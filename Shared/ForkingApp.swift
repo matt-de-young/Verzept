@@ -8,10 +8,18 @@
 import SwiftUI
 
 @main
-struct ForkingApp: App {
+struct ScrumdingerApp: App {
+    @ObservedObject private var data = RecipeData()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                RecipesView(recipes: $data.recipes) {
+                    data.save()
+                }
+            }
+            .onAppear{
+                data.load()
+            }
         }
     }
 }
