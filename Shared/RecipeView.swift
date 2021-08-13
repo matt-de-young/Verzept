@@ -9,30 +9,48 @@ import SwiftUI
 
 struct RecipeView: View {
     @Binding var recipe: Recipe
-    @State private var data: Recipe.Data = Recipe.Data()
-    @State private var isPresented = false
+    @State private var recipeData: Recipe.Data = Recipe.Data()
+    @State private var editRecipeisPresented = false
 
     var body: some View {
         List() {
-            Section(header: Text("Description")) {
-                Text(recipe.description)
+            if !recipe.description.isEmpty {
+                Section(header: Text("Description")) {
+                    Text(recipe.description)
+                }
+            }
+            if !recipe.ingredients.isEmpty {
+                Section(header: Text("Ingredients")) {
+                    ForEach(recipe.ingredients, id: \.self) { ingredient in
+                        HStack {
+                            Text("\(ingredient.ammount)")
+                            Text(ingredient.unit)
+                            Text(ingredient.name)
+                        }
+                    }
+                }
+            }
+            if !recipe.instructions.isEmpty {
+                Section(header: Text("Instructions")) {
+                    Text(recipe.instructions)
+                }
             }
         }
         .navigationTitle(recipe.title)
         .listStyle(InsetGroupedListStyle())
         .navigationBarItems(trailing: Button("Edit") {
-            isPresented = true
-            data = recipe.data
+            editRecipeisPresented = true
+            recipeData = recipe.data
         })
-        .fullScreenCover(isPresented: $isPresented) {
+        .fullScreenCover(isPresented: $editRecipeisPresented) {
             NavigationView {
-                EditRecipeView(recipeData: $data)
+                EditRecipeView(recipeData: $recipeData)
                     .navigationTitle(recipe.title)
                     .navigationBarItems(leading: Button("Cancel") {
-                        isPresented = false
+                        editRecipeisPresented = false
                     }, trailing: Button("Done") {
-                        isPresented = false
-                        recipe.update(from: data)
+                        editRecipeisPresented = false
+                        recipe.update(from: recipeData)
                     })
             }
         }

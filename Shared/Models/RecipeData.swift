@@ -36,7 +36,7 @@ class RecipeData: ObservableObject {
                 return
             }
             guard let recipes = try? JSONDecoder().decode([Recipe].self, from: data) else {
-                fatalError("Can't decode saved recipe data.")
+                fatalError("Can't decode saved recipe data from \(Self.fileURL).")
             }
             DispatchQueue.main.async {
                 self?.recipes = recipes

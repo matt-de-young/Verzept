@@ -12,7 +12,7 @@ struct RecipesView: View {
     let saveAction: () -> Void
     
     @Environment(\.scenePhase) private var scenePhase
-    @State private var isPresented = false
+    @State private var newRecipeIsPresented = false
     @State private var newRecipeData = Recipe.Data()
     
     var body: some View {
@@ -25,22 +25,24 @@ struct RecipesView: View {
         }
         .navigationTitle("All Recipes")
         .navigationBarItems(trailing: Button(action: {
-            isPresented = true
+            newRecipeIsPresented = true
         }) {
             Image(systemName: "plus")
         })
-        .sheet(isPresented: $isPresented){
+        .sheet(isPresented: $newRecipeIsPresented){
             NavigationView {
                 EditRecipeView(recipeData: $newRecipeData)
                     .navigationBarItems(leading: Button("Dismiss") {
-                        isPresented = false
+                        newRecipeIsPresented = false
                     }, trailing: Button("Add") {
                         let newRecipe = Recipe(
                             title: newRecipeData.title,
-                            description: newRecipeData.description
+                            description: newRecipeData.description,
+                            ingredients: newRecipeData.ingredients,
+                            instructions: newRecipeData.instructions
                         )
                         recipes.append(newRecipe)
-                        isPresented = false
+                        newRecipeIsPresented = false
                     })
             }
         }
