@@ -37,9 +37,7 @@ struct RecipesView: View {
                     }, trailing: Button("Add") {
                         let newRecipe = Recipe(
                             title: newRecipeData.title,
-                            description: newRecipeData.description,
-                            ingredients: newRecipeData.ingredients,
-                            instructions: newRecipeData.instructions
+                            description: newRecipeData.description
                         )
                         recipes.append(newRecipe)
                         newRecipeIsPresented = false

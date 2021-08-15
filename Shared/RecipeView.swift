@@ -19,9 +19,9 @@ struct RecipeView: View {
                     Text(recipe.description)
                 }
             }
-            if !recipe.ingredients.isEmpty {
+            if !(recipe.head?.ingredients.isEmpty)! {
                 Section(header: Text("Ingredients")) {
-                    ForEach(recipe.ingredients, id: \.self) { ingredient in
+                    ForEach(recipe.head!.ingredients, id: \.self) { ingredient in
                         HStack {
                             Text("\(ingredient.ammount)")
                             Text(ingredient.unit)
@@ -30,9 +30,9 @@ struct RecipeView: View {
                     }
                 }
             }
-            if !recipe.instructions.isEmpty {
+            if !recipe.head!.instructions.isEmpty {
                 Section(header: Text("Instructions")) {
-                    Text(recipe.instructions)
+                    Text(recipe.head!.instructions)
                 }
             }
         }
