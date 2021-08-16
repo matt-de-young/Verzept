@@ -14,14 +14,49 @@ struct RecipeView: View {
 
     var body: some View {
         List() {
+            Section(
+                header: Text("Current branch"),
+                footer: HStack() {
+                    Spacer()
+                    NavigationLink(destination: EditRecipeBranchView(recipe: $recipe)) {
+                        Text("Change")
+                    }
+                }
+            ) {
+                VStack(alignment: .leading) {
+//                    Text(recipe.currentBranch.name)
+                    HStack {
+                        Text(recipe.currentBranch.name)
+                        Spacer()
+                        Text("\(recipe.currentBranch.id)").font(.system(size: 8))
+                    }
+                    Spacer()
+                    Text(recipe.currentBranch.head.created, style: .date)
+                        .fontWeight(.light)
+                        .font(.system(size: 12))
+                }
+            }
+            Section(header: Text("head")) {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text(recipe.currentBranch.head.name)
+                        Spacer()
+                        Text("\(recipe.currentBranch.head.id)").font(.system(size: 8))
+                    }
+                    Spacer()
+                    Text(recipe.currentBranch.head.created, style: .date)
+                        .fontWeight(.light)
+                        .font(.system(size: 12))
+                }
+            }
             if !recipe.description.isEmpty {
                 Section(header: Text("Description")) {
                     Text(recipe.description)
                 }
             }
-            if !(recipe.head?.ingredients.isEmpty)! {
+            if !(recipe.ingredients.isEmpty) {
                 Section(header: Text("Ingredients")) {
-                    ForEach(recipe.head!.ingredients, id: \.self) { ingredient in
+                    ForEach(recipe.ingredients, id: \.self) { ingredient in
                         HStack {
                             Text("\(ingredient.ammount)")
                             Text(ingredient.unit)
@@ -30,9 +65,9 @@ struct RecipeView: View {
                     }
                 }
             }
-            if !recipe.head!.instructions.isEmpty {
+            if !(recipe.instructions.isEmpty) {
                 Section(header: Text("Instructions")) {
-                    Text(recipe.head!.instructions)
+                    Text(recipe.instructions)
                 }
             }
         }

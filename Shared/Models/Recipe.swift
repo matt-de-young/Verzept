@@ -11,21 +11,42 @@ struct Recipe: Identifiable, Codable {
     let id: UUID
     var title: String
     var description: String
-    var root: RecipeVersion?
-    var head: RecipeVersion?
+    var root: RecipeVersion
+    var branches: [RecipeBranch]
+    var currentBranch: RecipeBranch
+    
+    var ingredients: [Ingredient] {
+        return currentBranch.head.ingredients
+    }
+    
+    var instructions: String {
+        return currentBranch.head.instructions
+    }
     
     init(
         id: UUID = UUID(),
         title: String,
         description: String = "",
-        root: RecipeVersion? = nil,
-        head: RecipeVersion? = nil
+        root: RecipeVersion = RecipeVersion(),
+        branches: [RecipeBranch] = [],
+        currentBranch: RecipeBranch? = nil
     ) {
         self.id = id
         self.title = title
         self.description = description
         self.root = root
-        self.head = head
+        
+        if (branches.isEmpty){
+            self.branches = [RecipeBranch(name: "main", root: self.root, head: self.root)]
+        } else {
+            self.branches = branches
+        }
+        
+        if (currentBranch == nil){
+            self.currentBranch = self.branches[0]
+        } else {
+            self.currentBranch = currentBranch!
+        }
     }
 }
 
@@ -33,21 +54,40 @@ extension Recipe {
     struct Data {
         var title: String = ""
         var description: String = ""
-        var versions: [RecipeVersion] = []
-        var root: RecipeVersion?
-        var head: RecipeVersion?
+        var branches: [RecipeBranch] = []
+        var currentBranch: RecipeBranch? = nil
+        var ingredients: [Ingredient] = []
+        var instructions: String = ""
     }
     
     var data: Data {
-        return Data(title: title, description: description, root: root, head: head)
+        return Data(
+            title: title,
+            description: description,
+            branches: branches,
+            currentBranch: currentBranch,
+            ingredients: currentBranch.head.ingredients,
+            instructions: currentBranch.head.instructions
+        )
     }
     
     mutating func update(from data: Data) {
         title = data.title
         description = data.description
-        if (data.head != nil) {
-            head = data.head!
+        branches = data.branches
+        if (data.currentBranch != nil){
+            currentBranch = data.currentBranch!
         }
+        currentBranch.update(
+            data: RecipeVersion.Data(
+                ingredients: data.ingredients,
+                instructions: data.instructions
+            )
+        )
+    }
+    
+    mutating func setCurrentBranch(branch: RecipeBranch) {
+        currentBranch = branch
     }
 }
 
@@ -57,13 +97,13 @@ extension Recipe {
             Recipe(
                 title: "Black Bean Burger",
                 description: "Really tasty vegan burger using southwest flavors like Chipotle.",
-                root: RecipeVersion.data[0],
-                head: RecipeVersion.data[1]
+                root: RecipeVersion.BBBInit,
+                branches: [RecipeBranch.testData["BBBMain"]!, RecipeBranch.testData["BBBVegan"]!]
             ),
             Recipe(
                 title: "Red Jambalaya",
-                root: RecipeVersion.data[2],
-                head: RecipeVersion.data[2]
+                root: RecipeVersion.JambalayaInit,
+                branches: [RecipeBranch.testData["JambalayaMain"]!]
             ),
             Recipe(
                 title: "Galette Des Rois",
@@ -71,8 +111,8 @@ extension Recipe {
                     January 6th is Epiphany Day in France and the tradition is to make a Galette des Rois (French King Cake) and share it
                     with family or friends. Greedy people extend this day-long tradition to make more Galette des Rois during January.
                     """,
-                root: RecipeVersion.data[3],
-                head: RecipeVersion.data[3]
+                root: RecipeVersion.GaletteInit,
+                branches: [RecipeBranch.testData["GaletteMain"]!]
             )
         ]
     }

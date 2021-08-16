@@ -29,6 +29,7 @@ class RecipeData: ObservableObject {
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let data = try? Data(contentsOf: Self.fileURL) else {
                 #if DEBUG
+                print("Loading data from \(Self.fileURL).")
                 DispatchQueue.main.async {
                     self?.recipes = Recipe.data
                 }
