@@ -16,6 +16,7 @@ struct BranchesView: View {
     @State private var newBranchIsPresented: Bool = false
     @State private var newBranchData = RecipeBranch.Data()
     @State private var selectedBranchIndex = 0
+    @State private var compareBranchA: RecipeBranch? = nil
     
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
@@ -65,6 +66,9 @@ struct BranchesView: View {
                         editBranch = branch
                         newBranchData = branch.data
                     },
+                    .default(Text("Compare")) {
+                        compareBranchA = branch
+                    },
                     .destructive(Text("Delete")) {
                         recipe.deleteBranch(branch: branch)
                     },
@@ -99,6 +103,17 @@ struct BranchesView: View {
                         newBranchIsPresented = false
                         actionBranch = nil
                     })
+            }
+        }
+        .sheet(isPresented: .constant(compareBranchA != nil)) {
+            NavigationView {
+                CompareVersionsView(
+                    recipe: recipe,
+                    versionA: compareBranchA!.head
+                )
+                .navigationBarItems(leading: Button("Dismiss") {
+                    compareBranchA = nil
+                })
             }
         }
     }
