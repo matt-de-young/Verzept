@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeBranch: Identifiable, Codable, Equatable {
+struct RecipeBranch: Identifiable, Codable, Hashable, Equatable {
     
     let id: UUID
     var name: String
@@ -28,6 +28,26 @@ struct RecipeBranch: Identifiable, Codable, Equatable {
 }
 
 extension RecipeBranch {
+    
+    struct Data {
+        var name: String = ""
+        var root: RecipeVersion? = nil
+        var head: RecipeVersion? = nil
+    }
+    
+    var data: Data {
+        return Data(
+            name: name,
+            root: root,
+            head: head
+        )
+    }
+    
+    mutating func update(from data: Data) {
+        name = data.name
+        root = data.root ?? RecipeVersion()
+        head = data.head ?? RecipeVersion()
+    }
     
     mutating func update(name: String? = nil, data: RecipeVersion.Data? = nil) {
         if (name != nil){

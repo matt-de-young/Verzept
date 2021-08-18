@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeVersion: Identifiable, Codable, Equatable, Comparable {
+struct RecipeVersion: Identifiable, Codable, Hashable, Equatable, Comparable {
     
     let id: UUID
     var name: String

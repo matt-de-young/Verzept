@@ -15,38 +15,16 @@ struct RecipeView: View {
     var body: some View {
         List() {
             Section(
-                header: Text("Current branch"),
-                footer: HStack() {
-                    Spacer()
-                    NavigationLink(destination: EditRecipeBranchView(recipe: $recipe)) {
-                        Text("Change")
-                    }
-                }
+                header: Text("Current branch")
             ) {
-                VStack(alignment: .leading) {
-//                    Text(recipe.currentBranch.name)
-                    HStack {
+                NavigationLink(destination: BranchesView(recipe: $recipe)) {
+                    VStack(alignment: .leading) {
                         Text(recipe.currentBranch.name)
                         Spacer()
-                        Text("\(recipe.currentBranch.id)").font(.system(size: 8))
+                        Text(recipe.currentBranch.head.created, style: .date)
+                            .fontWeight(.light)
+                            .font(.system(size: 12))
                     }
-                    Spacer()
-                    Text(recipe.currentBranch.head.created, style: .date)
-                        .fontWeight(.light)
-                        .font(.system(size: 12))
-                }
-            }
-            Section(header: Text("head")) {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(recipe.currentBranch.head.name)
-                        Spacer()
-                        Text("\(recipe.currentBranch.head.id)").font(.system(size: 8))
-                    }
-                    Spacer()
-                    Text(recipe.currentBranch.head.created, style: .date)
-                        .fontWeight(.light)
-                        .font(.system(size: 12))
                 }
             }
             if !recipe.description.isEmpty {

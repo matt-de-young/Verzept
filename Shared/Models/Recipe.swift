@@ -48,6 +48,42 @@ struct Recipe: Identifiable, Codable {
             self.currentBranch = currentBranch!
         }
     }
+    
+    mutating func setCurrentBranch(branch: RecipeBranch) {
+        currentBranch = branch
+    }
+    
+    mutating func deleteBranch(branch: RecipeBranch) {
+        guard let branchIndex = branches.firstIndex(of: branch) else {
+            fatalError("Can't find Branch in Recipe")
+        }
+        branches.remove(at: branchIndex)
+    }
+    
+    mutating func createBranch(from: RecipeBranch.Data) -> RecipeBranch {
+        
+        print("Creating a new branch from \(from)")
+        
+        let newHead = RecipeVersion(
+            name: from.name,
+            ingredients: from.root?.ingredients ?? currentBranch.head.ingredients,
+            instructions: from.root?.instructions ?? currentBranch.head.instructions
+        )
+        
+        print("new head: \(newHead)")
+        
+        let newBranch = RecipeBranch(
+            name: from.name,
+            root: from.root ?? currentBranch.head,
+            head: newHead
+        )
+        
+        print("new branch: \(newBranch)")
+        
+        currentBranch.head.add(child: newHead)
+        branches.append(newBranch)
+        return newBranch
+    }
 }
 
 extension Recipe {
@@ -84,10 +120,6 @@ extension Recipe {
                 instructions: data.instructions
             )
         )
-    }
-    
-    mutating func setCurrentBranch(branch: RecipeBranch) {
-        currentBranch = branch
     }
 }
 
