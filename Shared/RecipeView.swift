@@ -13,44 +13,59 @@ struct RecipeView: View {
     @State private var editRecipeisPresented = false
 
     var body: some View {
-        List() {
-            Section(
-                header: Text("Current branch")
-            ) {
-                NavigationLink(destination: BranchesView(recipe: $recipe)) {
-                    VStack(alignment: .leading) {
-                        Text(recipe.currentBranch.name)
-                        Spacer()
-                        Text(recipe.currentBranch.head.created, style: .date)
-                            .fontWeight(.light)
-                            .font(.system(size: 12))
-                    }
-                }
-            }
-            if !recipe.description.isEmpty {
-                Section(header: Text("Description")) {
-                    Text(recipe.description)
-                }
-            }
-            if !(recipe.ingredients.isEmpty) {
-                Section(header: Text("Ingredients")) {
-                    ForEach(recipe.ingredients, id: \.self) { ingredient in
+        ScrollView {
+            HStack() {
+                VStack(alignment: .leading) {
+                    Text("Current branch: ") + Text(recipe.currentBranch.name).bold()
+                    Text("Last Updated: \(Text(recipe.currentBranch.head.created, style: .date))")
+                        .fontWeight(.light)
+                        .font(.system(size: 12))
+                    NavigationLink(destination: BranchesView(recipe: $recipe)) {
                         HStack {
-                            Text("\(ingredient.ammount)")
-                            Text(ingredient.unit)
-                            Text(ingredient.name)
+                            Text("View Branches")
+                            Spacer()
+                            Image(systemName: "arrow.branch")
                         }
+                            .padding()
                     }
+                        .foregroundColor(.white)
+                        .background(Color.accentColor)
+                        .cornerRadius(8)
+                        .padding(.top)
+                        .padding(.bottom)
+                    
+                    if !recipe.description.isEmpty {
+                        VStack(alignment: .leading) {
+                            Text("Description:").font(.headline)
+                            Text(recipe.description)
+                        }.padding(.bottom)
+                    }
+
+                    if !recipe.ingredients.isEmpty {
+                        VStack(alignment: .leading) {
+                            Text("Ingrdients:").font(.headline)
+                            ForEach(recipe.ingredients, id: \.self) { ingredient in
+                                HStack {
+                                    Text("\(ingredient.ammount)")
+                                    Text(ingredient.unit)
+                                    Text(ingredient.name)
+                                }
+                            }
+                        }.padding(.bottom)
+                    }
+                    
+                    if !(recipe.instructions.isEmpty) {
+                        Text("Instructions:").font(.headline)
+                        Text(recipe.instructions).padding(.bottom)
+                    }
+                    
+                    Spacer()
                 }
-            }
-            if !(recipe.instructions.isEmpty) {
-                Section(header: Text("Instructions")) {
-                    Text(recipe.instructions)
-                }
+                Spacer()
             }
         }
         .navigationTitle(recipe.title)
-        .listStyle(InsetGroupedListStyle())
+        .padding()
         .navigationBarItems(trailing: Button("Edit") {
             editRecipeisPresented = true
             recipeData = recipe.data
