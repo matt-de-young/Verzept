@@ -10,30 +10,23 @@ import SwiftUI
 struct RecipeView: View {
     @Binding var recipe: Recipe
     @State private var recipeData: Recipe.Data = Recipe.Data()
+    @State private var branchesViewisPresented = false
     @State private var editRecipeisPresented = false
+    @State private var newNoteisPresented = false
+    @State private var newNoteData = VersionNote.Data()
 
     var body: some View {
         ScrollView {
             HStack() {
                 VStack(alignment: .leading) {
-                    Text("Current branch: ") + Text(recipe.currentBranch.name).bold()
-                    Text("Last Updated: \(Text(recipe.currentBranch.head.created, style: .date))")
-                        .fontWeight(.light)
-                        .font(.system(size: 12))
-                    NavigationLink(destination: BranchesView(recipe: $recipe)) {
-                        HStack {
-                            Text("View Branches")
-                            Spacer()
-                            Image(systemName: "arrow.branch")
-                        }
-                            .padding()
+                    VStack(alignment: .leading) {
+                        Text("Current branch: ") + Text(recipe.currentBranch.name).bold()
+                        Text("Last Updated: \(Text(recipe.currentBranch.head.created, style: .date))")
+                            .fontWeight(.light)
+                            .font(.system(size: 12))
                     }
-                        .foregroundColor(.white)
-                        .background(Color.accentColor)
-                        .cornerRadius(8)
-                        .padding(.top)
                         .padding(.bottom)
-                    
+
                     if !recipe.description.isEmpty {
                         VStack(alignment: .leading) {
                             Text("Description:").font(.headline)
@@ -53,10 +46,23 @@ struct RecipeView: View {
                             }
                         }.padding(.bottom)
                     }
-                    
+
                     if !(recipe.instructions.isEmpty) {
                         Text("Instructions:").font(.headline)
                         Text(recipe.instructions).padding(.bottom)
+                    }
+
+                    if !(recipe.notes.isEmpty) {
+                        Text("Notes:").font(.headline)
+                        ForEach(recipe.notes, id: \.self) { note in
+                            VStack(alignment: .leading) {
+                                Text(note.created, style: .date)
+                                    .fontWeight(.light)
+                                    .font(.system(size: 12))
+                                Text(note.text)
+                            }
+                            .padding(.bottom)
+                        }
                     }
                     
                     Spacer()
@@ -70,6 +76,23 @@ struct RecipeView: View {
             editRecipeisPresented = true
             recipeData = recipe.data
         })
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                Button(action: {
+                    branchesViewisPresented = true
+                }, label: {
+                    Text("Versions")
+                    Image(systemName: "arrow.branch")
+                })
+                Spacer()
+                Button(action: {
+                    newNoteisPresented = true
+                }, label: {
+                    Text("Add Note")
+                    Image(systemName: "square.and.pencil")
+                })
+            }
+        }
         .fullScreenCover(isPresented: $editRecipeisPresented) {
             NavigationView {
                 EditRecipeView(recipeData: $recipeData)
@@ -82,6 +105,24 @@ struct RecipeView: View {
                     })
             }
         }
+        .sheet(isPresented: $newNoteisPresented) {
+            NavigationView {
+                NewNoteView(noteData: $newNoteData)
+                    .navigationBarItems(leading: Button("Dismiss") {
+                        newNoteisPresented = false
+                    }, trailing: Button("Add") {
+                        let newNote = VersionNote(text: newNoteData.text)
+                        recipe.currentBranch.head.add(note: newNote)
+                        newNoteData = VersionNote.Data()
+                        newNoteisPresented = false
+                    })
+            }
+        }
+        .background(
+            NavigationLink(destination: BranchesView(recipe: $recipe), isActive: $branchesViewisPresented) {
+                EmptyView()
+            }
+        )
     }
 }
 

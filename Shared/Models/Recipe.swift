@@ -23,6 +23,10 @@ struct Recipe: Identifiable, Codable {
         return currentBranch.head.instructions
     }
     
+    var notes: [VersionNote] {
+        return currentBranch.head.notes
+    }
+    
     init(
         id: UUID = UUID(),
         title: String,

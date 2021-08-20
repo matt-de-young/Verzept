@@ -13,6 +13,7 @@ struct RecipeVersion: Identifiable, Codable, Hashable, Equatable, Comparable {
     var name: String
     var ingredients: [Ingredient]
     var instructions: String
+    var notes: [VersionNote]
     var children: [RecipeVersion]
     var created: Date
     
@@ -21,12 +22,14 @@ struct RecipeVersion: Identifiable, Codable, Hashable, Equatable, Comparable {
         name: String = "",
         ingredients: [Ingredient] = [],
         instructions: String = "",
+        notes: [VersionNote] = [],
         children: [RecipeVersion] = []
     ) {
         self.id = id
         self.name = name
         self.ingredients = ingredients
         self.instructions = instructions
+        self.notes = notes
         self.children = children
         self.created = Date()
     }
@@ -53,6 +56,18 @@ extension RecipeVersion {
     
     mutating func add(child: RecipeVersion) {
         children.append(child)
+    }
+    
+    mutating func add(note: VersionNote) {
+        notes.append(note)
+    }
+    
+    mutating func remove(note: VersionNote) {
+        for (i, x) in notes.enumerated() {
+            if x == note {
+                notes.remove(at: i)
+            }
+        }
     }
     
     var count: Int {
@@ -119,6 +134,7 @@ extension RecipeVersion {
             until fragrant, about 2 minutes. Add chipotle chili and sauce and cook, stirring, until fragrant, about 30 seconds.
             Transfer mixture to a large bowl.
             """,
+        notes: [VersionNote.TestData[0]],
         children: [BBBVegan]
     )
     static var JambalayaInit = RecipeVersion(
