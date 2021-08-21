@@ -13,13 +13,11 @@ struct EditIngredientView: View {
     var body: some View {
         List {
             Section() {
-                TextField("New Ingredient", text: $ingredientData.name)
-            }
-            Section() {
                 HStack {
                     TextField("Ammount", text: $ingredientData.ammount)
                     TextField("Unit", text: $ingredientData.unit)
                 }
+                TextField("New Ingredient", text: $ingredientData.name)
             }
             Section(header: Text("Notes")) {
                 TextEditor(text: $ingredientData.notes)

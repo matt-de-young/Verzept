@@ -34,12 +34,10 @@ struct RecipesView: View {
                 EditRecipeView(recipeData: $newRecipeData)
                     .navigationBarItems(leading: Button("Dismiss") {
                         newRecipeIsPresented = false
+                        newRecipeData = Recipe.Data()
                     }, trailing: Button("Add") {
-                        let newRecipe = Recipe(
-                            title: newRecipeData.title,
-                            description: newRecipeData.description
-                        )
-                        recipes.append(newRecipe)
+                        recipes.append(Recipe(data: newRecipeData))
+                        newRecipeData = Recipe.Data()
                         newRecipeIsPresented = false
                     })
             }

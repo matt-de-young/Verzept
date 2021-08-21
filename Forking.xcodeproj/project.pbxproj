@@ -68,6 +68,7 @@
 		C912509E26C8DEDB009698EE /* RecipeVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeVersion.swift; sourceTree = "<group>"; };
 		C91250A426C9924F009698EE /* RecipeBranch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeBranch.swift; sourceTree = "<group>"; };
 		C91250A726C9AEBD009698EE /* BranchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchesView.swift; sourceTree = "<group>"; };
+		C918003826D121F9001E7597 /* Forking.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Forking.entitlements; sourceTree = "<group>"; };
 		C9DFA11B26CF9D50002BBFB6 /* IngredientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +93,7 @@
 		C912506426C53E75009698EE = {
 			isa = PBXGroup;
 			children = (
+				C918003826D121F9001E7597 /* Forking.entitlements */,
 				C912506926C53E75009698EE /* Shared */,
 				C912507326C53E76009698EE /* iOS */,
 				C912507A26C53E76009698EE /* macOS */,
@@ -434,6 +436,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Forking.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 922DS6BX5S;
 				ENABLE_PREVIEWS = YES;
@@ -446,6 +449,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattdeyoung.Forking;
 				PRODUCT_NAME = Forking;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -456,6 +461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Forking.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 922DS6BX5S;
 				ENABLE_PREVIEWS = YES;
@@ -468,6 +474,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattdeyoung.Forking;
 				PRODUCT_NAME = Forking;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

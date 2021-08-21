@@ -63,7 +63,7 @@ struct EditRecipeView: View {
                     editIngredientIsPresented = false
                     ingredientData = Ingredient.Data()
                     editIngredientIndex = nil
-                }, trailing: Button("Done") {
+                }, trailing: Button(editIngredientIndex == nil ? "Add" : "Done") {
                     editIngredientIsPresented = false
                     let newIngredient = Ingredient(
                         name: ingredientData.name,

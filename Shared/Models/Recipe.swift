@@ -31,14 +31,22 @@ struct Recipe: Identifiable, Codable {
         id: UUID = UUID(),
         title: String,
         description: String = "",
-        root: RecipeVersion = RecipeVersion(),
+        root: RecipeVersion? = nil,
         branches: [RecipeBranch] = [],
         currentBranch: RecipeBranch? = nil
     ) {
         self.id = id
         self.title = title
         self.description = description
-        self.root = root
+        if (root == nil) {
+            self.root = RecipeVersion(
+//                name: "Init",
+//                ingredients: ,
+//                instructions: <#T##String#>,
+            )
+        } else {
+            self.root = root!
+        }
         
         if (branches.isEmpty){
             self.branches = [RecipeBranch(name: "main", root: self.root, head: self.root)]
@@ -50,6 +58,27 @@ struct Recipe: Identifiable, Codable {
             self.currentBranch = self.branches[0]
         } else {
             self.currentBranch = currentBranch!
+        }
+    }
+    
+    init(data: Data) {
+        self.id = UUID()
+        self.title = data.title
+        self.description = data.description
+        
+        if (data.currentBranch == nil) {
+            self.root = RecipeVersion(
+                name: "Init",
+                ingredients: data.ingredients,
+                instructions: data.instructions
+            )
+            let newBranch = RecipeBranch(name: "main", root: self.root, head: self.root)
+            self.branches = [newBranch]
+            self.currentBranch = newBranch
+        } else {
+            self.root = data.currentBranch!.root
+            self.branches = data.branches
+            self.currentBranch = data.currentBranch!
         }
     }
     
