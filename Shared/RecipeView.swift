@@ -19,52 +19,11 @@ struct RecipeView: View {
         ScrollView {
             HStack() {
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
-                        Text("Current branch: ") + Text(recipe.currentBranch.name).bold()
-                        Text("Last Updated: \(Text(recipe.currentBranch.head.created, style: .date))")
-                            .fontWeight(.light)
-                            .font(.system(size: 12))
-                    }
-                        .padding(.bottom)
-
-                    if !recipe.description.isEmpty {
-                        VStack(alignment: .leading) {
-                            Text("Description:").font(.headline)
-                            Text(recipe.description)
-                        }.padding(.bottom)
-                    }
-
-                    if !recipe.ingredients.isEmpty {
-                        VStack(alignment: .leading) {
-                            Text("Ingrdients:").font(.headline)
-                            ForEach(recipe.ingredients, id: \.self) { ingredient in
-                                HStack {
-                                    Text("\(ingredient.ammount)")
-                                    Text(ingredient.unit)
-                                    Text(ingredient.name)
-                                }
-                            }
-                        }.padding(.bottom)
-                    }
-
-                    if !(recipe.instructions.isEmpty) {
-                        Text("Instructions:").font(.headline)
-                        Text(recipe.instructions).padding(.bottom)
-                    }
-
-                    if !(recipe.notes.isEmpty) {
-                        Text("Notes:").font(.headline)
-                        ForEach(recipe.notes, id: \.self) { note in
-                            VStack(alignment: .leading) {
-                                Text(note.created, style: .date)
-                                    .fontWeight(.light)
-                                    .font(.system(size: 12))
-                                Text(note.text)
-                            }
-                            .padding(.bottom)
-                        }
-                    }
-                    
+                    CurrentBranchView(recipe: $recipe)
+                    DescriptionView(recipe: $recipe)
+                    IngredientsView(recipe: $recipe)
+                    InstructionsView(recipe: $recipe)
+                    NotesView(recipe: $recipe)
                     Spacer()
                 }
                 Spacer()
@@ -111,8 +70,7 @@ struct RecipeView: View {
                     .navigationBarItems(leading: Button("Dismiss") {
                         newNoteisPresented = false
                     }, trailing: Button("Add") {
-                        let newNote = VersionNote(text: newNoteData.text)
-                        recipe.currentBranch.head.add(note: newNote)
+                        recipe.currentBranch.head.add(note: VersionNote(text: newNoteData.text))
                         newNoteData = VersionNote.Data()
                         newNoteisPresented = false
                     })
@@ -123,6 +81,84 @@ struct RecipeView: View {
                 EmptyView()
             }
         )
+    }
+}
+
+extension RecipeView {
+    struct CurrentBranchView: View {
+        @Binding var recipe: Recipe
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text("Version:").font(.headline)
+                Text(recipe.currentBranch.name)
+                Text("Last Updated: \(Text(recipe.currentBranch.head.created, style: .date))")
+                    .fontWeight(.light)
+                    .font(.system(size: 12))
+            }
+            .padding(.bottom)
+        }
+    }
+    
+    struct DescriptionView: View {
+        @Binding var recipe: Recipe
+        
+        var body: some View {
+            if !recipe.description.isEmpty {
+                VStack(alignment: .leading) {
+                    Text("Description:").font(.headline)
+                    Text(recipe.description)
+                }
+                .padding(.bottom)
+            }
+        }
+    }
+    
+    struct IngredientsView: View {
+        @Binding var recipe: Recipe
+        
+        var body: some View {
+            if !recipe.ingredients.isEmpty {
+                VStack(alignment: .leading, content: {
+                    Text("Ingrdients:").font(.headline)
+                    IngredientListView(ingredients: recipe.ingredients)
+                })
+                .padding(.bottom)
+            }
+        }
+    }
+    
+    struct InstructionsView: View {
+        @Binding var recipe: Recipe
+        
+        var body: some View {
+            if !recipe.instructions.isEmpty {
+                VStack(alignment: .leading, content: {
+                    Text("Instructions:").font(.headline)
+                    Text(recipe.instructions).padding(.bottom)
+                })
+                .padding(.bottom)
+            }
+        }
+    }
+    
+    struct NotesView: View {
+        @Binding var recipe: Recipe
+        
+        var body: some View {
+            if !recipe.notes.isEmpty {
+                Text("Notes:").font(.headline)
+                ForEach(recipe.notes, id: \.self) { note in
+                    VStack(alignment: .leading) {
+                        Text(note.created, style: .date)
+                            .fontWeight(.light)
+                            .font(.system(size: 12))
+                        Text(note.text)
+                    }
+                    .padding(.bottom)
+                }
+            }
+        }
     }
 }
 

@@ -56,7 +56,7 @@ struct BranchesView: View {
         .actionSheet(item: $actionBranch) { branch in
             ActionSheet(
                 title: Text("\(branch.name)"),
-                message: Text("Last updated ") + Text(branch.head.created, style: .relative) + Text(" ago"),
+                message: Text("Last updated \(Text(branch.head.created, style: .relative)) ago"),
                 buttons: [
                     .default(Text("Make Current").bold()) {
                         recipe.setCurrentBranch(branch: branch)
