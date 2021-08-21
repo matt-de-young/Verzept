@@ -102,18 +102,10 @@
 		C912506926C53E75009698EE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C918003726D11814001E7597 /* Views */,
 				C9DFA11A26CF9CB4002BBFB6 /* Components */,
 				C912508B26C54D82009698EE /* Models */,
 				C912506A26C53E75009698EE /* ForkingApp.swift */,
-				C912506B26C53E75009698EE /* RecipesView.swift */,
-				C912509226C55284009698EE /* RecipeView.swift */,
-				C912509526C55B7A009698EE /* EditRecipeView.swift */,
-				C91222EA26CF7A4F0056C8B5 /* NewNoteView.swift */,
-				C91222E126CB85E60056C8B5 /* NewBranchView.swift */,
-				C912509B26C65E8C009698EE /* EditIngredientView.swift */,
-				C91250A726C9AEBD009698EE /* BranchesView.swift */,
-				C91222DE26CB83640056C8B5 /* EditBranchView.swift */,
-				C91222E426CD1F750056C8B5 /* CompareVersionsView.swift */,
 				C912506C26C53E76009698EE /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -156,6 +148,22 @@
 				C912509826C5A914009698EE /* Ingredient.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C918003726D11814001E7597 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C912506B26C53E75009698EE /* RecipesView.swift */,
+				C912509226C55284009698EE /* RecipeView.swift */,
+				C912509526C55B7A009698EE /* EditRecipeView.swift */,
+				C91250A726C9AEBD009698EE /* BranchesView.swift */,
+				C91222E126CB85E60056C8B5 /* NewBranchView.swift */,
+				C91222DE26CB83640056C8B5 /* EditBranchView.swift */,
+				C91222E426CD1F750056C8B5 /* CompareVersionsView.swift */,
+				C91222EA26CF7A4F0056C8B5 /* NewNoteView.swift */,
+				C912509B26C65E8C009698EE /* EditIngredientView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		C9DFA11A26CF9CB4002BBFB6 /* Components */ = {
