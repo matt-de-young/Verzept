@@ -57,6 +57,7 @@ struct ListBranchesView: View {
         }) {
             Image(systemName: "plus")
         })
+        .navigationTitle("Branches")
         .actionSheet(item: $selectedBranch, content: { branch in
             var buttons: [ActionSheet.Button] = [
                 .default(Text("Edit")) {

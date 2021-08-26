@@ -49,11 +49,15 @@ struct EditIngredientView: View {
                 unit: $unit,
                 notes: $notes
             )
-            .navigationBarItems(leading: Button("Dismiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }, trailing: Button("Update") {
-                onComplete(name, quantity, unit, notes)
-            })
+            .navigationBarItems(
+                leading: Button("Dismiss") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }.font(.body.weight(.regular)),
+                trailing: Button("Update") {
+                    onComplete(name, quantity, unit, notes)
+                }
+            )
+            .navigationTitle("Edit Ingredient")
         }
     }
 }
@@ -76,11 +80,14 @@ struct NewIngredientView: View {
                 unit: $unit,
                 notes: $notes
             )
-            .navigationBarItems(leading: Button("Dismiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }, trailing: Button("Add") {
-                onComplete(name, quantity, unit, notes)
-            })
+            .navigationBarItems(
+                leading: Button("Dismiss") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }.font(.body.weight(.regular)),
+                trailing: Button("Add") {
+                    onComplete(name, quantity, unit, notes)
+                }
+            )
         }
     }
 }

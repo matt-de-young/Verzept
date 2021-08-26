@@ -114,11 +114,14 @@ struct EditRecipeView: View {
                 ingredients: $ingredients,
                 directions: $directions
             )
-            .navigationBarItems(leading: Button("Dismiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }, trailing: Button("Update") {
-                onComplete(title, ingredients, directions)
-            })
+            .navigationBarItems(
+                leading: Button("Dismiss") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }.font(.body.weight(.regular)),
+                trailing: Button("Update") {
+                    onComplete(title, ingredients, directions)
+                }
+            )
         }
     }
 }
@@ -143,11 +146,14 @@ struct CreateRecipeView: View {
                 directions: $directions
             )
             .navigationBarTitle(Text("New Recipe"))
-            .navigationBarItems(leading: Button("Dismiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }, trailing: Button("Create") {
-                onComplete(title, ingredients, directions)
-            })
+            .navigationBarItems(
+                leading: Button("Dismiss") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }.font(.body.weight(.regular)),
+                trailing: Button("Create") {
+                    onComplete(title, ingredients, directions)
+                }
+            )
         }
     }
 }

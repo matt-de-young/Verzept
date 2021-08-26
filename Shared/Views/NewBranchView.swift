@@ -34,11 +34,14 @@ struct NewBranchView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("New Branch")
-            .navigationBarItems(leading: Button("Dismiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }, trailing: Button("Create") {
-                onComplete(branches[selectedBranchIndex], name)
-            })
+            .navigationBarItems(
+                leading: Button("Dismiss") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }.font(.body.weight(.regular)),
+                trailing: Button("Create") {
+                    onComplete(branches[selectedBranchIndex], name)
+                }
+            )
         }
     }
 }

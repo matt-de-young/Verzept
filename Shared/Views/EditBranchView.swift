@@ -23,11 +23,14 @@ struct EditBranchView: View {
             }
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Edit Branch")
-            .navigationBarItems(leading: Button("Dismiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }, trailing: Button("Update") {
-                onComplete(name)
-            })
+            .navigationBarItems(
+                leading: Button("Dismiss") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }.font(.body.weight(.regular)),
+                trailing: Button("Update") {
+                    onComplete(name)
+                }
+            )
         }
     }
 }
