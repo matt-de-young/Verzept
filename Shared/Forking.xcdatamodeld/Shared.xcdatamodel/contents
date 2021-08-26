@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Branch" representedClassName="Branch" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="head" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Version" inverseName="toHead" inverseEntity="Version"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="branches" inverseEntity="Recipe"/>
+        <relationship name="root" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Version" inverseName="toRoot" inverseEntity="Version"/>
+        <relationship name="toCurrentBranch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="currentBranch" inverseEntity="Recipe"/>
+    </entity>
+    <entity name="Ingredient" representedClassName="Ingredient" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="quantity" optional="YES" attributeType="String"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
+        <relationship name="toVersion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Version" inverseName="ingredients" inverseEntity="Version"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" syncable="YES">
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="Note" representedClassName="Note" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="version" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Version" inverseName="notes" inverseEntity="Version"/>
+    </entity>
+    <entity name="Recipe" representedClassName="Recipe" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="branches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Branch" inverseName="recipe" inverseEntity="Branch"/>
+        <relationship name="currentBranch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Branch" inverseName="toCurrentBranch" inverseEntity="Branch"/>
+        <relationship name="root" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Version" inverseName="recipe" inverseEntity="Version"/>
+    </entity>
+    <entity name="Version" representedClassName="Version" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="directions" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Version" inverseName="children" inverseEntity="Version"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="toVersion" inverseEntity="Ingredient"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="version" inverseEntity="Note"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="root" inverseEntity="Recipe"/>
+        <relationship name="toHead" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Branch" inverseName="head" inverseEntity="Branch"/>
+        <relationship name="toRoot" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Branch" inverseName="root" inverseEntity="Branch"/>
+    </entity>
+    <elements>
+        <element name="Branch" positionX="446.4012451171875" positionY="-693.1356811523438" width="128" height="119"/>
+        <element name="Ingredient" positionX="1119.9619140625" positionY="-769.4895629882812" width="128" height="104"/>
+        <element name="Item" positionX="-273.9004516601562" positionY="-845.86669921875" width="128" height="44"/>
+        <element name="Note" positionX="961.7127075195312" positionY="-498.6815795898438" width="128" height="89"/>
+        <element name="Recipe" positionX="209.8157958984375" positionY="-693.6525573730469" width="112.10400390625" height="119"/>
+        <element name="Version" positionX="724.435791015625" positionY="-782.7981567382812" width="128" height="179"/>
+    </elements>
+</model>

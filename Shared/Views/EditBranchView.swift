@@ -2,28 +2,40 @@
 //  EditBranchView.swift
 //  Forking
 //
-//  Created by Matt de Young on 17.08.21.
+//  Created by Matt de Young on 25.08.21.
 //
 
 import SwiftUI
 
 struct EditBranchView: View {
-    @Binding var branchData: RecipeBranch.Data
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State var name: String
+    let onComplete: (String) -> Void
     
     var body: some View {
-        List {
-            Section(header: Text("Name")) {
-                TextField("", text: $branchData.name)
+        NavigationView {
+            List {
+                Section(header: Text("Name")) {
+                    TextField("", text: $name)
+                }
             }
+            .listStyle(InsetGroupedListStyle())
+            .navigationTitle("Edit Branch")
+            .navigationBarItems(leading: Button("Dismiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            }, trailing: Button("Update") {
+                onComplete(name)
+            })
         }
-        .listStyle(InsetGroupedListStyle())
     }
 }
 
 struct EditBranchView_Previews: PreviewProvider {
     static var previews: some View {
-        EditBranchView(
-            branchData: .constant(RecipeBranch.testData["BBBVegan"]!.data)
-        )
+        EditBranchView(name: "Sweet branch") { name in
+            
+        }
     }
 }

@@ -2,41 +2,66 @@
 //  NewBranchView.swift
 //  Forking
 //
-//  Created by Matt de Young on 17.08.21.
+//  Created by Matt de Young on 25.08.21.
 //
 
 import SwiftUI
+import CoreData
 
 struct NewBranchView: View {
-    var recipe: Recipe
-    @Binding var branchData: RecipeBranch.Data
-    @Binding var selectedBranchIndex: Int
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State var branches: [Branch]
+    @State var name: String = ""
+    @State private var selectedBranchIndex = 0
+    let onComplete: (Branch, String) -> Void
     
     var body: some View {
-        List {
-            Section(header: Text("Name")) {
-                TextField("", text: $branchData.name)
-            }
-            Section(header: Text("Based on branch")) {
-                Picker("Branch", selection: $selectedBranchIndex, content: {
-                    ForEach(0..<recipe.branches.count, content: { index in
-                        Text(recipe.branches[index].name)
+        NavigationView {
+            List {
+                Section(header: Text("Name")) {
+                    TextField("", text: $name)
+                }
+                Section(header: Text("Based on branch")) {
+                    Picker("Branch", selection: $selectedBranchIndex, content: {
+                        ForEach(0..<branches.count, content: { index in
+                            Text(branches[index].name)
+                        })
                     })
-                })
-                .pickerStyle(WheelPickerStyle())
+                    .pickerStyle(WheelPickerStyle())
+                }
             }
+            .listStyle(InsetGroupedListStyle())
+            .navigationTitle("New Branch")
+            .navigationBarItems(leading: Button("Dismiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            }, trailing: Button("Create") {
+                onComplete(branches[selectedBranchIndex], name)
+            })
         }
-        .listStyle(InsetGroupedListStyle())
-        .navigationTitle("New Branch")
     }
 }
 
 struct NewBranchView_Previews: PreviewProvider {
+    static var newVersion = Version(
+        context: PersistenceController.preview.container.viewContext,
+        name: "init",
+        ingredients: [],
+        directions: ""
+    )
     static var previews: some View {
         NewBranchView(
-            recipe: Recipe.data[0],
-            branchData: .constant(RecipeBranch.testData["BBBVegan"]!.data),
-            selectedBranchIndex: .constant(0)
-        )
+            branches: [
+                Branch(
+                    context: PersistenceController.preview.container.viewContext,
+                    name: "main",
+                    root: newVersion,
+                    head: newVersion
+                )
+            ]
+        ) { name, basedOnBranch in
+                
+        }
     }
 }

@@ -2,27 +2,39 @@
 //  NewNoteView.swift
 //  Forking
 //
-//  Created by Matt de Young on 20.08.21.
+//  Created by Matt de Young on 25.08.21.
 //
 
 import SwiftUI
 
 struct NewNoteView: View {
-    @Binding var noteData: VersionNote.Data
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @State var text: String = ""
+    let onComplete: (String) -> Void
+
     var body: some View {
-        List {
-            Section() {
-                TextEditor(text: $noteData.text)
-                    .frame(minHeight: 200.0)
+        NavigationView {
+            Form {
+                Section(header: Text("Note")) {
+                    TextEditor(text: $text)
+                        .frame(minHeight: 200.0)
+                }
             }
+            .navigationBarItems(leading: Button("Dismiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            }, trailing: Button("Add") {
+                onComplete(text)
+            })
         }
-        .listStyle(InsetGroupedListStyle())
     }
 }
 
 struct NewNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        NewNoteView(noteData: .constant(VersionNote.Data()))
+        NewNoteView() { text in
+            
+        }
     }
 }

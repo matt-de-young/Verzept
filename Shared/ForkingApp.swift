@@ -2,23 +2,22 @@
 //  ForkingApp.swift
 //  Shared
 //
-//  Created by Matt de Young on 12.08.21.
+//  Created by Matt de Young on 22.08.21.
 //
 
 import SwiftUI
 
 @main
-struct ScrumdingerApp: App {
-    @ObservedObject private var data = RecipeData()
+struct ForkingApp: App {
+    let persistenceController = PersistenceController.shared
+
     var body: some Scene {
         WindowGroup {
+//            ContentView()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
             NavigationView {
-                RecipesView(recipes: $data.recipes) {
-                    data.save()
-                }
-            }
-            .onAppear{
-                data.load()
+                ListRecipesView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
             }
         }
     }

@@ -18,7 +18,7 @@ struct IngredientListView: View {
     var body: some View {
         LazyVGrid(columns: columns, alignment: .leading, spacing: 5) {
             ForEach(ingredients, id: \.self) { ingredient in
-                Text("\(ingredient.ammount) \(ingredient.unit)")
+                Text("\(ingredient.quantity) \(ingredient.unit)")
                 Text(ingredient.name)
             }
         }
@@ -27,6 +27,11 @@ struct IngredientListView: View {
 
 struct IngredientListView_Previews: PreviewProvider {
     static var previews: some View {
-        IngredientListView(ingredients: RecipeVersion.BBBInit.ingredients)
+        let context = PersistenceController.preview.container.viewContext
+        IngredientListView(ingredients: [
+            Ingredient(context: context, name: "Beans", quantity: "2", unit: "cans"),
+            Ingredient(context: context, name: "Adobo Sauce", quantity: "3", unit: UnitVolume.tablespoons.symbol),
+            Ingredient(context: context, name: "Egg", quantity: "1")
+        ])
     }
 }
