@@ -25,19 +25,30 @@ struct ListBranchesView: View {
         List() {
             ForEach(Array(recipe.branches)) { branch in
                 let isCurrentBranch = branch == recipe.currentBranch
-                VStack(alignment: .leading) {
-                    Text(branch.name).fontWeight(isCurrentBranch ? .heavy : .regular)
-                    Spacer()
-                    HStack {
-                        Text(branch.head.name)
-                            .fontWeight(isCurrentBranch ? .semibold : .light)
-                            .font(.system(size: 12))
+                HStack {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(branch.name).fontWeight(isCurrentBranch ? .heavy : .regular)
+                            Spacer()
+                            if isCurrentBranch {
+                                Text("current")
+                                    .font(.system(size: 12))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.accentColor)
+                            }
+                        }
                         Spacer()
-                        Text(branch.head.created, style: .date)
-                            .fontWeight(isCurrentBranch ? .semibold : .light)
-                            .font(.system(size: 12))
+                        HStack {
+                            Text(branch.head.name)
+                                .fontWeight(isCurrentBranch ? .semibold : .light)
+                                .font(.system(size: 12))
+                            Spacer()
+                            Text(branch.head.created, style: .date)
+                                .fontWeight(isCurrentBranch ? .semibold : .light)
+                                .font(.system(size: 12))
+                        }
                     }
-                }
+                }.contentShape(Rectangle())
                 .onTapGesture {
                     selectedBranch = branch
                 }
