@@ -22,6 +22,7 @@ extension Version {
     @NSManaged public var ingredients: Set<Ingredient>
     @NSManaged public var directions: String
     @NSManaged public var notes: Set<Note>
+    @NSManaged public var parent: Version?
     @NSManaged private var children: Set<Version>
     @NSManaged private var recipe: Recipe
     @NSManaged private var toHead: Branch
@@ -32,7 +33,8 @@ extension Version {
         name: String = "",
         ingredients: Set<Ingredient> = [],
         directions: String = "",
-        notes: Set<Note> = []
+        notes: Set<Note> = [],
+        parent: Version? = nil
     ) {
         let entity = NSEntityDescription.entity(forEntityName: "Version", in: context)!
         self.init(entity: entity, insertInto: context)
@@ -43,8 +45,34 @@ extension Version {
         self.ingredients = ingredients
         self.directions = directions
         self.notes = notes
+        self.parent = parent
     }
 
+}
+
+extension Version {
+//    func descendants() -> [Version] {
+//        var x: [Version] = []
+//        x.append(self)
+//        for child in children {
+//            x.append(contentsOf: child.descendants())
+//        }
+//        return x
+//    }
+//    
+//    func find(_ id: UUID) -> Version? {
+//        if self.id == id {
+//            return self
+//        }
+//        
+//        for child in children {
+//            if let match = child.find(id) {
+//                return match
+//            }
+//        }
+//        
+//        return nil
+//    }
 }
 
 // MARK: Generated accessors for ingredients

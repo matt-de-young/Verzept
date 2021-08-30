@@ -11,6 +11,10 @@
 		C918644E26DCBDBD000450F8 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */; };
 		C918644F26DCBDBD000450F8 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */; };
 		C918645026DCBDBD000450F8 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */; };
+		C918645226DCE0F3000450F8 /* BranchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918645126DCE0F3000450F8 /* BranchHistoryView.swift */; };
+		C918645326DCE0F3000450F8 /* BranchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918645126DCE0F3000450F8 /* BranchHistoryView.swift */; };
+		C918645426DCE0F3000450F8 /* BranchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918645126DCE0F3000450F8 /* BranchHistoryView.swift */; };
+		C918645526DCE0F3000450F8 /* BranchHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918645126DCE0F3000450F8 /* BranchHistoryView.swift */; };
 		C950752D26D2557C0042B175 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C950752C26D2557C0042B175 /* Tests_iOS.swift */; };
 		C950753826D2557C0042B175 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C950753726D2557C0042B175 /* Tests_macOS.swift */; };
 		C950753A26D2557C0042B175 /* Forking.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C950750E26D2557B0042B175 /* Forking.xcdatamodeld */; };
@@ -122,6 +126,7 @@
 
 /* Begin PBXFileReference section */
 		C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
+		C918645126DCE0F3000450F8 /* BranchHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchHistoryView.swift; sourceTree = "<group>"; };
 		C950750F26D2557B0042B175 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		C950751026D2557B0042B175 /* ForkingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForkingApp.swift; sourceTree = "<group>"; };
 		C950751226D2557B0042B175 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -292,6 +297,7 @@
 				C99F598B26D6D89000F0AA20 /* EditBranchView.swift */,
 				C99F599026D6D8CD00F0AA20 /* NewBranchView.swift */,
 				C99F599526D7717C00F0AA20 /* CompareBranchesView.swift */,
+				C918645126DCE0F3000450F8 /* BranchHistoryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -468,6 +474,7 @@
 				C950756426D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C99F598C26D6D89000F0AA20 /* EditBranchView.swift in Sources */,
 				C9530BBA26D2F95900DA1660 /* Recipe+CoreDataClass.swift in Sources */,
+				C918645226DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C9530BB226D2F95900DA1660 /* Note+CoreDataClass.swift in Sources */,
 				C9530BBE26D2F95900DA1660 /* Recipe+CoreDataProperties.swift in Sources */,
 				C99F598226D6541000F0AA20 /* NewNoteView.swift in Sources */,
@@ -499,6 +506,7 @@
 				C950756526D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C99F598D26D6D89000F0AA20 /* EditBranchView.swift in Sources */,
 				C9530BBB26D2F95900DA1660 /* Recipe+CoreDataClass.swift in Sources */,
+				C918645326DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C9530BB326D2F95900DA1660 /* Note+CoreDataClass.swift in Sources */,
 				C9530BBF26D2F95900DA1660 /* Recipe+CoreDataProperties.swift in Sources */,
 				C99F598326D6541000F0AA20 /* NewNoteView.swift in Sources */,
@@ -533,6 +541,7 @@
 				C9530BB826D2F95900DA1660 /* Note+CoreDataProperties.swift in Sources */,
 				C9530BC026D2F95900DA1660 /* Recipe+CoreDataProperties.swift in Sources */,
 				C950756126D285A70042B175 /* ListRecipesView.swift in Sources */,
+				C918645426DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C950756626D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C99F598426D6541000F0AA20 /* NewNoteView.swift in Sources */,
 				C9530BD026D2F95900DA1660 /* Ingredient+CoreDataProperties.swift in Sources */,
@@ -562,6 +571,7 @@
 				C9530BB926D2F95900DA1660 /* Note+CoreDataProperties.swift in Sources */,
 				C9530BC126D2F95900DA1660 /* Recipe+CoreDataProperties.swift in Sources */,
 				C950756226D285A70042B175 /* ListRecipesView.swift in Sources */,
+				C918645526DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C950756726D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C99F598526D6541000F0AA20 /* NewNoteView.swift in Sources */,
 				C9530BD126D2F95900DA1660 /* Ingredient+CoreDataProperties.swift in Sources */,

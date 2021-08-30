@@ -56,6 +56,36 @@ extension Branch {
     }
 }
 
+extension Branch {
+    func history() -> [Version] {
+        var path = [head]
+        var x = head
+        while true {
+            if (x.parent == nil) {
+                break
+            }
+            x = x.parent!
+            path.append(x)
+            if (x == root) {
+                break
+            }
+        }
+        return path
+    }
+    func fullHistory() -> [Version] {
+        var path = [head]
+        var x = head
+        while true {
+            if (x.parent == nil) {
+                break
+            }
+            x = x.parent!
+            path.append(x)
+        }
+        return path
+    }
+}
+
 extension Branch : Identifiable {
 
 }

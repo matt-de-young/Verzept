@@ -104,7 +104,8 @@ extension Recipe {
                 context: context,
                 name: versionName ?? replacementName,
                 ingredients: ingredients ?? recipe.ingredients,
-                directions: directions ?? recipe.directions
+                directions: directions ?? recipe.directions,
+                parent: recipe.currentBranch.head
             )
         }
         

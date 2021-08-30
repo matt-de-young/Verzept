@@ -18,8 +18,10 @@ struct ListBranchesView: View {
     @State private var newBranchIsPresented: Bool = false
     @State private var selectedBranch: Branch? = nil
     @State private var editBranch: Branch? = nil
-    @State private var CompareBranchIsPresented: Bool = false
+    @State private var compareBranchIsPresented: Bool = false
     @State private var compareBranch: Branch? = nil
+    @State private var historyBranchIsPresented: Bool = false
+    @State private var historyBranch: Branch? = nil
 
     var body: some View {
         List() {
@@ -68,7 +70,11 @@ struct ListBranchesView: View {
                 },
                 .default(Text("Compare")) {
                     compareBranch = branch
-                    CompareBranchIsPresented = true
+                    compareBranchIsPresented = true
+                },
+                .default(Text("View History")) {
+                    historyBranch = branch
+                    historyBranchIsPresented = true
                 },
                 .cancel()
             ]
@@ -110,7 +116,17 @@ struct ListBranchesView: View {
                     branchA: compareBranch ?? recipe.currentBranch,
                     branches: Array(recipe.branches).filter { $0 != compareBranch }
                 ),
-                isActive: $CompareBranchIsPresented
+                isActive: $compareBranchIsPresented
+            ) {
+                EmptyView()
+            }
+        )
+        .background(
+            NavigationLink(
+                destination: BranchHistoryView(
+                    branch: historyBranch ?? recipe.currentBranch
+                ),
+                isActive: $historyBranchIsPresented
             ) {
                 EmptyView()
             }
