@@ -85,16 +85,24 @@ extension Recipe {
         recipe: Recipe,
         title: String?,
         ingredients: Set<Ingredient>?,
-        directions: String?
+        directions: String?,
+        versionName: String? = nil
     ) {
         if title != nil {
             recipe.title = title!
         }
         
         if (ingredients != nil || directions != nil) {
+            
+            var replacementName: String {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                return dateFormatter.string(from: Date())
+            }
+            
             recipe.currentBranch.head = Version(
                 context: context,
-                name: "",
+                name: versionName ?? replacementName,
                 ingredients: ingredients ?? recipe.ingredients,
                 directions: directions ?? recipe.directions
             )

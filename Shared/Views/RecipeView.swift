@@ -90,13 +90,14 @@ struct RecipeView: View {
                 title: recipe.title,
                 ingredients: Array(recipe.ingredients),
                 directions: recipe.directions
-            ) { title, ingredients, directions in
+            ) { title, ingredients, directions, versionName in
                 Recipe.update(
                     context: viewContext,
                     recipe: recipe,
                     title: title,
                     ingredients: Set(ingredients),
-                    directions: directions
+                    directions: directions,
+                    versionName: versionName
                 )
                 editRecipeisPresented = false
             }

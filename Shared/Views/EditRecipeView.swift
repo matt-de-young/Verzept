@@ -104,7 +104,10 @@ struct EditRecipeView: View {
     @State var title: String
     @State var ingredients: [Ingredient]
     @State var directions: String
-    let onComplete: (String, [Ingredient], String) -> Void
+    @State var versionName: String = ""
+    let onComplete: (String, [Ingredient], String, String) -> Void
+    
+    @State private var isShowingNameAlert = false
     
     var body: some View {
         NavigationView {
@@ -114,15 +117,21 @@ struct EditRecipeView: View {
                 ingredients: $ingredients,
                 directions: $directions
             )
+            .navigationBarTitle(Text("Edit Recipe"))
             .navigationBarItems(
                 leading: Button("Dismiss") {
                     self.presentationMode.wrappedValue.dismiss()
                 }.font(.body.weight(.regular)),
                 trailing: Button("Update") {
-                    onComplete(title, ingredients, directions)
+                    self.isShowingNameAlert = true
                 }
             )
         }
+        .alert(isPresented: $isShowingNameAlert, TextAlert(title: "Name this update", accept: "Update", action: { versionName in
+            if versionName != nil {
+                onComplete(title, ingredients, directions, versionName!)
+            }
+        }))
     }
 }
 
@@ -170,7 +179,7 @@ struct EditRecipeView_Previews: PreviewProvider {
             title: "Black Bean Burgers",
             ingredients: [],
             directions: ""
-        ) { title, ingredients, directions in
+        ) { title, ingredients, directions, versionName in
             
         }
     }

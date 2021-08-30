@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C918644D26DCBDBD000450F8 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */; };
+		C918644E26DCBDBD000450F8 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */; };
+		C918644F26DCBDBD000450F8 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */; };
+		C918645026DCBDBD000450F8 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */; };
 		C950752D26D2557C0042B175 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C950752C26D2557C0042B175 /* Tests_iOS.swift */; };
 		C950753826D2557C0042B175 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C950753726D2557C0042B175 /* Tests_macOS.swift */; };
 		C950753A26D2557C0042B175 /* Forking.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C950750E26D2557B0042B175 /* Forking.xcdatamodeld */; };
@@ -117,6 +121,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
 		C950750F26D2557B0042B175 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		C950751026D2557B0042B175 /* ForkingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForkingApp.swift; sourceTree = "<group>"; };
 		C950751226D2557B0042B175 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -295,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				C9530BE326D42D7B00DA1660 /* IngredientListView.swift */,
+				C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -472,6 +478,7 @@
 				C950757326D292F80042B175 /* RecipeView.swift in Sources */,
 				C950755F26D285A70042B175 /* ListRecipesView.swift in Sources */,
 				C950754026D2557C0042B175 /* Persistence.swift in Sources */,
+				C918644D26DCBDBD000450F8 /* TextFieldAlert.swift in Sources */,
 				C950756E26D28A860042B175 /* EditIngredientView.swift in Sources */,
 				C950753A26D2557C0042B175 /* Forking.xcdatamodeld in Sources */,
 				C9530BCE26D2F95900DA1660 /* Ingredient+CoreDataProperties.swift in Sources */,
@@ -502,6 +509,7 @@
 				C950757426D292F80042B175 /* RecipeView.swift in Sources */,
 				C950756026D285A70042B175 /* ListRecipesView.swift in Sources */,
 				C950754126D2557C0042B175 /* Persistence.swift in Sources */,
+				C918644E26DCBDBD000450F8 /* TextFieldAlert.swift in Sources */,
 				C950756F26D28A860042B175 /* EditIngredientView.swift in Sources */,
 				C950753B26D2557C0042B175 /* Forking.xcdatamodeld in Sources */,
 				C9530BCF26D2F95900DA1660 /* Ingredient+CoreDataProperties.swift in Sources */,
@@ -528,6 +536,7 @@
 				C950756626D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C99F598426D6541000F0AA20 /* NewNoteView.swift in Sources */,
 				C9530BD026D2F95900DA1660 /* Ingredient+CoreDataProperties.swift in Sources */,
+				C918644F26DCBDBD000450F8 /* TextFieldAlert.swift in Sources */,
 				C99F599826D7717C00F0AA20 /* CompareBranchesView.swift in Sources */,
 				C9530BDC26D2F95900DA1660 /* Version+CoreDataClass.swift in Sources */,
 				C99F599326D6D8CD00F0AA20 /* NewBranchView.swift in Sources */,
@@ -556,6 +565,7 @@
 				C950756726D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C99F598526D6541000F0AA20 /* NewNoteView.swift in Sources */,
 				C9530BD126D2F95900DA1660 /* Ingredient+CoreDataProperties.swift in Sources */,
+				C918645026DCBDBD000450F8 /* TextFieldAlert.swift in Sources */,
 				C99F599926D7717C00F0AA20 /* CompareBranchesView.swift in Sources */,
 				C9530BDD26D2F95900DA1660 /* Version+CoreDataClass.swift in Sources */,
 				C99F599426D6D8CD00F0AA20 /* NewBranchView.swift in Sources */,

@@ -24,20 +24,17 @@ struct ListBranchesView: View {
     var body: some View {
         List() {
             ForEach(Array(recipe.branches)) { branch in
+                let isCurrentBranch = branch == recipe.currentBranch
                 VStack(alignment: .leading) {
-                    if (branch == recipe.currentBranch) {
-                        Text(branch.name).fontWeight(.heavy)
-                    } else {
-                        Text(branch.name)
-                    }
+                    Text(branch.name).fontWeight(isCurrentBranch ? .heavy : .regular)
                     Spacer()
-                    if (branch == recipe.currentBranch) {
-                        Text(branch.head.created, style: .date)
-                            .fontWeight(.semibold)
+                    HStack {
+                        Text(branch.head.name)
+                            .fontWeight(isCurrentBranch ? .semibold : .light)
                             .font(.system(size: 12))
-                    } else {
+                        Spacer()
                         Text(branch.head.created, style: .date)
-                            .fontWeight(.light)
+                            .fontWeight(isCurrentBranch ? .semibold : .light)
                             .font(.system(size: 12))
                     }
                 }
@@ -45,11 +42,6 @@ struct ListBranchesView: View {
                     selectedBranch = branch
                 }
             }
-//            .onDelete { indices in
-//                withAnimation {
-//                    recipe.branches.remove(atOffsets: indices)
-//                }
-//            }
         }
         .listStyle(InsetGroupedListStyle())
         .navigationBarItems(trailing: Button(action: {
