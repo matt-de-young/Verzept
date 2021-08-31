@@ -14,6 +14,8 @@ struct RecipeFormView: View {
 
     @State private var newIngredientIsPresented: Bool = false
     @State private var editIngredient: Ingredient? = nil
+//    @State private var ingredientsEditMode = false
+    @State var editMode: EditMode = .inactive
     
     @Binding var title: String
     @Binding var ingredients: [Ingredient]
@@ -25,31 +27,45 @@ struct RecipeFormView: View {
                 TextField("Title", text: $title)
             }
             Section(header: Text("Ingredients")) {
-                ForEach(Array(ingredients.enumerated()), id: \.offset) { index, ingredient in
-                    HStack {
-                        Text("\(String?(ingredient.quantity ) ?? "")")
-                        Text(ingredient.unit )
-                        Text(ingredient.name )
+                NavigationView {
+                    List {
+                        ForEach(Array(ingredients.enumerated()), id: \.offset) { index, ingredient in
+                            HStack {
+                                Text("\(String?(ingredient.quantity ) ?? "")")
+                                Text(ingredient.unit )
+                                Text(ingredient.name )
+                                Spacer()
+                            }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                editIngredient = ingredient
+                            }
+                        }
+                        .onMove(perform: { indices, newOffset in
+                            withAnimation {
+                                ingredients.move(fromOffsets: indices, toOffset: newOffset)
+                            }
+                        })
+                        .onDelete { indices in
+                            withAnimation {
+                                ingredients.remove(atOffsets: indices)
+                            }
+                        }
+                        Button(action: {
+                            newIngredientIsPresented = true
+                        }, label: {
+                            HStack {
+                                Text("Add Ingredient")
+                                Spacer()
+                                Image(systemName: "plus.circle.fill")
+                                    .accessibilityLabel(Text("Add ingredient"))
+                            }
+                        })
                     }
-                    .onTapGesture {
-                        editIngredient = ingredient
-                    }
+                    .navigationBarItems(trailing: EditButton())
+                    .environment(\.editMode, $editMode)
                 }
-                .onDelete { indices in
-                    withAnimation {
-                        ingredients.remove(atOffsets: indices)
-                    }
-                }
-                Button(action: {
-                    newIngredientIsPresented = true
-                }, label: {
-                    HStack {
-                        Text("Add Ingredient")
-                        Spacer()
-                        Image(systemName: "plus.circle.fill")
-                            .accessibilityLabel(Text("Add ingredient"))
-                    }
-                })
+                .frame(minHeight: 500.0)
             }
             Section(header: Text("Directions")) {
                 TextEditor(text: $directions)
@@ -177,7 +193,10 @@ struct EditRecipeView_Previews: PreviewProvider {
         EditRecipeView(
             viewContext: PersistenceController.preview.container.viewContext,
             title: "Black Bean Burgers",
-            ingredients: [],
+            ingredients: [
+                Ingredient(context: PersistenceController.preview.container.viewContext, name: "Eggs", quantity: "2"),
+                Ingredient(context: PersistenceController.preview.container.viewContext, name: "Beans", quantity: "1", unit: "can")
+            ],
             directions: ""
         ) { title, ingredients, directions, versionName in
             
