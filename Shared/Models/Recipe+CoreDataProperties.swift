@@ -22,7 +22,7 @@ extension Recipe {
     @NSManaged public var title: String
     @NSManaged public var branches: Set<Branch>
     @NSManaged public var currentBranch: Branch
-    @NSManaged private var root: Version
+    @NSManaged private var versions: Set<Version>
 
     var ingredients: Set<Ingredient> {
         return currentBranch.head.ingredients
@@ -53,9 +53,9 @@ extension Recipe {
         let newVersion = Version(context: context, name: "init", ingredients: ingredients, directions: directions, notes: notes)
         let newBranch = Branch(context: context, name: "main", root: newVersion, head: newVersion)
         
+        self.versions = [newVersion]
         self.branches = [newBranch]
         self.currentBranch = newBranch
-        self.root = newVersion
         
         do {
             try context.save()
@@ -100,13 +100,15 @@ extension Recipe {
                 return dateFormatter.string(from: Date())
             }
             
-            recipe.currentBranch.head = Version(
+            let newVersion = Version(
                 context: context,
                 name: versionName ?? replacementName,
                 ingredients: ingredients ?? recipe.ingredients,
                 directions: directions ?? recipe.directions,
                 parent: recipe.currentBranch.head
             )
+            recipe.addToVersions(newVersion)
+            recipe.currentBranch.head = newVersion
         }
         
         do {
@@ -141,13 +143,12 @@ extension Recipe {
         context: NSManagedObjectContext,
         recipe: Recipe,
         name: String,
-        basedOn: Branch
+        root: Version
     ) {
-        
-        let newBranch = Branch(context: context, name: name, root: basedOn.head, head: basedOn.head)
+        let newBranch = Branch(context: context, name: name, root: root, head: root)
         recipe.addToBranches(newBranch)
         recipe.currentBranch = newBranch
-        
+
         do {
             try context.save()
         } catch {
@@ -200,6 +201,23 @@ extension Recipe {
     @objc(removeBranches:)
     @NSManaged public func removeFromBranches(_ values: NSSet)
 
+}
+
+// MARK: Generated accessors for versions
+extension Recipe {
+    
+    @objc(addVersionsObject:)
+    @NSManaged private func addToVersions(_ value: Version)
+    
+    @objc(removeVersionsObject:)
+    @NSManaged private func removeFromVersions(_ value: Version)
+    
+    @objc(addVersions:)
+    @NSManaged private func addToVersions(_ values: NSSet)
+    
+    @objc(removeVersions:)
+    @NSManaged private func removeFromVersions(_ values: NSSet)
+    
 }
 
 extension Recipe : Identifiable {

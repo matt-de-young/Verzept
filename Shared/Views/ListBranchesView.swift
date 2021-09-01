@@ -99,7 +99,7 @@ struct ListBranchesView: View {
         })
         .sheet(isPresented: $newBranchIsPresented) {
             NewBranchView(branches: Array(recipe.branches)) { basedOn, name in
-                Recipe.addBranch(context: viewContext, recipe: recipe, name: name, basedOn: basedOn)
+                Recipe.addBranch(context: viewContext, recipe: recipe, name: name, root: basedOn.head)
                 newBranchIsPresented = false
                 selectedBranch = nil
             }
@@ -124,6 +124,7 @@ struct ListBranchesView: View {
         .background(
             NavigationLink(
                 destination: BranchHistoryView(
+                    viewContext: viewContext,
                     branch: historyBranch ?? recipe.currentBranch
                 ),
                 isActive: $historyBranchIsPresented

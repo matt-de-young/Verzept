@@ -27,7 +27,7 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="branches" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Branch" inverseName="recipe" inverseEntity="Branch"/>
         <relationship name="currentBranch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Branch" inverseName="toCurrentBranch" inverseEntity="Branch"/>
-        <relationship name="root" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Version" inverseName="recipe" inverseEntity="Version"/>
+        <relationship name="versions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Version" inverseName="recipe" inverseEntity="Version"/>
     </entity>
     <entity name="Version" representedClassName="Version" syncable="YES">
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -38,7 +38,7 @@
         <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="toVersion" inverseEntity="Ingredient"/>
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Note" inverseName="version" inverseEntity="Note"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Version" inverseName="children" inverseEntity="Version"/>
-        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="root" inverseEntity="Recipe"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="versions" inverseEntity="Recipe"/>
         <relationship name="toHead" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Branch" inverseName="head" inverseEntity="Branch"/>
         <relationship name="toRoot" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Branch" inverseName="root" inverseEntity="Branch"/>
     </entity>
@@ -47,6 +47,6 @@
         <element name="Ingredient" positionX="1119.9619140625" positionY="-769.4895629882812" width="128" height="118"/>
         <element name="Note" positionX="961.7127075195312" positionY="-498.6815795898438" width="128" height="89"/>
         <element name="Recipe" positionX="209.8157958984375" positionY="-693.6525573730469" width="112.10400390625" height="119"/>
-        <element name="Version" positionX="724.435791015625" positionY="-782.7981567382812" width="128" height="208"/>
+        <element name="Version" positionX="724.435791015625" positionY="-782.7981567382812" width="128" height="194"/>
     </elements>
 </model>

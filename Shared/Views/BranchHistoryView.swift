@@ -6,31 +6,36 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct BranchHistoryView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @State var viewContext: NSManagedObjectContext
     var branch: Branch
     
     var body: some View {
         List() {
             ForEach(Array(branch.fullHistory())) { version in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(version.name)
-                        Spacer()
-                        HStack {
+                NavigationLink(destination: VersionView(viewContext: viewContext, version: version)) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(version.name)
                             Spacer()
-                            Text(version.created, style: .date)
-                                .fontWeight(.light)
-                                .font(.system(size: 12))
+                            HStack {
+                                Spacer()
+                                Text(version.created, style: .date)
+                                    .fontWeight(.light)
+                                    .font(.system(size: 12))
+                            }
                         }
                     }
-                }.contentShape(Rectangle())
+                }
             }
         }
         .listStyle(InsetGroupedListStyle())
+        .navigationTitle("History")
     }
 }
 
@@ -63,6 +68,7 @@ struct BranchHistoryView_Previews: PreviewProvider {
     )
     static var previews: some View {
         BranchHistoryView(
+            viewContext: viewContext,
             branch: branch
         )
     }

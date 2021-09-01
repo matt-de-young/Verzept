@@ -23,8 +23,8 @@ extension Version {
     @NSManaged public var directions: String
     @NSManaged public var notes: Set<Note>
     @NSManaged public var parent: Version?
+    @NSManaged public var recipe: Recipe
     @NSManaged private var children: Set<Version>
-    @NSManaged private var recipe: Recipe
     @NSManaged private var toHead: Branch
     @NSManaged private var toRoot: Branch
     
