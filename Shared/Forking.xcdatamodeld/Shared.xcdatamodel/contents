@@ -9,6 +9,7 @@
         <relationship name="toCurrentBranch" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="currentBranch" inverseEntity="Recipe"/>
     </entity>
     <entity name="Ingredient" representedClassName="Ingredient" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="quantity" optional="YES" attributeType="String"/>
@@ -22,6 +23,7 @@
         <relationship name="version" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Version" inverseName="notes" inverseEntity="Version"/>
     </entity>
     <entity name="Recipe" representedClassName="Recipe" syncable="YES">
+        <attribute name="branchIndex" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[UUID]"/>
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
@@ -33,6 +35,7 @@
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="directions" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="ingredientIndex" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[UUID]"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Version" inverseName="parent" inverseEntity="Version"/>
         <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="toVersion" inverseEntity="Ingredient"/>
@@ -44,9 +47,9 @@
     </entity>
     <elements>
         <element name="Branch" positionX="446.4012451171875" positionY="-693.1356811523438" width="128" height="119"/>
-        <element name="Ingredient" positionX="1119.9619140625" positionY="-769.4895629882812" width="128" height="118"/>
+        <element name="Ingredient" positionX="1119.9619140625" positionY="-769.4895629882812" width="128" height="119"/>
         <element name="Note" positionX="961.7127075195312" positionY="-498.6815795898438" width="128" height="89"/>
-        <element name="Recipe" positionX="209.8157958984375" positionY="-693.6525573730469" width="112.10400390625" height="119"/>
-        <element name="Version" positionX="724.435791015625" positionY="-782.7981567382812" width="128" height="194"/>
+        <element name="Recipe" positionX="209.8157958984375" positionY="-693.6525573730469" width="112.10400390625" height="134"/>
+        <element name="Version" positionX="724.435791015625" positionY="-782.7981567382812" width="128" height="209"/>
     </elements>
 </model>

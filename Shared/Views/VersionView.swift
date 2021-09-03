@@ -22,7 +22,7 @@ struct VersionView: View {
             if !version.ingredients.isEmpty {
                 VStack(alignment: .leading, content: {
                     Text("Ingrdients:").font(.headline)
-                    IngredientListView(ingredients: Array(version.ingredients))
+                    IngredientListView(ingredients: version.sortedIngredients())
                 })
                 .padding(.bottom)
             }

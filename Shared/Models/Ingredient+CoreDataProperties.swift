@@ -16,6 +16,7 @@ extension Ingredient {
         return NSFetchRequest<Ingredient>(entityName: "Ingredient")
     }
 
+    @NSManaged public var id: UUID
     @NSManaged public var name: String
     @NSManaged public var notes: String
     @NSManaged public var quantity: String
@@ -32,6 +33,7 @@ extension Ingredient {
         let entity = NSEntityDescription.entity(forEntityName: "Ingredient", in: context)!
         self.init(entity: entity, insertInto: context)
         
+        self.id = UUID()
         self.name = name
         self.quantity = quantity
         self.unit = unit

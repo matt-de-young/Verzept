@@ -23,9 +23,10 @@ extension Recipe {
     @NSManaged public var branches: Set<Branch>
     @NSManaged public var currentBranch: Branch
     @NSManaged private var versions: Set<Version>
+    @NSManaged private var branchIndex: [UUID]
 
-    var ingredients: Set<Ingredient> {
-        return currentBranch.head.ingredients
+    var ingredients: [Ingredient] {
+        return currentBranch.head.sortedIngredients()
     }
     
     var directions: String {
@@ -34,6 +35,20 @@ extension Recipe {
     
     var notes: Set<Note> {
         return currentBranch.head.notes
+    }
+    
+    var sortedBranches: [Branch] {
+        var ret: [Branch] = []
+        for id in branchIndex {
+            if let branch = branches.first(where: { $0.id == id }) {
+                if branch == currentBranch {
+                    ret.insert(branch, at: 0)
+                } else {
+                    ret.append(branch)
+                }
+            }
+        }
+        return ret
     }
     
     convenience init (
@@ -55,6 +70,7 @@ extension Recipe {
         
         self.versions = [newVersion]
         self.branches = [newBranch]
+        self.branchIndex = [newBranch.id]
         self.currentBranch = newBranch
         
         do {
@@ -103,7 +119,7 @@ extension Recipe {
             let newVersion = Version(
                 context: context,
                 name: versionName ?? replacementName,
-                ingredients: ingredients ?? recipe.ingredients,
+                ingredients: ingredients ?? Set(recipe.ingredients),
                 directions: directions ?? recipe.directions,
                 parent: recipe.currentBranch.head
             )
@@ -147,6 +163,7 @@ extension Recipe {
     ) {
         let newBranch = Branch(context: context, name: name, root: root, head: root)
         recipe.addToBranches(newBranch)
+        recipe.branchIndex.append(newBranch.id)
         recipe.currentBranch = newBranch
 
         do {
@@ -174,6 +191,7 @@ extension Recipe {
     
     static func deleteBranch(context: NSManagedObjectContext, recipe: Recipe, branch: Branch) {
         recipe.removeFromBranches(branch)
+        recipe.branchIndex.removeAll(where: { $0 == branch.id })
         
         do {
             try context.save()
@@ -190,16 +208,16 @@ extension Recipe {
 extension Recipe {
 
     @objc(addBranchesObject:)
-    @NSManaged public func addToBranches(_ value: Branch)
+    @NSManaged private func addToBranches(_ value: Branch)
 
     @objc(removeBranchesObject:)
-    @NSManaged public func removeFromBranches(_ value: Branch)
+    @NSManaged private func removeFromBranches(_ value: Branch)
 
     @objc(addBranches:)
-    @NSManaged public func addToBranches(_ values: NSSet)
+    @NSManaged private func addToBranches(_ values: NSSet)
 
     @objc(removeBranches:)
-    @NSManaged public func removeFromBranches(_ values: NSSet)
+    @NSManaged private func removeFromBranches(_ values: NSSet)
 
 }
 

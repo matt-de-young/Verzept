@@ -31,7 +31,7 @@ struct RecipeView: View {
                     if !recipe.ingredients.isEmpty {
                         VStack(alignment: .leading, content: {
                             Text("Ingrdients:").font(.headline)
-                            IngredientListView(ingredients: Array(recipe.ingredients))
+                            IngredientListView(ingredients: recipe.ingredients)
                         })
                         .padding(.bottom)
                     }
