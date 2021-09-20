@@ -88,14 +88,14 @@ struct RecipeView: View {
             EditRecipeView(
                 viewContext: viewContext,
                 title: recipe.title,
-                ingredients: Array(recipe.ingredients),
+                ingredients: recipe.ingredients,
                 directions: recipe.directions
             ) { title, ingredients, directions, versionName in
                 Recipe.update(
                     context: viewContext,
                     recipe: recipe,
                     title: title,
-                    ingredients: Set(ingredients),
+                    ingredients: ingredients,
                     directions: directions,
                     versionName: versionName
                 )
@@ -129,7 +129,10 @@ struct RecipeView_Previews: PreviewProvider {
             recipe: Recipe(
                 context: PersistenceController.preview.container.viewContext,
                 title: "Super Recipe",
-                ingredients: [],
+                ingredients: """
+                    1 cup Lorem
+                    30 ml Ipsum
+                    """,
                 directions: """
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                     enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor

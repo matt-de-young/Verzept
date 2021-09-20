@@ -41,7 +41,7 @@ struct ListRecipesView: View {
                     _ = Recipe(
                         context: viewContext,
                         title: title,
-                        ingredients: Set(ingredients),
+                        ingredients: ingredients,
                         directions: directions
                     )
                 }

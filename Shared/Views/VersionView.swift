@@ -22,7 +22,7 @@ struct VersionView: View {
             if !version.ingredients.isEmpty {
                 VStack(alignment: .leading, content: {
                     Text("Ingrdients:").font(.headline)
-                    IngredientListView(ingredients: version.sortedIngredients())
+                    IngredientListView(ingredients: version.ingredients)
                 })
                 .padding(.bottom)
             }
@@ -92,10 +92,10 @@ struct VersionView_Previews: PreviewProvider {
     static var initVersion = Version(
         context: viewContext,
         name: "init",
-        ingredients: [
-            Ingredient(context: viewContext, name: "Stuff", quantity: "1", unit: "cup"),
-            Ingredient(context: viewContext, name: "Other Stuff", quantity: "30", unit: "ml"),
-        ],
+        ingredients: """
+            1 cup Stuff
+            30 ml Other Stuff
+        """,
         directions: "Mix the stuff into the other stuff."
     )
     static var previews: some View {

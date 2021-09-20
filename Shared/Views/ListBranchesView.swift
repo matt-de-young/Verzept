@@ -142,7 +142,7 @@ struct ListBranchesView_Previews: PreviewProvider {
             recipe: Recipe(
                 context: PersistenceController.preview.container.viewContext,
                 title: "Super Recipe",
-                ingredients: [],
+                ingredients: "",
                 directions: "",
                 notes: []
             )

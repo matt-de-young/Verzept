@@ -24,9 +24,9 @@ extension Recipe {
     @NSManaged public var currentBranch: Branch
     @NSManaged private var versions: Set<Version>
     @NSManaged private var branchIndex: [UUID]
-
-    var ingredients: [Ingredient] {
-        return currentBranch.head.sortedIngredients()
+    
+    var ingredients: String {
+        return currentBranch.head.ingredients
     }
     
     var directions: String {
@@ -54,7 +54,7 @@ extension Recipe {
     convenience init (
         context: NSManagedObjectContext!,
         title: String,
-        ingredients: Set<Ingredient> = [],
+        ingredients: String = "",
         directions: String = "",
         notes: Set<Note> = []
     ) {
@@ -70,7 +70,7 @@ extension Recipe {
         
         self.versions = [newVersion]
         self.branches = [newBranch]
-        self.branchIndex = [newBranch.id]
+        self.branchIndex = [newBranch.id] // TODO: There is some issue here. index is stored as "(\n    \"CFFC3E99-353A-4800-B209-F30079D63B90\"\n)"
         self.currentBranch = newBranch
         
         do {
@@ -100,7 +100,7 @@ extension Recipe {
         context: NSManagedObjectContext,
         recipe: Recipe,
         title: String?,
-        ingredients: Set<Ingredient>?,
+        ingredients: String?,
         directions: String?,
         versionName: String? = nil
     ) {
@@ -119,7 +119,7 @@ extension Recipe {
             let newVersion = Version(
                 context: context,
                 name: versionName ?? replacementName,
-                ingredients: ingredients ?? Set(recipe.ingredients),
+                ingredients: ingredients ?? recipe.ingredients,
                 directions: directions ?? recipe.directions,
                 parent: recipe.currentBranch.head
             )

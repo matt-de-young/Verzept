@@ -50,7 +50,7 @@ struct NewBranchView_Previews: PreviewProvider {
     static var newVersion = Version(
         context: PersistenceController.preview.container.viewContext,
         name: "init",
-        ingredients: [],
+        ingredients:"",
         directions: ""
     )
     static var previews: some View {

@@ -13,10 +13,9 @@ struct RecipeFormView: View {
     @State var viewContext: NSManagedObjectContext
 
     @State private var newIngredientIsPresented: Bool = false
-    @State private var editIngredient: Ingredient? = nil
     
     @Binding var title: String
-    @Binding var ingredients: [Ingredient]
+    @Binding var ingredients: String
     @Binding var directions: String
     
     var body: some View {
@@ -24,74 +23,78 @@ struct RecipeFormView: View {
             Section(header: Text("Title")) {
                 TextField("Title", text: $title)
             }
+//            Section(header: Text("Ingredients")) {
+//                ForEach(Array(ingredients.enumerated()), id: \.offset) { index, ingredient in
+//                    HStack {
+//                        Text("\(String?(ingredient.quantity ) ?? "")")
+//                        Text(ingredient.unit )
+//                        Text(ingredient.name )
+//                    }
+//                    .onTapGesture {
+//                        editIngredient = ingredient
+//                    }
+//                }
+//                .onDelete { indices in
+//                    withAnimation {
+//                        ingredients.remove(atOffsets: indices)
+//                    }
+//                }
+//                Button(action: {
+//                    newIngredientIsPresented = true
+//                }, label: {
+//                    HStack {
+//                        Text("Add Ingredient")
+//                        Spacer()
+//                        Image(systemName: "plus.circle.fill")
+//                            .accessibilityLabel(Text("Add ingredient"))
+//                    }
+//                })
+//            }
             Section(header: Text("Ingredients")) {
-                ForEach(Array(ingredients.enumerated()), id: \.offset) { index, ingredient in
-                    HStack {
-                        Text("\(String?(ingredient.quantity ) ?? "")")
-                        Text(ingredient.unit )
-                        Text(ingredient.name )
-                    }
-                    .onTapGesture {
-                        editIngredient = ingredient
-                    }
-                }
-                .onDelete { indices in
-                    withAnimation {
-                        ingredients.remove(atOffsets: indices)
-                    }
-                }
-                Button(action: {
-                    newIngredientIsPresented = true
-                }, label: {
-                    HStack {
-                        Text("Add Ingredient")
-                        Spacer()
-                        Image(systemName: "plus.circle.fill")
-                            .accessibilityLabel(Text("Add ingredient"))
-                    }
-                })
+                TextEditor(text: $ingredients)
+                    .frame(minHeight: 200.0)
             }
             Section(header: Text("Directions")) {
                 TextEditor(text: $directions)
                     .frame(minHeight: 200.0)
             }
         }
-        .sheet(isPresented: $newIngredientIsPresented) {
-            NewIngredientView() { name, quantity, unit, notes in
-                withAnimation {
-                    ingredients.append(
-                        Ingredient(
-                            context: viewContext,
-                            name: name,
-                            quantity: quantity,
-                            unit: unit,
-                            notes: notes
-                        )
-                    )
-                }
-                newIngredientIsPresented = false
-            }
-        }
-        .sheet(item: $editIngredient) { ingredient in
-            EditIngredientView(
-                name: ingredient.name,
-                quantity: ingredient.quantity,
-                unit: ingredient.unit,
-                notes: ingredient.notes
-            ) { name, quantity, unit, notes in
-                let i = ingredients.firstIndex(of: ingredient)
-                if i != nil {
-                    ingredients[i!] = Ingredient(
-                        context: viewContext,
-                        name: name,
-                        quantity: quantity,
-                        unit: unit,
-                        notes: notes
-                    )
-                }
-                editIngredient = nil
-            }
-        }
+//        .sheet(isPresented: $newIngredientIsPresented) {
+//            NewIngredientView() { name, quantity, unit, notes in
+//                withAnimation {
+//                    ingredients.append(
+//                        Ingredient(
+//                            context: viewContext,
+//                            name: name,
+//                            quantity: quantity,
+//                            unit: unit,
+//                            notes: notes
+//                        )
+//                    )
+//                }
+//                newIngredientIsPresented = false
+//            }
+//        }
+//        .sheet(item: $editIngredient) { ingredient in
+//            EditIngredientView(
+//                name: ingredient.name,
+//                quantity: ingredient.quantity,
+//                unit: ingredient.unit,
+//                notes: ingredient.notes
+//            ) { name, quantity, unit, notes in
+//                let i = ingredients.firstIndex(of: ingredient)
+//                if i != nil {
+//                    ingredients[i!] = Ingredient(
+//                        context: viewContext,
+//                        name: name,
+//                        quantity: quantity,
+//                        unit: unit,
+//                        notes: notes
+//                    )
+//                }
+//                editIngredient = nil
+//            }
+//        }
     }
 }
 
@@ -102,10 +105,10 @@ struct EditRecipeView: View {
     @State var viewContext: NSManagedObjectContext
     
     @State var title: String
-    @State var ingredients: [Ingredient]
+    @State var ingredients: String
     @State var directions: String
     @State var versionName: String = ""
-    let onComplete: (String, [Ingredient], String, String) -> Void
+    let onComplete: (String, String, String, String) -> Void
     
     @State private var isShowingNameAlert = false
     
@@ -142,9 +145,9 @@ struct CreateRecipeView: View {
     @State var viewContext: NSManagedObjectContext
     
     @State var title: String = ""
-    @State var ingredients: [Ingredient] = []
+    @State var ingredients: String = ""
     @State var directions: String = ""
-    let onComplete: (String, [Ingredient], String) -> Void
+    let onComplete: (String, String, String) -> Void
     
     var body: some View {
         NavigationView {
@@ -177,7 +180,7 @@ struct EditRecipeView_Previews: PreviewProvider {
         EditRecipeView(
             viewContext: PersistenceController.preview.container.viewContext,
             title: "Black Bean Burgers",
-            ingredients: [],
+            ingredients: "",
             directions: ""
         ) { title, ingredients, directions, versionName in
             
