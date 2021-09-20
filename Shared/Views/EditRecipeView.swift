@@ -20,81 +20,24 @@ struct RecipeFormView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Title")) {
-                TextField("Title", text: $title)
+            Section(header: Text("Title").modifier(formLabel())) {
+                TextField("", text: $title)
+                    .foregroundColor(Color.ui.foregreoundColor)
+                    .accentColor(Color.ui.accentColor)
             }
-//            Section(header: Text("Ingredients")) {
-//                ForEach(Array(ingredients.enumerated()), id: \.offset) { index, ingredient in
-//                    HStack {
-//                        Text("\(String?(ingredient.quantity ) ?? "")")
-//                        Text(ingredient.unit )
-//                        Text(ingredient.name )
-//                    }
-//                    .onTapGesture {
-//                        editIngredient = ingredient
-//                    }
-//                }
-//                .onDelete { indices in
-//                    withAnimation {
-//                        ingredients.remove(atOffsets: indices)
-//                    }
-//                }
-//                Button(action: {
-//                    newIngredientIsPresented = true
-//                }, label: {
-//                    HStack {
-//                        Text("Add Ingredient")
-//                        Spacer()
-//                        Image(systemName: "plus.circle.fill")
-//                            .accessibilityLabel(Text("Add ingredient"))
-//                    }
-//                })
-//            }
-            Section(header: Text("Ingredients")) {
+            Section(header: Text("Ingredients").modifier(formLabel())) {
                 TextEditor(text: $ingredients)
                     .frame(minHeight: 200.0)
+                    .foregroundColor(Color.ui.foregreoundColor)
+                    .accentColor(Color.ui.accentColor)
             }
-            Section(header: Text("Directions")) {
+            Section(header: Text("Directions").modifier(formLabel())) {
                 TextEditor(text: $directions)
                     .frame(minHeight: 200.0)
+                    .foregroundColor(Color.ui.foregreoundColor)
+                    .accentColor(Color.ui.accentColor)
             }
         }
-//        .sheet(isPresented: $newIngredientIsPresented) {
-//            NewIngredientView() { name, quantity, unit, notes in
-//                withAnimation {
-//                    ingredients.append(
-//                        Ingredient(
-//                            context: viewContext,
-//                            name: name,
-//                            quantity: quantity,
-//                            unit: unit,
-//                            notes: notes
-//                        )
-//                    )
-//                }
-//                newIngredientIsPresented = false
-//            }
-//        }
-//        .sheet(item: $editIngredient) { ingredient in
-//            EditIngredientView(
-//                name: ingredient.name,
-//                quantity: ingredient.quantity,
-//                unit: ingredient.unit,
-//                notes: ingredient.notes
-//            ) { name, quantity, unit, notes in
-//                let i = ingredients.firstIndex(of: ingredient)
-//                if i != nil {
-//                    ingredients[i!] = Ingredient(
-//                        context: viewContext,
-//                        name: name,
-//                        quantity: quantity,
-//                        unit: unit,
-//                        notes: notes
-//                    )
-//                }
-//                editIngredient = nil
-//            }
-//        }
     }
 }
 

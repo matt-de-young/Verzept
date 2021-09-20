@@ -18,31 +18,29 @@ struct NewBranchView: View {
     let onComplete: (Branch, String) -> Void
     
     var body: some View {
-        NavigationView {
-            List {
-                Section(header: Text("Name")) {
-                    TextField("", text: $name)
-                }
-                Section(header: Text("Based on branch")) {
-                    Picker("Branch", selection: $selectedBranchIndex, content: {
-                        ForEach(0..<branches.count, content: { index in
-                            Text(branches[index].name)
-                        })
-                    })
-                    .pickerStyle(WheelPickerStyle())
-                }
+        Form {
+            Section(header: Text("Name").modifier(formLabel())) {
+                TextField("", text: $name)
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle("New Branch")
-            .navigationBarItems(
-                leading: Button("Dismiss") {
-                    self.presentationMode.wrappedValue.dismiss()
-                }.font(.body.weight(.regular)),
-                trailing: Button("Create") {
-                    onComplete(branches[selectedBranchIndex], name)
-                }
-            )
+            Section(header: Text("Based on branch").modifier(formLabel())) {
+                Picker("Branch", selection: $selectedBranchIndex, content: {
+                    ForEach(0..<branches.count, content: { index in
+                        Text(branches[index].name)
+                    })
+                })
+                .pickerStyle(WheelPickerStyle())
+            }
         }
+        .listStyle(InsetGroupedListStyle())
+        .navigationTitle("New Branch")
+        .navigationBarItems(
+            leading: Button("Dismiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            }.font(.body.weight(.regular)),
+            trailing: Button("Create") {
+                onComplete(branches[selectedBranchIndex], name)
+            }
+        )
     }
 }
 

@@ -62,6 +62,8 @@ struct VersionView: View {
                 Form {
                     Section(header: Text("Name")) {
                         TextField("Name", text: $newBranchName)
+                            .foregroundColor(Color.ui.foregreoundColor)
+                            .accentColor(Color.ui.accentColor)
                     }
                 }
                 .navigationBarTitle(Text("New Branch"))

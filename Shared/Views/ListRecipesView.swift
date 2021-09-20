@@ -30,6 +30,7 @@ struct ListRecipesView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle("All Recipes")
+        .foregroundColor(Color.ui.foregreoundColor)
         .navigationBarItems(trailing: Button(action: {
             newRecipeIsPresented = true
         }) {
