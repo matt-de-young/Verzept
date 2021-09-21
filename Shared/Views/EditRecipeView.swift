@@ -20,29 +20,9 @@ struct RecipeFormView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Title").modifier(formLabel())) {
-                TextField("", text: $title)
-                    .foregroundColor(Color.ui.foregroundColor)
-                    .accentColor(Color.ui.accentColor)
-            }
-            Section(header: Text("Ingredients").modifier(formLabel())) {
-                ZStack {
-                    TextEditor(text: $ingredients)
-                        .frame(minHeight: 200.0)
-                        .foregroundColor(Color.ui.foregroundColor)
-                        .accentColor(Color.ui.accentColor)
-                    Text(ingredients)
-                        .opacity(0)
-                        .padding(.all, 8)
-                }
-                
-            }
-            Section(header: Text("Directions").modifier(formLabel())) {
-                TextEditor(text: $directions)
-                    .frame(minHeight: 200.0)
-                    .foregroundColor(Color.ui.foregroundColor)
-                    .accentColor(Color.ui.accentColor)
-            }
+            FormField(text: $title, header: "Title")
+            FormField(text: $ingredients, header: "Ingredients", isMultiLine: true)
+            FormField(text: $directions, header: "Directions", isMultiLine: true)
         }
     }
 }

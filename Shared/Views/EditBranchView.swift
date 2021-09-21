@@ -16,9 +16,7 @@ struct EditBranchView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Name").modifier(formLabel())) {
-                TextField("", text: $name)
-            }
+            FormField(text: $name, header: "Name")
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle("Edit Branch")

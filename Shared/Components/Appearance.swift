@@ -15,6 +15,7 @@ extension Color {
         let accentColor = Color("AccentColor")
         let foregroundColor = Color("ForegroundColor")
         let backgroundColor = Color("BackgroundColor")
+        let backgroundAccentColor = Color("BackgroundAccentColor")
         
         let bodyColor = Color("ForegroundColor")
         let headerColor = Color("HeaderColor")
@@ -51,12 +52,10 @@ struct SectionHeader: ViewModifier {
     }
 }
 
-struct formLabel: ViewModifier {
-    let font = Font.system(size: 12).weight(.black)
-    
+struct FormLabel: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color.ui.bodyColor)
-            .font(font)
+            .font(Font.system(size: 12).weight(.black))
     }
 }

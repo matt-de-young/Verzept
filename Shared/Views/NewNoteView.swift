@@ -16,12 +16,7 @@ struct NewNoteView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Note").modifier(formLabel())) {
-                TextEditor(text: $text)
-                    .frame(minHeight: 200.0)
-                    .foregroundColor(Color.ui.foregroundColor)
-                    .accentColor(Color.ui.accentColor)
-            }
+            FormField(text: $text, header: "Note", isMultiLine: true)
         }
         .navigationBarItems(
             leading: Button("Dismiss") {
