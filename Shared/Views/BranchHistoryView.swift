@@ -44,19 +44,19 @@ struct BranchHistoryView_Previews: PreviewProvider {
     static var initVersion = Version(
         context: viewContext,
         name: "init",
-        ingredients: [
-            Ingredient(context: viewContext, name: "Stuff", quantity: "1", unit: "cup"),
-            Ingredient(context: viewContext, name: "Other Stuff", quantity: "30", unit: "ml"),
-        ],
+        ingredients: """
+            1 cup Stuff
+            30 ml Other Stuff
+            """,
         directions: "Mix the stuff into the other stuff."
     )
     static var otherVersion = Version(
         context: viewContext,
         name: "More other stuff",
-        ingredients: [
-            Ingredient(context: viewContext, name: "Stuff", quantity: "1", unit: "cup"),
-            Ingredient(context: viewContext, name: "Other Stuff", quantity: "45", unit: "ml"),
-        ],
+        ingredients: """
+            1 cup Stuff
+            45 ml Other Stuff
+            """,
         directions: "Fold the other stuff into the  stuff.",
         parent: initVersion
     )

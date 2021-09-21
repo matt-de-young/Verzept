@@ -30,10 +30,11 @@ struct ListRecipesView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle("All Recipes")
+        .foregroundColor(Color.ui.foregroundColor)
         .navigationBarItems(trailing: Button(action: {
             newRecipeIsPresented = true
         }) {
-            Image(systemName: "plus")
+            Image(systemName: "plus").font(Font.body.weight(.semibold))
         })
         .sheet(isPresented: $newRecipeIsPresented){
             CreateRecipeView(viewContext: viewContext) { title, ingredients, directions in
@@ -41,7 +42,7 @@ struct ListRecipesView: View {
                     _ = Recipe(
                         context: viewContext,
                         title: title,
-                        ingredients: Set(ingredients),
+                        ingredients: ingredients,
                         directions: directions
                     )
                 }

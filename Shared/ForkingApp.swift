@@ -11,6 +11,18 @@ import SwiftUI
 struct ForkingApp: App {
     let persistenceController = PersistenceController.shared
 
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .foregroundColor: UIColor(Color.ui.headerColor),
+            .font : UIFont(name: "Futura Bold", size: 42)!
+        ]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(Color.ui.headerColor)]
+        UIToolbar.appearance().barTintColor = UIColor(Color.ui.backgroundColor)
+        UIButton.appearance().tintColor = UIColor(Color.ui.accentColor)
+        UITableView.appearance().backgroundColor = UIColor(Color.ui.backgroundColor)
+//        UITextView.appearance().tintColor = UIColor(Color.ui.foregroundColor)
+    }
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {

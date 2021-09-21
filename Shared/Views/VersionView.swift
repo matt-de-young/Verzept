@@ -22,7 +22,7 @@ struct VersionView: View {
             if !version.ingredients.isEmpty {
                 VStack(alignment: .leading, content: {
                     Text("Ingrdients:").font(.headline)
-                    IngredientListView(ingredients: version.sortedIngredients())
+                    IngredientListView(ingredients: version.ingredients)
                 })
                 .padding(.bottom)
             }
@@ -62,6 +62,8 @@ struct VersionView: View {
                 Form {
                     Section(header: Text("Name")) {
                         TextField("Name", text: $newBranchName)
+                            .foregroundColor(Color.ui.foregroundColor)
+                            .accentColor(Color.ui.accentColor)
                     }
                 }
                 .navigationBarTitle(Text("New Branch"))
@@ -69,7 +71,7 @@ struct VersionView: View {
                     leading: Button("Dismiss") {
                         newBranchIsPresented = false
                         newBranchName = ""
-                    }.font(.body.weight(.regular)),
+                    }.buttonStyle(DismissTextButton()),
                     trailing: Button("Create") {
                         Recipe.addBranch(
                             context: viewContext,
@@ -80,6 +82,7 @@ struct VersionView: View {
                         newBranchIsPresented = false
                         self.presentationMode.wrappedValue.dismiss()
                     }
+                    .buttonStyle(TextButton())
                     .disabled(self.newBranchName.isEmpty)
                 )
             }
@@ -92,10 +95,10 @@ struct VersionView_Previews: PreviewProvider {
     static var initVersion = Version(
         context: viewContext,
         name: "init",
-        ingredients: [
-            Ingredient(context: viewContext, name: "Stuff", quantity: "1", unit: "cup"),
-            Ingredient(context: viewContext, name: "Other Stuff", quantity: "30", unit: "ml"),
-        ],
+        ingredients: """
+            1 cup Stuff
+            30 ml Other Stuff
+        """,
         directions: "Mix the stuff into the other stuff."
     )
     static var previews: some View {

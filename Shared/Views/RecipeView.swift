@@ -16,12 +16,13 @@ struct RecipeView: View {
     @State private var newNoteisPresented = false
     
     var body: some View {
-        ScrollView {
-            HStack() {
+        ZStack {
+            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+            ScrollView() {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
-                        Text("Branch:").font(.headline)
-                        Text(recipe.currentBranch.name)
+                        Text("Branch:").modifier(SectionHeader())
+                        Text(recipe.currentBranch.name).fontWeight(.semibold)
                         Text("Last Updated: \(Text(recipe.currentBranch.head.created, style: .date))")
                             .fontWeight(.light)
                             .font(.system(size: 12))
@@ -30,28 +31,28 @@ struct RecipeView: View {
                     
                     if !recipe.ingredients.isEmpty {
                         VStack(alignment: .leading, content: {
-                            Text("Ingrdients:").font(.headline)
-                            IngredientListView(ingredients: recipe.ingredients)
+                            Text("Ingredients:").modifier(SectionHeader())
+                            IngredientListView(ingredients: recipe.ingredients).font(Font.body.weight(.semibold))
                         })
                         .padding(.bottom)
                     }
                     
                     if !recipe.directions.isEmpty {
                         VStack(alignment: .leading, content: {
-                            Text("Directions:").font(.headline)
-                            Text(recipe.directions)
+                            Text("Directions:").modifier(SectionHeader())
+                            DirectionsListView(directions: recipe.directions).font(Font.body.weight(.semibold))
                         })
                         .padding(.bottom)
                     }
                     
                     if !recipe.notes.isEmpty {
-                        Text("Notes:").font(.headline)
+                        Text("Notes:").modifier(SectionHeader())
                         ForEach(Array(recipe.notes), id: \.self) { note in
                             VStack(alignment: .leading) {
                                 Text(note.created, style: .date)
                                     .fontWeight(.light)
                                     .font(.system(size: 12))
-                                Text(note.text)
+                                Text(note.text).fontWeight(.semibold)
                             }
                             .padding(.bottom)
                         }
@@ -61,64 +62,72 @@ struct RecipeView: View {
                 }
                 Spacer()
             }
-        }
-        .navigationTitle(recipe.title)
-        .padding()
-        .navigationBarItems(trailing: Button("Edit") {
-            editRecipeisPresented = true
-        })
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
-                Button(action: {
-                    newNoteisPresented = true
-                }, label: {
-                    Text("Add Note")
-                    Image(systemName: "square.and.pencil")
-                })
-                Spacer()
-                Button(action: {
-                    branchesViewisPresented = true
-                }, label: {
-                    Text("Branches")
-                    Image(systemName: "arrow.branch")
-                })
-            }
-        }
-        .sheet(isPresented: $editRecipeisPresented) {
-            EditRecipeView(
-                viewContext: viewContext,
-                title: recipe.title,
-                ingredients: Array(recipe.ingredients),
-                directions: recipe.directions
-            ) { title, ingredients, directions, versionName in
-                Recipe.update(
-                    context: viewContext,
-                    recipe: recipe,
-                    title: title,
-                    ingredients: Set(ingredients),
-                    directions: directions,
-                    versionName: versionName
-                )
-                editRecipeisPresented = false
-            }
-        }
-        .sheet(isPresented: $newNoteisPresented) {
-            NavigationView {
-                NewNoteView() { text in
-                    Recipe.addNote(context: viewContext, recipe: recipe, text: text)
-                    recipe.objectWillChange.send()
-                    newNoteisPresented = false
+            .navigationTitle(recipe.title)
+            .foregroundColor(Color.ui.foregroundColor)
+            .padding()
+            .navigationBarItems(trailing: Button("Edit") {
+                editRecipeisPresented = true
+            }.buttonStyle(TextButton())
+            )
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button(action: {
+                        newNoteisPresented = true
+                    }, label: {
+                        HStack {
+                            Text("Add Note").fontWeight(.semibold)
+                            Image(systemName: "square.and.pencil").font(Font.body.weight(.semibold))
+                        }
+                    })
+                        .buttonStyle(TextButton())
+                    Spacer()
+                    Button(action: {
+                        branchesViewisPresented = true
+                    }, label: {
+                        HStack {
+                            Text("Branches").fontWeight(.semibold)
+                            Image(systemName: "arrow.branch").font(Font.body.weight(.semibold))
+                        }
+                    })
+                        .buttonStyle(TextButton())
                 }
             }
-        }
-        .background(
-            NavigationLink(
-                destination: ListBranchesView(viewContext: viewContext, recipe: recipe.self),
-                isActive: $branchesViewisPresented
-            ) {
-                EmptyView()
+            .sheet(isPresented: $editRecipeisPresented) {
+                EditRecipeView(
+                    viewContext: viewContext,
+                    title: recipe.title,
+                    ingredients: recipe.ingredients,
+                    directions: recipe.directions
+                ) { title, ingredients, directions, versionName in
+                    Recipe.update(
+                        context: viewContext,
+                        recipe: recipe,
+                        title: title,
+                        ingredients: ingredients,
+                        directions: directions,
+                        versionName: versionName
+                    )
+                    editRecipeisPresented = false
+                }
             }
-        )
+            .sheet(isPresented: $newNoteisPresented) {
+                NavigationView {
+                    NewNoteView() { text in
+                        Recipe.addNote(context: viewContext, recipe: recipe, text: text)
+                        recipe.objectWillChange.send()
+                        newNoteisPresented = false
+                    }
+                }
+            }
+            .background(
+                NavigationLink(
+                    destination: ListBranchesView(viewContext: viewContext, recipe: recipe.self),
+                    isActive: $branchesViewisPresented
+                ) {
+                    EmptyView()
+                }
+            )
+        }
     }
 }
 
@@ -129,8 +138,15 @@ struct RecipeView_Previews: PreviewProvider {
             recipe: Recipe(
                 context: PersistenceController.preview.container.viewContext,
                 title: "Super Recipe",
-                ingredients: [],
+                ingredients: """
+                    1 cup Lorem
+                    30 ml Ipsum
+                    """,
                 directions: """
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                     enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
                     in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non

@@ -13,84 +13,16 @@ struct RecipeFormView: View {
     @State var viewContext: NSManagedObjectContext
 
     @State private var newIngredientIsPresented: Bool = false
-    @State private var editIngredient: Ingredient? = nil
     
     @Binding var title: String
-    @Binding var ingredients: [Ingredient]
+    @Binding var ingredients: String
     @Binding var directions: String
     
     var body: some View {
         Form {
-            Section(header: Text("Title")) {
-                TextField("Title", text: $title)
-            }
-            Section(header: Text("Ingredients")) {
-                ForEach(Array(ingredients.enumerated()), id: \.offset) { index, ingredient in
-                    HStack {
-                        Text("\(String?(ingredient.quantity ) ?? "")")
-                        Text(ingredient.unit )
-                        Text(ingredient.name )
-                    }
-                    .onTapGesture {
-                        editIngredient = ingredient
-                    }
-                }
-                .onDelete { indices in
-                    withAnimation {
-                        ingredients.remove(atOffsets: indices)
-                    }
-                }
-                Button(action: {
-                    newIngredientIsPresented = true
-                }, label: {
-                    HStack {
-                        Text("Add Ingredient")
-                        Spacer()
-                        Image(systemName: "plus.circle.fill")
-                            .accessibilityLabel(Text("Add ingredient"))
-                    }
-                })
-            }
-            Section(header: Text("Directions")) {
-                TextEditor(text: $directions)
-                    .frame(minHeight: 200.0)
-            }
-        }
-        .sheet(isPresented: $newIngredientIsPresented) {
-            NewIngredientView() { name, quantity, unit, notes in
-                withAnimation {
-                    ingredients.append(
-                        Ingredient(
-                            context: viewContext,
-                            name: name,
-                            quantity: quantity,
-                            unit: unit,
-                            notes: notes
-                        )
-                    )
-                }
-                newIngredientIsPresented = false
-            }
-        }
-        .sheet(item: $editIngredient) { ingredient in
-            EditIngredientView(
-                name: ingredient.name,
-                quantity: ingredient.quantity,
-                unit: ingredient.unit,
-                notes: ingredient.notes
-            ) { name, quantity, unit, notes in
-                let i = ingredients.firstIndex(of: ingredient)
-                if i != nil {
-                    ingredients[i!] = Ingredient(
-                        context: viewContext,
-                        name: name,
-                        quantity: quantity,
-                        unit: unit,
-                        notes: notes
-                    )
-                }
-                editIngredient = nil
-            }
+            FormField(text: $title, header: "Title")
+            FormField(text: $ingredients, header: "Ingredients", isMultiLine: true)
+            FormField(text: $directions, header: "Directions", isMultiLine: true)
         }
     }
 }
@@ -102,10 +34,10 @@ struct EditRecipeView: View {
     @State var viewContext: NSManagedObjectContext
     
     @State var title: String
-    @State var ingredients: [Ingredient]
+    @State var ingredients: String
     @State var directions: String
     @State var versionName: String = ""
-    let onComplete: (String, [Ingredient], String, String) -> Void
+    let onComplete: (String, String, String, String) -> Void
     
     @State private var isShowingNameAlert = false
     
@@ -121,10 +53,10 @@ struct EditRecipeView: View {
             .navigationBarItems(
                 leading: Button("Dismiss") {
                     self.presentationMode.wrappedValue.dismiss()
-                }.font(.body.weight(.regular)),
+                }.buttonStyle(DismissTextButton()),
                 trailing: Button("Update") {
                     self.isShowingNameAlert = true
-                }
+                }.buttonStyle(TextButton())
             )
         }
         .alert(isPresented: $isShowingNameAlert, TextAlert(title: "Name this update", accept: "Update", action: { versionName in
@@ -142,9 +74,9 @@ struct CreateRecipeView: View {
     @State var viewContext: NSManagedObjectContext
     
     @State var title: String = ""
-    @State var ingredients: [Ingredient] = []
+    @State var ingredients: String = ""
     @State var directions: String = ""
-    let onComplete: (String, [Ingredient], String) -> Void
+    let onComplete: (String, String, String) -> Void
     
     var body: some View {
         NavigationView {
@@ -158,10 +90,10 @@ struct CreateRecipeView: View {
             .navigationBarItems(
                 leading: Button("Dismiss") {
                     self.presentationMode.wrappedValue.dismiss()
-                }.font(.body.weight(.regular)),
+                }.buttonStyle(DismissTextButton()),
                 trailing: Button("Create") {
                     onComplete(title, ingredients, directions)
-                }
+                }.buttonStyle(TextButton())
             )
         }
     }
@@ -177,7 +109,7 @@ struct EditRecipeView_Previews: PreviewProvider {
         EditRecipeView(
             viewContext: PersistenceController.preview.container.viewContext,
             title: "Black Bean Burgers",
-            ingredients: [],
+            ingredients: "",
             directions: ""
         ) { title, ingredients, directions, versionName in
             

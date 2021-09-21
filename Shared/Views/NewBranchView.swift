@@ -18,31 +18,27 @@ struct NewBranchView: View {
     let onComplete: (Branch, String) -> Void
     
     var body: some View {
-        NavigationView {
-            List {
-                Section(header: Text("Name")) {
-                    TextField("", text: $name)
-                }
-                Section(header: Text("Based on branch")) {
-                    Picker("Branch", selection: $selectedBranchIndex, content: {
-                        ForEach(0..<branches.count, content: { index in
-                            Text(branches[index].name)
-                        })
+        Form {
+            FormField(text: $name, header: "Name")
+            Section(header: Text("Based on branch").modifier(SectionHeader())) {
+                Picker("Branch", selection: $selectedBranchIndex, content: {
+                    ForEach(0..<branches.count, content: { index in
+                        Text(branches[index].name)
                     })
-                    .pickerStyle(WheelPickerStyle())
-                }
+                })
+                .pickerStyle(WheelPickerStyle())
             }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle("New Branch")
-            .navigationBarItems(
-                leading: Button("Dismiss") {
-                    self.presentationMode.wrappedValue.dismiss()
-                }.font(.body.weight(.regular)),
-                trailing: Button("Create") {
-                    onComplete(branches[selectedBranchIndex], name)
-                }
-            )
         }
+        .listStyle(InsetGroupedListStyle())
+        .navigationTitle("New Branch")
+        .navigationBarItems(
+            leading: Button("Dismiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            }.buttonStyle(DismissTextButton()),
+            trailing: Button("Create") {
+                onComplete(branches[selectedBranchIndex], name)
+            }.buttonStyle(TextButton())
+        )
     }
 }
 
@@ -50,7 +46,7 @@ struct NewBranchView_Previews: PreviewProvider {
     static var newVersion = Version(
         context: PersistenceController.preview.container.viewContext,
         name: "init",
-        ingredients: [],
+        ingredients:"",
         directions: ""
     )
     static var previews: some View {

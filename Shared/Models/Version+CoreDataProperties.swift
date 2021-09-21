@@ -19,7 +19,7 @@ extension Version {
     @NSManaged public var id: UUID
     @NSManaged public var created: Date
     @NSManaged public var name: String
-    @NSManaged public var ingredients: Set<Ingredient>
+    @NSManaged public var ingredients: String
     @NSManaged public var directions: String
     @NSManaged public var notes: Set<Note>
     @NSManaged public var parent: Version?
@@ -27,12 +27,11 @@ extension Version {
     @NSManaged private var children: Set<Version>
     @NSManaged private var toHead: Branch
     @NSManaged private var toRoot: Branch
-    @NSManaged private var ingredientIndex: [UUID]
     
     convenience init(
         context: NSManagedObjectContext!,
         name: String = "",
-        ingredients: Set<Ingredient> = [],
+        ingredients: String = "",
         directions: String = "",
         notes: Set<Note> = [],
         parent: Version? = nil
@@ -44,22 +43,9 @@ extension Version {
         self.created = Date()
         self.name = name
         self.ingredients = ingredients
-        self.ingredientIndex = ingredients.map { $0.id }
         self.directions = directions
         self.notes = notes
         self.parent = parent
-    }
-}
-
-extension Version {
-    func sortedIngredients() -> [Ingredient] {
-        var ret: [Ingredient] = []
-        for id in ingredientIndex {
-            if let ingredient = ingredients.first(where: { $0.id == id }) {
-                ret.append(ingredient)
-            }
-        }
-        return ret
     }
 }
 
@@ -86,23 +72,6 @@ extension Version {
 //        
 //        return nil
 //    }
-}
-
-// MARK: Generated accessors for ingredients
-extension Version {
-
-    @objc(addIngredientsObject:)
-    @NSManaged public func addToIngredients(_ value: Ingredient)
-
-    @objc(removeIngredientsObject:)
-    @NSManaged public func removeFromIngredients(_ value: Ingredient)
-
-    @objc(addIngredients:)
-    @NSManaged public func addToIngredients(_ values: NSSet)
-
-    @objc(removeIngredients:)
-    @NSManaged public func removeFromIngredients(_ values: NSSet)
-
 }
 
 // MARK: Generated accessors for notes

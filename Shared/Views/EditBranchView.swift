@@ -15,23 +15,19 @@ struct EditBranchView: View {
     let onComplete: (String) -> Void
     
     var body: some View {
-        NavigationView {
-            List {
-                Section(header: Text("Name")) {
-                    TextField("", text: $name)
-                }
-            }
-            .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Edit Branch")
-            .navigationBarItems(
-                leading: Button("Dismiss") {
-                    self.presentationMode.wrappedValue.dismiss()
-                }.font(.body.weight(.regular)),
-                trailing: Button("Update") {
-                    onComplete(name)
-                }
-            )
+        Form {
+            FormField(text: $name, header: "Name")
         }
+        .listStyle(InsetGroupedListStyle())
+        .navigationTitle("Edit Branch")
+        .navigationBarItems(
+            leading: Button("Dismiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            }.buttonStyle(DismissTextButton()),
+            trailing: Button("Update") {
+                onComplete(name)
+            }.buttonStyle(TextButton())
+        )
     }
 }
 

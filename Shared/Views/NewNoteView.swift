@@ -15,23 +15,18 @@ struct NewNoteView: View {
     let onComplete: (String) -> Void
 
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Note")) {
-                    TextEditor(text: $text)
-                        .frame(minHeight: 200.0)
-                }
-            }
-            .navigationBarItems(
-                leading: Button("Dismiss") {
-                    self.presentationMode.wrappedValue.dismiss()
-                }.font(.body.weight(.regular)),
-                trailing: Button("Add") {
-                    onComplete(text)
-                }
-            )
-            .navigationTitle("Add Note")
+        Form {
+            FormField(text: $text, header: "Note", isMultiLine: true)
         }
+        .navigationBarItems(
+            leading: Button("Dismiss") {
+                self.presentationMode.wrappedValue.dismiss()
+            }.buttonStyle(DismissTextButton()),
+            trailing: Button("Add") {
+                onComplete(text)
+            }.buttonStyle(TextButton())
+        )
+        .navigationTitle("Add Note")
     }
 }
 
