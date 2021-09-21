@@ -60,7 +60,7 @@ struct FormField: View {
         if (header != nil) {
             Section(
                 header: Text(header!)
-                    .foregroundColor(Color.ui.bodyColor)
+                    .foregroundColor(Color.ui.headerColor)
                     .font(Font.system(size: 14).weight(.black))
                     .textCase(.uppercase)
             ) {
@@ -94,5 +94,6 @@ struct FormField_Previews: PreviewProvider {
                 Spacer()
             }
         }
+        .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
     }
 }

@@ -14,16 +14,27 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         
-        let testRecipe = Recipe(
+        _ = Recipe(
             context: viewContext,
             title: "Test Recipe",
             ingredients: """
+                1 cup Lorem
+                30 ml Ipsum
                 """,
             directions: """
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                """,
+            notes: []
+        )
+        _ = Recipe(
+            context: viewContext,
+            title: "Other Test Recipe With a Long Title",
+            ingredients: """
+                1 cup Lorem
+                30 ml Ipsum
+                """,
+            directions: """
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 """,
             notes: []
         )

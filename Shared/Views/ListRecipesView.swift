@@ -16,26 +16,35 @@ struct ListRecipesView: View {
     var recipes: FetchedResults<Recipe>
     
     var body: some View {
-        List() {
-            ForEach(recipes) { recipe in
-                NavigationLink(destination: RecipeView(viewContext: viewContext, recipe: recipe)) {
-                    Text(recipe.title)
+        NavigationView {
+            List() {
+                ForEach(recipes) { recipe in
+                    NavigationLink(destination: RecipeView(viewContext: viewContext, recipe: recipe)) {
+                        VStack {
+                            HStack {
+                                Text(recipe.title)
+                                    .font(Font(UIFont(name: "Futura Bold", size: 22)!))
+                                    .foregroundColor(Color.ui.headerColor)
+                                Spacer()
+                            }
+                            HStack {
+                                Text(recipe.currentBranch.name)
+                                    .foregroundColor(Color.ui.foregroundColor)
+                                    .fontWeight(.semibold)
+                                Spacer()
+                            }
+                        }
+                    }
                 }
             }
-            .onDelete { offsets in
-                withAnimation {
-                    Recipe.delete(context: viewContext, recipes: recipes, offsets: offsets)
-                }
-            }
+            .navigationTitle("All Recipes")
+            .foregroundColor(Color.ui.foregroundColor)
+            .navigationBarItems(trailing: Button(action: {
+                newRecipeIsPresented = true
+            }) {
+                Image(systemName: "plus").font(Font.body.weight(.semibold))
+            })
         }
-        .listStyle(InsetGroupedListStyle())
-        .navigationTitle("All Recipes")
-        .foregroundColor(Color.ui.foregroundColor)
-        .navigationBarItems(trailing: Button(action: {
-            newRecipeIsPresented = true
-        }) {
-            Image(systemName: "plus").font(Font.body.weight(.semibold))
-        })
         .sheet(isPresented: $newRecipeIsPresented){
             CreateRecipeView(viewContext: viewContext) { title, ingredients, directions in
                 withAnimation {
@@ -54,6 +63,7 @@ struct ListRecipesView: View {
 
 struct ListRecipesView_Previews: PreviewProvider {
     static var previews: some View {
-        ListRecipesView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ListRecipesView().preferredColorScheme(.light).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ListRecipesView().preferredColorScheme(.dark).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

@@ -8,6 +8,35 @@
 import CoreData
 import SwiftUI
 
+struct BranchListItem: View {
+    var branch: Branch
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(branch.name)
+                        .font(Font(UIFont(name: "Futura Bold", size: 22)!))
+                        .foregroundColor(Color.ui.headerColor)
+                    Spacer()
+                }
+                Spacer()
+                HStack {
+                    Text(branch.head.name)
+                        .foregroundColor(Color.ui.foregroundColor)
+                        .fontWeight(.semibold)
+                    Spacer()
+                    Text(branch.head.created, style: .date)
+                        .foregroundColor(Color.ui.foregroundColor)
+                        .font(.system(size: 14))
+                        .fontWeight(.semibold)
+                }
+            }
+        }
+        .contentShape(Rectangle())
+    }
+}
+
 struct ListBranchesView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -24,45 +53,31 @@ struct ListBranchesView: View {
     @State private var historyBranch: Branch? = nil
 
     var body: some View {
-        List() {
-            ForEach(Array(recipe.branches)) { branch in
-                let isCurrentBranch = branch == recipe.currentBranch
-                HStack {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text(branch.name).fontWeight(isCurrentBranch ? .heavy : .regular)
-                            Spacer()
-                            if isCurrentBranch {
-                                Text("current")
-                                    .font(.system(size: 12))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.accentColor)
-                            }
-                        }
-                        Spacer()
-                        HStack {
-                            Text(branch.head.name)
-                                .fontWeight(isCurrentBranch ? .semibold : .light)
-                                .font(.system(size: 12))
-                            Spacer()
-                            Text(branch.head.created, style: .date)
-                                .fontWeight(isCurrentBranch ? .semibold : .light)
-                                .font(.system(size: 12))
+        NavigationView {
+            List {
+                Section(header: Text("Current").modifier(SectionHeader())) {
+                    BranchListItem(branch: recipe.currentBranch)
+                    .onTapGesture {
+                        selectedBranch = recipe.currentBranch
+                    }
+                }
+                ForEach(Array(recipe.branches)) { branch in
+                    if branch != recipe.currentBranch {
+                        BranchListItem(branch: branch)
+                        .onTapGesture {
+                            selectedBranch = branch
                         }
                     }
-                }.contentShape(Rectangle())
-                .onTapGesture {
-                    selectedBranch = branch
                 }
             }
+            .listStyle(InsetGroupedListStyle())
+            .navigationBarItems(trailing: Button(action: {
+                newBranchIsPresented = true
+            }) {
+                Image(systemName: "plus").font(Font.body.weight(.semibold))
+            })
+            .navigationTitle("Branches")
         }
-        .listStyle(InsetGroupedListStyle())
-        .navigationBarItems(trailing: Button(action: {
-            newBranchIsPresented = true
-        }) {
-            Image(systemName: "plus").font(Font.body.weight(.semibold))
-        })
-        .navigationTitle("Branches")
         .actionSheet(item: $selectedBranch, content: { branch in
             var buttons: [ActionSheet.Button] = [
                 .default(Text("Edit")) {

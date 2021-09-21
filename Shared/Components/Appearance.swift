@@ -49,6 +49,7 @@ struct SectionHeader: ViewModifier {
         content
             .font(Font(UIFont(name: "Futura Bold", size: 14)!))
             .textCase(.uppercase)
+            .foregroundColor(Color.ui.headerColor)
             .padding(.bottom, 1)
     }
 }
