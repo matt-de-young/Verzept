@@ -18,11 +18,11 @@ struct RecipeView: View {
     var body: some View {
         ZStack {
             Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-            HStack() {
+            ScrollView() {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         Text("Branch:").modifier(SectionHeader())
-                        Text(recipe.currentBranch.name)
+                        Text(recipe.currentBranch.name).fontWeight(.semibold)
                         Text("Last Updated: \(Text(recipe.currentBranch.head.created, style: .date))")
                             .fontWeight(.light)
                             .font(.system(size: 12))
@@ -32,7 +32,7 @@ struct RecipeView: View {
                     if !recipe.ingredients.isEmpty {
                         VStack(alignment: .leading, content: {
                             Text("Ingredients:").modifier(SectionHeader())
-                            IngredientListView(ingredients: recipe.ingredients)
+                            IngredientListView(ingredients: recipe.ingredients).font(Font.body.weight(.semibold))
                         })
                         .padding(.bottom)
                     }
@@ -40,7 +40,7 @@ struct RecipeView: View {
                     if !recipe.directions.isEmpty {
                         VStack(alignment: .leading, content: {
                             Text("Directions:").modifier(SectionHeader())
-                            Text(recipe.directions)
+                            Text(recipe.directions).fontWeight(.semibold)
                         })
                         .padding(.bottom)
                     }
@@ -52,7 +52,7 @@ struct RecipeView: View {
                                 Text(note.created, style: .date)
                                     .fontWeight(.light)
                                     .font(.system(size: 12))
-                                Text(note.text)
+                                Text(note.text).fontWeight(.semibold)
                             }
                             .padding(.bottom)
                         }
@@ -74,16 +74,20 @@ struct RecipeView: View {
                     Button(action: {
                         newNoteisPresented = true
                     }, label: {
-                        Text("Add Note").fontWeight(.semibold)
-                        Image(systemName: "square.and.pencil").font(Font.body.weight(.semibold))
+                        HStack {
+                            Text("Add Note").fontWeight(.semibold)
+                            Image(systemName: "square.and.pencil").font(Font.body.weight(.semibold))
+                        }
                     })
                         .buttonStyle(TextButton())
                     Spacer()
                     Button(action: {
                         branchesViewisPresented = true
                     }, label: {
-                        Text("Branches").fontWeight(.semibold)
-                        Image(systemName: "arrow.branch").font(Font.body.weight(.semibold))
+                        HStack {
+                            Text("Branches").fontWeight(.semibold)
+                            Image(systemName: "arrow.branch").font(Font.body.weight(.semibold))
+                        }
                     })
                         .buttonStyle(TextButton())
                 }
@@ -139,6 +143,10 @@ struct RecipeView_Previews: PreviewProvider {
                     30 ml Ipsum
                     """,
                 directions: """
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                    enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                    in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                     enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
                     in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non

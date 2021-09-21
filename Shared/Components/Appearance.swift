@@ -47,7 +47,8 @@ struct DismissTextButton: ButtonStyle {
 struct SectionHeader: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(Font.system(size: 12).weight(.black))
+            .font(Font.system(size: 14).weight(.black))
+            .textCase(.uppercase)
             .padding(.bottom, 1)
     }
 }
@@ -56,6 +57,6 @@ struct FormLabel: ViewModifier {
     func body(content: Content) -> some View {
         content
             .foregroundColor(Color.ui.bodyColor)
-            .font(Font.system(size: 12).weight(.black))
+            .font(Font.system(size: 14).weight(.black))
     }
 }

@@ -85,6 +85,7 @@
 		C98761A826F9BE6400D67766 /* ForkingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C950751026D2557B0042B175 /* ForkingApp.swift */; };
 		C98761A926F9BE6700D67766 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C924ACCB26F9BC7400D3FEC7 /* FormField.swift */; };
 		C98761AA26F9BE6800D67766 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C924ACCB26F9BC7400D3FEC7 /* FormField.swift */; };
+		C98761B326F9D83000D67766 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C98761B226F9D83000D67766 /* CloudKit.framework */; };
 		C99F598226D6541000F0AA20 /* NewNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99F598126D6541000F0AA20 /* NewNoteView.swift */; };
 		C99F598326D6541000F0AA20 /* NewNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99F598126D6541000F0AA20 /* NewNoteView.swift */; };
 		C99F598426D6541000F0AA20 /* NewNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99F598126D6541000F0AA20 /* NewNoteView.swift */; };
@@ -160,6 +161,8 @@
 		C9530BB026D2F95900DA1660 /* Version+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Version+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C9530BB126D2F95900DA1660 /* Version+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Version+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C9530BE326D42D7B00DA1660 /* IngredientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListView.swift; sourceTree = "<group>"; };
+		C98761B026F9D80800D67766 /* Forking (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Forking (iOS).entitlements"; sourceTree = "<group>"; };
+		C98761B226F9D83000D67766 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		C99F598126D6541000F0AA20 /* NewNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteView.swift; sourceTree = "<group>"; };
 		C99F598626D6779500F0AA20 /* ListBranchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBranchesView.swift; sourceTree = "<group>"; };
 		C99F598B26D6D89000F0AA20 /* EditBranchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBranchView.swift; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C98761B326F9D83000D67766 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,12 +207,14 @@
 		C950750826D2557B0042B175 = {
 			isa = PBXGroup;
 			children = (
+				C98761B026F9D80800D67766 /* Forking (iOS).entitlements */,
 				C950750D26D2557B0042B175 /* Shared */,
 				C950751A26D2557C0042B175 /* iOS */,
 				C950752126D2557C0042B175 /* macOS */,
 				C950752B26D2557C0042B175 /* Tests iOS */,
 				C950753626D2557C0042B175 /* Tests macOS */,
 				C950751926D2557C0042B175 /* Products */,
+				C98761B126F9D83000D67766 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -313,6 +319,14 @@
 				C924ACCB26F9BC7400D3FEC7 /* FormField.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		C98761B126F9D83000D67766 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C98761B226F9D83000D67766 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -732,6 +746,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Forking (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 922DS6BX5S;
 				ENABLE_PREVIEWS = YES;
@@ -754,6 +769,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Forking (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 922DS6BX5S;
 				ENABLE_PREVIEWS = YES;
