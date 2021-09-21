@@ -60,7 +60,7 @@ struct ListBranchesView: View {
         .navigationBarItems(trailing: Button(action: {
             newBranchIsPresented = true
         }) {
-            Image(systemName: "plus")
+            Image(systemName: "plus").font(Font.body.weight(.semibold))
         })
         .navigationTitle("Branches")
         .actionSheet(item: $selectedBranch, content: { branch in

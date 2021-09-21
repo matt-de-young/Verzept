@@ -36,10 +36,10 @@ struct NewBranchView: View {
         .navigationBarItems(
             leading: Button("Dismiss") {
                 self.presentationMode.wrappedValue.dismiss()
-            }.font(.body.weight(.regular)),
+            }.buttonStyle(DismissTextButton()),
             trailing: Button("Create") {
                 onComplete(branches[selectedBranchIndex], name)
-            }
+            }.buttonStyle(TextButton())
         )
     }
 }

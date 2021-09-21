@@ -13,10 +13,10 @@ extension Color {
     
     struct UI {
         let accentColor = Color("AccentColor")
-        let foregreoundColor = Color("ForegroundColor")
+        let foregroundColor = Color("ForegroundColor")
         let backgroundColor = Color("BackgroundColor")
         
-        let bodyColor = Color("ForegreoundColor")
+        let bodyColor = Color("ForegroundColor")
         let headerColor = Color("HeaderColor")
     }
 }
@@ -28,13 +28,26 @@ struct TextButton: ButtonStyle {
         configuration
             .label
             .foregroundColor(configuration.isPressed ? Color.ui.accentColor : Color.ui.accentColor)
+            .font(Font.body.weight(.semibold))
+    }
+}
+
+struct DismissTextButton: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration
+            .label
+            .foregroundColor(configuration.isPressed ? Color.ui.accentColor : Color.ui.accentColor)
+            .font(Font.body.weight(.regular))
     }
 }
 
 struct SectionHeader: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.headline)
+            .font(Font.system(size: 12).weight(.black))
+            .padding(.bottom, 1)
     }
 }
 
@@ -43,7 +56,7 @@ struct formLabel: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .foregroundColor(Color.ui.foregreoundColor)
+            .foregroundColor(Color.ui.bodyColor)
             .font(font)
     }
 }

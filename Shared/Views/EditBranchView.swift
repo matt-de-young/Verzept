@@ -25,10 +25,10 @@ struct EditBranchView: View {
         .navigationBarItems(
             leading: Button("Dismiss") {
                 self.presentationMode.wrappedValue.dismiss()
-            }.font(.body.weight(.regular)),
+            }.buttonStyle(DismissTextButton()),
             trailing: Button("Update") {
                 onComplete(name)
-            }
+            }.buttonStyle(TextButton())
         )
     }
 }

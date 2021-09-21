@@ -17,7 +17,7 @@ struct ForkingApp: App {
         UIToolbar.appearance().barTintColor = UIColor(Color.ui.backgroundColor)
         UIButton.appearance().tintColor = UIColor(Color.ui.accentColor)
         UITableView.appearance().backgroundColor = UIColor(Color.ui.backgroundColor)
-//        UITextView.appearance().tintColor = UIColor(Color.ui.foregreoundColor)
+//        UITextView.appearance().tintColor = UIColor(Color.ui.foregroundColor)
     }
     
     var body: some Scene {

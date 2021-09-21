@@ -63,7 +63,7 @@ struct RecipeView: View {
                 Spacer()
             }
             .navigationTitle(recipe.title)
-            .foregroundColor(Color.ui.foregreoundColor)
+            .foregroundColor(Color.ui.foregroundColor)
             .padding()
             .navigationBarItems(trailing: Button("Edit") {
                 editRecipeisPresented = true
@@ -74,16 +74,16 @@ struct RecipeView: View {
                     Button(action: {
                         newNoteisPresented = true
                     }, label: {
-                        Text("Add Note")
-                        Image(systemName: "square.and.pencil")
+                        Text("Add Note").fontWeight(.semibold)
+                        Image(systemName: "square.and.pencil").font(Font.body.weight(.semibold))
                     })
                         .buttonStyle(TextButton())
                     Spacer()
                     Button(action: {
                         branchesViewisPresented = true
                     }, label: {
-                        Text("Branches")
-                        Image(systemName: "arrow.branch")
+                        Text("Branches").fontWeight(.semibold)
+                        Image(systemName: "arrow.branch").font(Font.body.weight(.semibold))
                     })
                         .buttonStyle(TextButton())
                 }

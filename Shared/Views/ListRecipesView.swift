@@ -30,11 +30,11 @@ struct ListRecipesView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationTitle("All Recipes")
-        .foregroundColor(Color.ui.foregreoundColor)
+        .foregroundColor(Color.ui.foregroundColor)
         .navigationBarItems(trailing: Button(action: {
             newRecipeIsPresented = true
         }) {
-            Image(systemName: "plus")
+            Image(systemName: "plus").font(Font.body.weight(.semibold))
         })
         .sheet(isPresented: $newRecipeIsPresented){
             CreateRecipeView(viewContext: viewContext) { title, ingredients, directions in

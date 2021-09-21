@@ -62,7 +62,7 @@ struct VersionView: View {
                 Form {
                     Section(header: Text("Name")) {
                         TextField("Name", text: $newBranchName)
-                            .foregroundColor(Color.ui.foregreoundColor)
+                            .foregroundColor(Color.ui.foregroundColor)
                             .accentColor(Color.ui.accentColor)
                     }
                 }
@@ -71,7 +71,7 @@ struct VersionView: View {
                     leading: Button("Dismiss") {
                         newBranchIsPresented = false
                         newBranchName = ""
-                    }.font(.body.weight(.regular)),
+                    }.buttonStyle(DismissTextButton()),
                     trailing: Button("Create") {
                         Recipe.addBranch(
                             context: viewContext,
@@ -82,6 +82,7 @@ struct VersionView: View {
                         newBranchIsPresented = false
                         self.presentationMode.wrappedValue.dismiss()
                     }
+                    .buttonStyle(TextButton())
                     .disabled(self.newBranchName.isEmpty)
                 )
             }

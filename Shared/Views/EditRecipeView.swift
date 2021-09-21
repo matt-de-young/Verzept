@@ -22,19 +22,25 @@ struct RecipeFormView: View {
         Form {
             Section(header: Text("Title").modifier(formLabel())) {
                 TextField("", text: $title)
-                    .foregroundColor(Color.ui.foregreoundColor)
+                    .foregroundColor(Color.ui.foregroundColor)
                     .accentColor(Color.ui.accentColor)
             }
             Section(header: Text("Ingredients").modifier(formLabel())) {
-                TextEditor(text: $ingredients)
-                    .frame(minHeight: 200.0)
-                    .foregroundColor(Color.ui.foregreoundColor)
-                    .accentColor(Color.ui.accentColor)
+                ZStack {
+                    TextEditor(text: $ingredients)
+                        .frame(minHeight: 200.0)
+                        .foregroundColor(Color.ui.foregroundColor)
+                        .accentColor(Color.ui.accentColor)
+                    Text(ingredients)
+                        .opacity(0)
+                        .padding(.all, 8)
+                }
+                
             }
             Section(header: Text("Directions").modifier(formLabel())) {
                 TextEditor(text: $directions)
                     .frame(minHeight: 200.0)
-                    .foregroundColor(Color.ui.foregreoundColor)
+                    .foregroundColor(Color.ui.foregroundColor)
                     .accentColor(Color.ui.accentColor)
             }
         }
@@ -67,10 +73,10 @@ struct EditRecipeView: View {
             .navigationBarItems(
                 leading: Button("Dismiss") {
                     self.presentationMode.wrappedValue.dismiss()
-                }.font(.body.weight(.regular)),
+                }.buttonStyle(DismissTextButton()),
                 trailing: Button("Update") {
                     self.isShowingNameAlert = true
-                }
+                }.buttonStyle(TextButton())
             )
         }
         .alert(isPresented: $isShowingNameAlert, TextAlert(title: "Name this update", accept: "Update", action: { versionName in
@@ -104,10 +110,10 @@ struct CreateRecipeView: View {
             .navigationBarItems(
                 leading: Button("Dismiss") {
                     self.presentationMode.wrappedValue.dismiss()
-                }.font(.body.weight(.regular)),
+                }.buttonStyle(DismissTextButton()),
                 trailing: Button("Create") {
                     onComplete(title, ingredients, directions)
-                }
+                }.buttonStyle(TextButton())
             )
         }
     }
