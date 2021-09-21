@@ -86,6 +86,14 @@
 		C98761A926F9BE6700D67766 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C924ACCB26F9BC7400D3FEC7 /* FormField.swift */; };
 		C98761AA26F9BE6800D67766 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C924ACCB26F9BC7400D3FEC7 /* FormField.swift */; };
 		C98761B326F9D83000D67766 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C98761B226F9D83000D67766 /* CloudKit.framework */; };
+		C98761B526F9E81D00D67766 /* DirectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98761B426F9E81D00D67766 /* DirectionsListView.swift */; };
+		C98761B626F9E81D00D67766 /* DirectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98761B426F9E81D00D67766 /* DirectionsListView.swift */; };
+		C98761B726F9E81D00D67766 /* DirectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98761B426F9E81D00D67766 /* DirectionsListView.swift */; };
+		C98761B826F9E81D00D67766 /* DirectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98761B426F9E81D00D67766 /* DirectionsListView.swift */; };
+		C98761BB26F9EA7900D67766 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98761BA26F9EA7900D67766 /* String.swift */; };
+		C98761BC26F9EA7900D67766 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98761BA26F9EA7900D67766 /* String.swift */; };
+		C98761BD26F9EA7900D67766 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98761BA26F9EA7900D67766 /* String.swift */; };
+		C98761BE26F9EA7900D67766 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98761BA26F9EA7900D67766 /* String.swift */; };
 		C99F598226D6541000F0AA20 /* NewNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99F598126D6541000F0AA20 /* NewNoteView.swift */; };
 		C99F598326D6541000F0AA20 /* NewNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99F598126D6541000F0AA20 /* NewNoteView.swift */; };
 		C99F598426D6541000F0AA20 /* NewNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99F598126D6541000F0AA20 /* NewNoteView.swift */; };
@@ -163,6 +171,8 @@
 		C9530BE326D42D7B00DA1660 /* IngredientListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListView.swift; sourceTree = "<group>"; };
 		C98761B026F9D80800D67766 /* Forking (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Forking (iOS).entitlements"; sourceTree = "<group>"; };
 		C98761B226F9D83000D67766 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		C98761B426F9E81D00D67766 /* DirectionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsListView.swift; sourceTree = "<group>"; };
+		C98761BA26F9EA7900D67766 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		C99F598126D6541000F0AA20 /* NewNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteView.swift; sourceTree = "<group>"; };
 		C99F598626D6779500F0AA20 /* ListBranchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBranchesView.swift; sourceTree = "<group>"; };
 		C99F598B26D6D89000F0AA20 /* EditBranchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBranchView.swift; sourceTree = "<group>"; };
@@ -221,6 +231,7 @@
 		C950750D26D2557B0042B175 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C98761B926F9EA5800D67766 /* Utilities */,
 				C9530BE226D42D5F00DA1660 /* Components */,
 				C950755226D255930042B175 /* Models */,
 				C950755326D2559B0042B175 /* Views */,
@@ -317,6 +328,7 @@
 				C918644C26DCBDBD000450F8 /* TextFieldAlert.swift */,
 				C9DE377A26F884EB003064A9 /* Appearance.swift */,
 				C924ACCB26F9BC7400D3FEC7 /* FormField.swift */,
+				C98761B426F9E81D00D67766 /* DirectionsListView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -327,6 +339,14 @@
 				C98761B226F9D83000D67766 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C98761B926F9EA5800D67766 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				C98761BA26F9EA7900D67766 /* String.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -489,6 +509,7 @@
 				C99F599626D7717C00F0AA20 /* CompareBranchesView.swift in Sources */,
 				C9530BE426D42D7B00DA1660 /* IngredientListView.swift in Sources */,
 				C99F598726D6779500F0AA20 /* ListBranchesView.swift in Sources */,
+				C98761BB26F9EA7900D67766 /* String.swift in Sources */,
 				C950756426D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C99F598C26D6D89000F0AA20 /* EditBranchView.swift in Sources */,
 				C9530BBA26D2F95900DA1660 /* Recipe+CoreDataClass.swift in Sources */,
@@ -500,6 +521,7 @@
 				C9530BDA26D2F95900DA1660 /* Version+CoreDataClass.swift in Sources */,
 				C950753C26D2557C0042B175 /* ForkingApp.swift in Sources */,
 				C924ACCC26F9BC7400D3FEC7 /* FormField.swift in Sources */,
+				C98761B526F9E81D00D67766 /* DirectionsListView.swift in Sources */,
 				C9530BDE26D2F95900DA1660 /* Version+CoreDataProperties.swift in Sources */,
 				C950757326D292F80042B175 /* RecipeView.swift in Sources */,
 				C918645726DEC822000450F8 /* VersionView.swift in Sources */,
@@ -521,6 +543,7 @@
 				C99F599726D7717C00F0AA20 /* CompareBranchesView.swift in Sources */,
 				C9530BE526D42D7B00DA1660 /* IngredientListView.swift in Sources */,
 				C99F598826D6779500F0AA20 /* ListBranchesView.swift in Sources */,
+				C98761BC26F9EA7900D67766 /* String.swift in Sources */,
 				C950756526D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C99F598D26D6D89000F0AA20 /* EditBranchView.swift in Sources */,
 				C9530BBB26D2F95900DA1660 /* Recipe+CoreDataClass.swift in Sources */,
@@ -532,6 +555,7 @@
 				C9530BDB26D2F95900DA1660 /* Version+CoreDataClass.swift in Sources */,
 				C950753D26D2557C0042B175 /* ForkingApp.swift in Sources */,
 				C924ACCD26F9BC7400D3FEC7 /* FormField.swift in Sources */,
+				C98761B626F9E81D00D67766 /* DirectionsListView.swift in Sources */,
 				C9530BDF26D2F95900DA1660 /* Version+CoreDataProperties.swift in Sources */,
 				C950757426D292F80042B175 /* RecipeView.swift in Sources */,
 				C918645826DEC822000450F8 /* VersionView.swift in Sources */,
@@ -553,6 +577,7 @@
 				C99F598926D6779500F0AA20 /* ListBranchesView.swift in Sources */,
 				C9530BBC26D2F95900DA1660 /* Recipe+CoreDataClass.swift in Sources */,
 				C9DE377D26F884EB003064A9 /* Appearance.swift in Sources */,
+				C98761BD26F9EA7900D67766 /* String.swift in Sources */,
 				C9530BC426D2F95900DA1660 /* Branch+CoreDataClass.swift in Sources */,
 				C98761A726F9BE6300D67766 /* ForkingApp.swift in Sources */,
 				C9530BC826D2F95900DA1660 /* Branch+CoreDataProperties.swift in Sources */,
@@ -564,6 +589,7 @@
 				C918645426DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C950756626D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C98761A926F9BE6700D67766 /* FormField.swift in Sources */,
+				C98761B726F9E81D00D67766 /* DirectionsListView.swift in Sources */,
 				C99F598426D6541000F0AA20 /* NewNoteView.swift in Sources */,
 				C918645926DEC822000450F8 /* VersionView.swift in Sources */,
 				C918644F26DCBDBD000450F8 /* TextFieldAlert.swift in Sources */,
@@ -585,6 +611,7 @@
 				C99F598A26D6779500F0AA20 /* ListBranchesView.swift in Sources */,
 				C9530BBD26D2F95900DA1660 /* Recipe+CoreDataClass.swift in Sources */,
 				C9DE377E26F884EB003064A9 /* Appearance.swift in Sources */,
+				C98761BE26F9EA7900D67766 /* String.swift in Sources */,
 				C9530BC526D2F95900DA1660 /* Branch+CoreDataClass.swift in Sources */,
 				C98761A826F9BE6400D67766 /* ForkingApp.swift in Sources */,
 				C9530BC926D2F95900DA1660 /* Branch+CoreDataProperties.swift in Sources */,
@@ -596,6 +623,7 @@
 				C918645526DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C950756726D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C98761AA26F9BE6800D67766 /* FormField.swift in Sources */,
+				C98761B826F9E81D00D67766 /* DirectionsListView.swift in Sources */,
 				C99F598526D6541000F0AA20 /* NewNoteView.swift in Sources */,
 				C918645A26DEC822000450F8 /* VersionView.swift in Sources */,
 				C918645026DCBDBD000450F8 /* TextFieldAlert.swift in Sources */,

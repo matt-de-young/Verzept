@@ -20,7 +20,7 @@ struct NewBranchView: View {
     var body: some View {
         Form {
             FormField(text: $name, header: "Name")
-            Section(header: Text("Based on branch").modifier(FormLabel())) {
+            Section(header: Text("Based on branch").modifier(SectionHeader())) {
                 Picker("Branch", selection: $selectedBranchIndex, content: {
                     ForEach(0..<branches.count, content: { index in
                         Text(branches[index].name)

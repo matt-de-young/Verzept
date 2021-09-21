@@ -40,7 +40,7 @@ struct RecipeView: View {
                     if !recipe.directions.isEmpty {
                         VStack(alignment: .leading, content: {
                             Text("Directions:").modifier(SectionHeader())
-                            Text(recipe.directions).fontWeight(.semibold)
+                            DirectionsListView(directions: recipe.directions).font(Font.body.weight(.semibold))
                         })
                         .padding(.bottom)
                     }

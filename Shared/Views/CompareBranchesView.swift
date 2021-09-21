@@ -20,13 +20,13 @@ struct CompareBranchesView: View {
     var body: some View {
         List() {
             Section(
-                header: Text(branchA.name).modifier(FormLabel())
+                header: Text(branchA.name).modifier(SectionHeader())
             ) {
                 Text(branchA.head.ingredients)
                 Text(branchA.head.directions)
             }
             if (branchB == nil) {
-                Section(header: Text("Compare to branch").modifier(FormLabel())) {
+                Section(header: Text("Compare to branch").modifier(SectionHeader())) {
                     Picker("Branch", selection: $pickerBranchIndex, content: {
                         ForEach(0..<branches.count, content: { index in
                             Text(branches[index].name)
@@ -42,7 +42,7 @@ struct CompareBranchesView: View {
                 }
             } else {
                 Section(
-                    header: Text(branchB!.name).modifier(FormLabel())
+                    header: Text(branchB!.name).modifier(SectionHeader())
                 ) {
                     Text(branchB!.head.ingredients)
                     Text(branchB!.head.directions)

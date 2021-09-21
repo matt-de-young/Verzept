@@ -41,6 +41,7 @@ struct FormField: View {
                         .frame(minHeight: 200.0)
                         .foregroundColor(Color.ui.foregroundColor)
                         .accentColor(Color.ui.accentColor)
+                        .font(Font.body.weight(.semibold))
                     Text(text)
                         .opacity(0)
                         .padding(.all, 8)
@@ -50,6 +51,7 @@ struct FormField: View {
                     .ignoresSafeArea(.keyboard, edges: .bottom)
                     .foregroundColor(Color.ui.foregroundColor)
                     .accentColor(Color.ui.accentColor)
+                    .font(Font.body.weight(.semibold))
             }
         }
     }
@@ -59,7 +61,8 @@ struct FormField: View {
             Section(
                 header: Text(header!)
                     .foregroundColor(Color.ui.bodyColor)
-                    .font(Font.system(size: 12).weight(.black))
+                    .font(Font.system(size: 14).weight(.black))
+                    .textCase(.uppercase)
             ) {
                 InnerField(text: $text, isMultiLine: isMultiLine)
             }
