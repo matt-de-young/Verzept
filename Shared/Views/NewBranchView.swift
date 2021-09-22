@@ -19,26 +19,37 @@ struct NewBranchView: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                FormField(text: $name, header: "Name")
-                Section(header: Text("Based on branch").modifier(SectionHeader())) {
-                    Picker("Branch", selection: $selectedBranchIndex, content: {
-                        ForEach(0..<branches.count, content: { index in
-                            Text(branches[index].name)
-                        })
-                    })
-                    .pickerStyle(WheelPickerStyle())
+            ZStack {
+                Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 8) {
+                        FormField(text: $name, header: "Name")
+                        HStack {
+                            Text("Based on Branch")
+                                .foregroundColor(Color.ui.headerColor)
+                                .font(Font.system(size: 14).weight(.black))
+                                .textCase(.uppercase)
+                            Spacer()
+                        }
+                            Picker("Branch", selection: $selectedBranchIndex, content: {
+                                ForEach(0..<branches.count, content: { index in
+                                    Text(branches[index].name)
+                                })
+                            })
+                            .pickerStyle(WheelPickerStyle())
+                        Spacer()
+                    }.padding()
                 }
+                .navigationTitle("New Branch")
+                .navigationBarItems(
+                    leading: Button("Dismiss") {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }.buttonStyle(DismissTextButton()),
+                    trailing: Button("Create") {
+                        onComplete(branches[selectedBranchIndex], name)
+                    }.buttonStyle(TextButton())
+                )
             }
-            .navigationTitle("New Branch")
-            .navigationBarItems(
-                leading: Button("Dismiss") {
-                    self.presentationMode.wrappedValue.dismiss()
-                }.buttonStyle(DismissTextButton()),
-                trailing: Button("Create") {
-                    onComplete(branches[selectedBranchIndex], name)
-                }.buttonStyle(TextButton())
-            )
         }
     }
 }

@@ -19,10 +19,16 @@ struct RecipeFormView: View {
     @Binding var directions: String
     
     var body: some View {
-        Form {
-            FormField(text: $title, header: "Title")
-            FormField(text: $ingredients, header: "Ingredients", isMultiLine: true)
-            FormField(text: $directions, header: "Directions", isMultiLine: true)
+        ZStack {
+            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 8) {
+                    FormField(text: $title, header: "Title")
+                    FormField(text: $ingredients, header: "Ingredients", isMultiLine: true)
+                    FormField(text: $directions, header: "Directions", isMultiLine: true)
+                    Spacer()
+                }.padding()
+            }
         }
     }
 }

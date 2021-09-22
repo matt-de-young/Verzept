@@ -15,11 +15,15 @@ struct EditBranchView: View {
     let onComplete: (String) -> Void
     
     var body: some View {
-        NavigationView {
-            Form {
-                FormField(text: $name, header: "Name")
+        ZStack {
+            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 8) {
+                    FormField(text: $name, header: "Name")
+                    Spacer()
+                }
+                .padding()
             }
-            .listStyle(InsetGroupedListStyle())
             .navigationTitle("Edit Branch")
             .navigationBarItems(
                 leading: Button("Dismiss") {
@@ -35,8 +39,10 @@ struct EditBranchView: View {
 
 struct EditBranchView_Previews: PreviewProvider {
     static var previews: some View {
-        EditBranchView(name: "Sweet branch") { name in
-            
+        NavigationView {
+            EditBranchView(name: "Sweet branch") { name in
+                
+            }
         }
     }
 }

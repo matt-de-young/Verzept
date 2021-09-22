@@ -15,25 +15,34 @@ struct NewNoteView: View {
     let onComplete: (String) -> Void
 
     var body: some View {
-        Form {
-            FormField(text: $text, header: "Note", isMultiLine: true)
+        ZStack {
+            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 8) {
+                    FormField(text: $text, header: "Note", isMultiLine: true)
+                    Spacer()
+                }
+                .padding()
+            }
+            .navigationBarItems(
+                leading: Button("Dismiss") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }.buttonStyle(DismissTextButton()),
+                trailing: Button("Add") {
+                    onComplete(text)
+                }.buttonStyle(TextButton())
+            )
+            .navigationTitle("Add Note")
         }
-        .navigationBarItems(
-            leading: Button("Dismiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }.buttonStyle(DismissTextButton()),
-            trailing: Button("Add") {
-                onComplete(text)
-            }.buttonStyle(TextButton())
-        )
-        .navigationTitle("Add Note")
     }
 }
 
 struct NewNoteView_Previews: PreviewProvider {
     static var previews: some View {
-        NewNoteView() { text in
-            
+        NavigationView {
+            NewNoteView() { text in
+                
+            }
         }
     }
 }
