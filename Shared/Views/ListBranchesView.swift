@@ -53,24 +53,34 @@ struct ListBranchesView: View {
     @State private var historyBranch: Branch? = nil
 
     var body: some View {
-        NavigationView {
-            List {
-                Section(header: Text("Current").modifier(SectionHeader())) {
-                    BranchListItem(branch: recipe.currentBranch)
-                    .onTapGesture {
-                        selectedBranch = recipe.currentBranch
+        ZStack {
+            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    HStack {
+                        Text("Current").modifier(SectionHeader())
+                        Spacer()
                     }
-                }
-                ForEach(Array(recipe.branches)) { branch in
-                    if branch != recipe.currentBranch {
-                        BranchListItem(branch: branch)
+                    BranchListItem(branch: recipe.currentBranch)
+                        .modifier(ListItem())
                         .onTapGesture {
-                            selectedBranch = branch
+                            selectedBranch = recipe.currentBranch
+                        }
+                }
+                    .padding()
+                VStack(spacing: 8) {
+                    ForEach(Array(recipe.branches)) { branch in
+                        if branch != recipe.currentBranch {
+                            BranchListItem(branch: branch)
+                                .modifier(ListItem())
+                                .onTapGesture {
+                                    selectedBranch = branch
+                                }
                         }
                     }
                 }
+                .padding()
             }
-            .listStyle(InsetGroupedListStyle())
             .navigationBarItems(trailing: Button(action: {
                 newBranchIsPresented = true
             }) {
@@ -152,15 +162,33 @@ struct ListBranchesView: View {
 
 struct ListBranchesView_Previews: PreviewProvider {
     static var previews: some View {
-        ListBranchesView(
-            viewContext: PersistenceController.preview.container.viewContext,
-            recipe: Recipe(
-                context: PersistenceController.preview.container.viewContext,
-                title: "Super Recipe",
-                ingredients: "",
-                directions: "",
-                notes: []
+        NavigationView {
+            ListBranchesView(
+                viewContext: PersistenceController.preview.container.viewContext,
+                recipe: Recipe(
+                    context: PersistenceController.preview.container.viewContext,
+                    title: "Super Recipe",
+                    ingredients: "",
+                    directions: "",
+                    notes: []
+                )
             )
-        )
+        }
+        .preferredColorScheme(.light)
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        NavigationView {
+            ListBranchesView(
+                viewContext: PersistenceController.preview.container.viewContext,
+                recipe: Recipe(
+                    context: PersistenceController.preview.container.viewContext,
+                    title: "Super Recipe",
+                    ingredients: "",
+                    directions: "",
+                    notes: []
+                )
+            )
+        }
+        .preferredColorScheme(.dark)
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

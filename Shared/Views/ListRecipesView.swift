@@ -16,41 +16,38 @@ struct ListRecipesView: View {
     var recipes: FetchedResults<Recipe>
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 8) {
-                ForEach(recipes) { recipe in
-                    NavigationLink(destination: RecipeView(viewContext: viewContext, recipe: recipe)) {
-                        HStack {
-                            VStack {
-                                HStack {
-                                    Text(recipe.title)
-                                        .font(Font(UIFont(name: "Futura Bold", size: 22)!))
-                                        .foregroundColor(Color.ui.headerColor)
-                                    Spacer()
+        ZStack {
+            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 8) {
+                    ForEach(recipes) { recipe in
+                        NavigationLink(destination: RecipeView(viewContext: viewContext, recipe: recipe)) {
+                            HStack {
+                                VStack {
+                                    HStack {
+                                        Text(recipe.title)
+                                            .font(Font(UIFont(name: "Futura Bold", size: 22)!))
+                                            .foregroundColor(Color.ui.headerColor)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text("Branch:")
+                                        Text(recipe.currentBranch.name)
+                                            .fontWeight(.semibold)
+                                        Spacer()
+                                    }
                                 }
-                                HStack {
-                                    Text("Branch:")
-                                    Text(recipe.currentBranch.name)
-                                        .fontWeight(.semibold)
-                                    Spacer()
-                                }
+                                Spacer()
+                                Image(systemName: "arrow.right")
+                                    .font(Font.body.weight(.semibold))
+                                    .foregroundColor(Color.ui.accentColor)
                             }
-                            Spacer()
-                            Image(systemName: "arrow.right")
-                                .font(Font.body.weight(.semibold))
-                                .foregroundColor(Color.ui.accentColor)
                         }
+                        .modifier(ListItem())
                     }
-                    .padding()
-                    .background(Color.ui.fieldBackgroundColor)
-                    .cornerRadius(8)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.ui.foregroundColor, lineWidth: 2)
-                    )
                 }
+                .padding()
             }
-            .padding()
         }
         .navigationTitle("All Recipes")
         .foregroundColor(Color.ui.foregroundColor)
@@ -78,18 +75,12 @@ struct ListRecipesView: View {
 struct ListRecipesView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ZStack {
-                Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-                ListRecipesView()
-            }
+            ListRecipesView()
         }
             .preferredColorScheme(.light)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         NavigationView {
-            ZStack {
-                Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-                ListRecipesView()
-            }
+            ListRecipesView()
         }
             .preferredColorScheme(.dark)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
