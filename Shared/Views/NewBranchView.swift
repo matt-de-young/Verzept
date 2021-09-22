@@ -18,27 +18,28 @@ struct NewBranchView: View {
     let onComplete: (Branch, String) -> Void
     
     var body: some View {
-        Form {
-            FormField(text: $name, header: "Name")
-            Section(header: Text("Based on branch").modifier(SectionHeader())) {
-                Picker("Branch", selection: $selectedBranchIndex, content: {
-                    ForEach(0..<branches.count, content: { index in
-                        Text(branches[index].name)
+        NavigationView {
+            Form {
+                FormField(text: $name, header: "Name")
+                Section(header: Text("Based on branch").modifier(SectionHeader())) {
+                    Picker("Branch", selection: $selectedBranchIndex, content: {
+                        ForEach(0..<branches.count, content: { index in
+                            Text(branches[index].name)
+                        })
                     })
-                })
-                .pickerStyle(WheelPickerStyle())
+                    .pickerStyle(WheelPickerStyle())
+                }
             }
+            .navigationTitle("New Branch")
+            .navigationBarItems(
+                leading: Button("Dismiss") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }.buttonStyle(DismissTextButton()),
+                trailing: Button("Create") {
+                    onComplete(branches[selectedBranchIndex], name)
+                }.buttonStyle(TextButton())
+            )
         }
-        .listStyle(InsetGroupedListStyle())
-        .navigationTitle("New Branch")
-        .navigationBarItems(
-            leading: Button("Dismiss") {
-                self.presentationMode.wrappedValue.dismiss()
-            }.buttonStyle(DismissTextButton()),
-            trailing: Button("Create") {
-                onComplete(branches[selectedBranchIndex], name)
-            }.buttonStyle(TextButton())
-        )
     }
 }
 
