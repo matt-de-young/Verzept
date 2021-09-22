@@ -38,6 +38,103 @@ struct PersistenceController {
                 """,
             notes: []
         )
+        _ = Recipe(
+            context: viewContext,
+            title: "YA Test Recipe",
+            ingredients: """
+                1 cup Lorem
+                30 ml Ipsum
+                """,
+            directions: """
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                """,
+            notes: []
+        )
+        _ = Recipe(
+            context: viewContext,
+            title: "Short One",
+            ingredients: """
+                1 cup Lorem
+                30 ml Ipsum
+                """,
+            directions: """
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                """,
+            notes: []
+        )
+        _ = Recipe(
+            context: viewContext,
+            title: "The Last Test Recipe",
+            ingredients: """
+                1 cup Lorem
+                30 ml Ipsum
+                """,
+            directions: """
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                """,
+            notes: []
+        )
+        
+//        _ = Recipe(
+//            context: viewContext,
+//            title: "The Last Test Recipe",
+//            ingredients: """
+//                1 cup Lorem
+//                30 ml Ipsum
+//                """,
+//            directions: """
+//                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+//                """,
+//            notes: []
+//        )
+//        _ = Recipe(
+//            context: viewContext,
+//            title: "The Last Test Recipe",
+//            ingredients: """
+//                1 cup Lorem
+//                30 ml Ipsum
+//                """,
+//            directions: """
+//                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+//                """,
+//            notes: []
+//        )
+//        _ = Recipe(
+//            context: viewContext,
+//            title: "The Last Test Recipe",
+//            ingredients: """
+//                1 cup Lorem
+//                30 ml Ipsum
+//                """,
+//            directions: """
+//                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+//                """,
+//            notes: []
+//        )
+//        _ = Recipe(
+//            context: viewContext,
+//            title: "The Last Test Recipe",
+//            ingredients: """
+//                1 cup Lorem
+//                30 ml Ipsum
+//                """,
+//            directions: """
+//                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+//                """,
+//            notes: []
+//        )
+//        _ = Recipe(
+//            context: viewContext,
+//            title: "The Last Test Recipe",
+//            ingredients: """
+//                1 cup Lorem
+//                30 ml Ipsum
+//                """,
+//            directions: """
+//                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+//                """,
+//            notes: []
+//        )
         
         do {
             try viewContext.save()

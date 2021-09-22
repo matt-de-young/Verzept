@@ -18,7 +18,7 @@ struct RecipeView: View {
     var body: some View {
         ZStack {
             Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-            ScrollView() {
+            ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         Text("Branch:").modifier(SectionHeader())

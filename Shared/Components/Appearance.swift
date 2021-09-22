@@ -15,7 +15,7 @@ extension Color {
         let accentColor = Color("AccentColor")
         let foregroundColor = Color("ForegroundColor")
         let backgroundColor = Color("BackgroundColor")
-        let backgroundAccentColor = Color("BackgroundAccentColor")
+        let fieldBackgroundColor = Color("FieldBackgroundColor")
         
         let bodyColor = Color("ForegroundColor")
         let headerColor = Color("HeaderColor")
