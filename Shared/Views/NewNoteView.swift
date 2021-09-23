@@ -17,12 +17,8 @@ struct NewNoteView: View {
     var body: some View {
         ZStack {
             Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 8) {
-                    FormField(text: $text, header: "Note", isMultiLine: true)
-                    Spacer()
-                }
-                .padding()
+            Form() {
+                FormField(text: $text, header: "Note", isMultiLine: true)
             }
             .navigationBarItems(
                 leading: Button("Dismiss") {

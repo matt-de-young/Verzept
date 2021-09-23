@@ -59,35 +59,28 @@ struct VersionView: View {
         })
         .sheet(isPresented: $newBranchIsPresented, content: {
             NavigationView {
-                ZStack {
-                    Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 8) {
-                            FormField(text: $newBranchName, header: "Name")
-                            Spacer()
-                        }
-                        .padding()
-                    }
-                    .navigationBarTitle(Text("New Branch"))
-                    .navigationBarItems(
-                        leading: Button("Dismiss") {
-                            newBranchIsPresented = false
-                            newBranchName = ""
-                        }.buttonStyle(DismissTextButton()),
-                        trailing: Button("Create") {
-                            Recipe.addBranch(
-                                context: viewContext,
-                                recipe: version.recipe,
-                                name: newBranchName,
-                                root: version
-                            )
-                            newBranchIsPresented = false
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                        .buttonStyle(TextButton())
-                        .disabled(self.newBranchName.isEmpty)
-                    )
+                Form {
+                    FormField(text: $newBranchName, header: "Name")
                 }
+                .navigationBarTitle(Text("New Branch"))
+                .navigationBarItems(
+                    leading: Button("Dismiss") {
+                        newBranchIsPresented = false
+                        newBranchName = ""
+                    }.buttonStyle(DismissTextButton()),
+                    trailing: Button("Create") {
+                        Recipe.addBranch(
+                            context: viewContext,
+                            recipe: version.recipe,
+                            name: newBranchName,
+                            root: version
+                        )
+                        newBranchIsPresented = false
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                    .buttonStyle(TextButton())
+                    .disabled(self.newBranchName.isEmpty)
+                )
             }
         })
     }

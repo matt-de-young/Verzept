@@ -21,24 +21,21 @@ struct NewBranchView: View {
         NavigationView {
             ZStack {
                 Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 8) {
-                        FormField(text: $name, header: "Name")
-                        HStack {
-                            Text("Based on Branch")
-                                .foregroundColor(Color.ui.headerColor)
-                                .font(Font.system(size: 14).weight(.black))
-                                .textCase(.uppercase)
-                            Spacer()
-                        }
-                            Picker("Branch", selection: $selectedBranchIndex, content: {
-                                ForEach(0..<branches.count, content: { index in
-                                    Text(branches[index].name)
-                                })
-                            })
-                            .pickerStyle(WheelPickerStyle())
+                Form {
+                    FormField(text: $name, header: "Name")
+                    HStack {
+                        Text("Based on Branch")
+                            .foregroundColor(Color.ui.headerColor)
+                            .font(Font.system(size: 14).weight(.black))
+                            .textCase(.uppercase)
                         Spacer()
-                    }.padding()
+                    }
+                    Picker("Branch", selection: $selectedBranchIndex, content: {
+                        ForEach(0..<branches.count, content: { index in
+                            Text(branches[index].name)
+                        })
+                    })
+                        .pickerStyle(WheelPickerStyle())
                 }
                 .navigationTitle("New Branch")
                 .navigationBarItems(

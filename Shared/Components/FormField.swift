@@ -66,35 +66,23 @@ struct FormField: View {
 
 struct FormField_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 8) {
-                    FormField(text: .constant("No Header"))
-                    FormField(text: .constant("test input"), header: "single line")
-                    FormField(
-                        text: .constant("longer test input"),
-                        header: "multi line",
-                        isMultiLine: true
-                    )
-                    Spacer()
-                }.padding()
-            }
+        Form {
+            FormField(text: .constant("No Header"))
+            FormField(text: .constant("test input"), header: "single line")
+            FormField(
+                text: .constant("longer test input"),
+                header: "multi line",
+                isMultiLine: true
+            )
         }.preferredColorScheme(.light)
-        ZStack {
-            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 8) {
-                    FormField(text: .constant("No Header"))
-                    FormField(text: .constant("test input"), header: "single line")
-                    FormField(
-                        text: .constant("longer test input"),
-                        header: "multi line",
-                        isMultiLine: true
-                    )
-                    Spacer()
-                }.padding()
-            }
+        Form {
+            FormField(text: .constant("No Header"))
+            FormField(text: .constant("test input"), header: "single line")
+            FormField(
+                text: .constant("longer test input"),
+                header: "multi line",
+                isMultiLine: true
+            )
         }.preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
     }
 }
