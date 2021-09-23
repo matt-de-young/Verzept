@@ -19,8 +19,7 @@ struct NewBranchView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+            Container {
                 Form {
                     FormField(text: $name, header: "Name")
                     HStack {

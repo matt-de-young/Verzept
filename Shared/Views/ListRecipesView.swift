@@ -16,8 +16,7 @@ struct ListRecipesView: View {
     var recipes: FetchedResults<Recipe>
     
     var body: some View {
-        ZStack {
-            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+        Container {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 8) {
                     ForEach(recipes) { recipe in
@@ -50,7 +49,6 @@ struct ListRecipesView: View {
             }
         }
         .navigationTitle("All Recipes")
-        .foregroundColor(Color.ui.foregroundColor)
         .navigationBarItems(trailing: Button(action: {
             newRecipeIsPresented = true
         }) {

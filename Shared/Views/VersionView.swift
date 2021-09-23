@@ -18,45 +18,42 @@ struct VersionView: View {
     @State var newBranchName: String = ""
     
     var body: some View {
-        VStack(alignment: .leading) {
+        TextContainer {
             if !version.ingredients.isEmpty {
                 VStack(alignment: .leading, content: {
-                    Text("Ingrdients:").font(.headline)
-                    IngredientListView(ingredients: version.ingredients)
+                    Text("Ingredients:").modifier(SectionHeader())
+                    IngredientListView(ingredients: version.ingredients).font(Font.body.weight(.semibold))
                 })
-                .padding(.bottom)
+                    .padding(.bottom)
             }
             
             if !version.directions.isEmpty {
                 VStack(alignment: .leading, content: {
-                    Text("Directions:").font(.headline)
-                    Text(version.directions)
+                    Text("Directions:").modifier(SectionHeader())
+                    DirectionsListView(directions: version.directions).font(Font.body.weight(.semibold))
                 })
-                .padding(.bottom)
+                    .padding(.bottom)
             }
             
             if !version.notes.isEmpty {
-                Text("Notes:").font(.headline)
+                Text("Notes:").modifier(SectionHeader())
                 ForEach(Array(version.notes), id: \.self) { note in
                     VStack(alignment: .leading) {
                         Text(note.created, style: .date)
                             .fontWeight(.light)
                             .font(.system(size: 12))
-                        Text(note.text)
+                        Text(note.text).fontWeight(.semibold)
                     }
                     .padding(.bottom)
                 }
             }
-            Spacer()
         }
-        .padding()
         .navigationTitle(version.name)
         .navigationBarItems(trailing: Button(action: {
             newBranchIsPresented = true
         }) {
-            Text("Branch")
-            Image(systemName: "arrow.branch")
-        })
+            Text("Branch \(Image(systemName: "arrow.branch"))")
+        }.buttonStyle(TextButton()))
         .sheet(isPresented: $newBranchIsPresented, content: {
             NavigationView {
                 Form {
@@ -98,6 +95,8 @@ struct VersionView_Previews: PreviewProvider {
         directions: "Mix the stuff into the other stuff."
     )
     static var previews: some View {
-        VersionView(viewContext: viewContext, version: initVersion)
+        NavigationView {
+            VersionView(viewContext: viewContext, version: initVersion)
+        }
     }
 }

@@ -15,8 +15,7 @@ struct NewNoteView: View {
     let onComplete: (String) -> Void
 
     var body: some View {
-        ZStack {
-            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+        Container {
             Form() {
                 FormField(text: $text, header: "Note", isMultiLine: true)
             }

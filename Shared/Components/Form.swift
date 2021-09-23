@@ -27,7 +27,7 @@ struct Form<Content: View>: View {
 
 struct Form_Previews: PreviewProvider {
     static var previews: some View {
-        Form() {
+        Form {
             FormField(text: .constant("Some Note text"), header: "Note", isMultiLine: true)
         }
     }

@@ -43,12 +43,14 @@ struct EditRecipeView: View {
     
     var body: some View {
         NavigationView {
-            RecipeFormView(
-                viewContext: viewContext,
-                title: $title,
-                ingredients: $ingredients,
-                directions: $directions
-            )
+            Container {
+                RecipeFormView(
+                    viewContext: viewContext,
+                    title: $title,
+                    ingredients: $ingredients,
+                    directions: $directions
+                )
+            }
             .navigationBarTitle(Text("Edit Recipe"))
             .navigationBarItems(
                 leading: Button("Dismiss") {
@@ -80,12 +82,14 @@ struct CreateRecipeView: View {
     
     var body: some View {
         NavigationView {
-            RecipeFormView(
-                viewContext: viewContext,
-                title: $title,
-                ingredients: $ingredients,
-                directions: $directions
-            )
+            Container {
+                RecipeFormView(
+                    viewContext: viewContext,
+                    title: $title,
+                    ingredients: $ingredients,
+                    directions: $directions
+                )
+            }
             .navigationBarTitle(Text("New Recipe"))
             .navigationBarItems(
                 leading: Button("Dismiss") {

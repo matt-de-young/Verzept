@@ -53,8 +53,7 @@ struct ListBranchesView: View {
     @State private var historyBranch: Branch? = nil
 
     var body: some View {
-        ZStack {
-            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
+        Container {
             ScrollView(showsIndicators: false) {
                 VStack {
                     HStack {
@@ -84,7 +83,9 @@ struct ListBranchesView: View {
             .navigationBarItems(trailing: Button(action: {
                 newBranchIsPresented = true
             }) {
-                Image(systemName: "plus").font(Font.body.weight(.semibold))
+                Image(systemName: "plus")
+                    .font(Font.body.weight(.semibold))
+                    .foregroundColor(Color.ui.accentColor)
             })
             .navigationTitle("Branches")
         }

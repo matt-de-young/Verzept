@@ -16,25 +16,34 @@ struct BranchHistoryView: View {
     var branch: Branch
     
     var body: some View {
-        List() {
-            ForEach(Array(branch.fullHistory())) { version in
-                NavigationLink(destination: VersionView(viewContext: viewContext, version: version)) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(version.name)
-                            Spacer()
+        Container {
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 8) {
+                    ForEach(Array(branch.fullHistory())) { version in
+                        NavigationLink(destination: VersionView(viewContext: viewContext, version: version)) {
                             HStack {
+                                VStack {
+                                    HStack {
+                                        Text(version.name)
+                                            .font(Font(UIFont(name: "Futura Bold", size: 22)!))
+                                            .foregroundColor(Color.ui.headerColor)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text(version.created, style: .date)
+                                        Spacer()
+                                    }
+                                }
                                 Spacer()
-                                Text(version.created, style: .date)
-                                    .fontWeight(.light)
-                                    .font(.system(size: 12))
+                                Image(systemName: "arrow.right")
+                                    .font(Font.body.weight(.semibold))
+                                    .foregroundColor(Color.ui.accentColor)
                             }
-                        }
+                        }.modifier(ListItem())
                     }
-                }
+                }.padding()
             }
         }
-        .listStyle(InsetGroupedListStyle())
         .navigationTitle("History")
     }
 }
@@ -67,9 +76,11 @@ struct BranchHistoryView_Previews: PreviewProvider {
         head: otherVersion
     )
     static var previews: some View {
-        BranchHistoryView(
-            viewContext: viewContext,
-            branch: branch
-        )
+        NavigationView {
+            BranchHistoryView(
+                viewContext: viewContext,
+                branch: branch
+            )
+        }
     }
 }
