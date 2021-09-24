@@ -22,6 +22,7 @@ struct ForkingApp: App {
         UITableView.appearance().backgroundColor = UIColor(Color.ui.backgroundColor)
         UITableView.appearance().tintColor = UIColor(Color.ui.backgroundColor)
         UITextView.appearance().backgroundColor = .clear
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = UIColor(.blue)
     }
     
     var body: some Scene {
