@@ -7,6 +7,26 @@
 
 import SwiftUI
 
+private struct Ingredient: View {
+    var text: String
+    @State var struck = false
+    
+    var body: some View {
+        Section {
+            Image(systemName: struck ? "circle.fill" : "circle")
+                .foregroundColor(Color.ui.accentColor)
+                .font(Font.system(size: 8).weight(.black))
+                .padding(6)
+            Text(text.trimmingCharacters(in: NSCharacterSet.whitespaces))
+                .strikethrough(struck)
+                .padding(.leading, 8)
+        }
+            .onTapGesture {
+                struck = !struck
+            }
+    }
+}
+
 struct IngredientListView: View {
     var ingredients: String
     
@@ -19,39 +39,28 @@ struct IngredientListView: View {
         LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
             ForEach(ingredients.lines, id: \.self) { line in
                 if !line.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty {
-                    Image(systemName: "circle")
-                        .foregroundColor(Color.ui.accentColor)
-                        .font(Font.system(size: 8).weight(.black))
-                        .padding(6)
-                    Text(line.trimmingCharacters(in: NSCharacterSet.whitespaces))
-                        .padding(.leading, 8)
+                    Ingredient(text: String(line))
                 }
             }
         }
+            .font(Font.body.weight(.semibold))
     }
 }
 
 struct IngredientListView_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            Color.ui.backgroundColor.edgesIgnoringSafeArea(.all)
-            HStack() {
-                VStack(alignment: .leading) {
-                    IngredientListView(
-                        ingredients: """
-                             2 cans Beans
-                             3 tbsp Adobo Sauce
-                             1 egg
-                             
-                             Some Really Reallt long ingredient that should wrap
-                            """
-                    )
-                    Spacer()
-                }
-                .foregroundColor(Color.ui.foregroundColor)
-                .font(Font.body.weight(.semibold))
-                Spacer()
-            }
+        TextContainer {
+            Text("Ingredient List View:")
+                .modifier(SectionHeader())
+            IngredientListView(
+                ingredients: """
+                     2 cans Beans
+                     3 tbsp Adobo Sauce
+                     1 egg
+                     
+                     Some Really Reallt long ingredient that should wrap
+                    """
+            )
         }
     }
 }
