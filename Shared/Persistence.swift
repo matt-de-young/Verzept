@@ -40,7 +40,7 @@ struct PersistenceController {
         )
         _ = Recipe(
             context: viewContext,
-            title: "YA Test Recipe",
+            title: "20-minute Teriyaki Chicken",
             ingredients: """
                 1 cup Lorem
                 30 ml Ipsum

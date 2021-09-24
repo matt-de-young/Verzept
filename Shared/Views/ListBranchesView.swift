@@ -18,6 +18,7 @@ struct BranchListItem: View {
                     Text(branch.name)
                         .font(Font(UIFont(name: "Futura Bold", size: 22)!))
                         .foregroundColor(Color.ui.headerColor)
+                        .multilineTextAlignment(.leading)
                     Spacer()
                 }
                 Spacer()
