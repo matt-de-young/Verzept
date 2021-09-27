@@ -27,10 +27,7 @@ struct ForkingApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                ListRecipesView()
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            }
+            ContentView(viewContext: persistenceController.container.viewContext)
         }
     }
 }

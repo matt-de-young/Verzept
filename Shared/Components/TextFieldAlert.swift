@@ -75,24 +75,24 @@ extension View {
     }
 }
 
-struct ContentView: View {
-    @State var showsAlert = false
-    var body: some View {
-        VStack {
-            Text("Hello, World!")
-            Button("alert") {
-                self.showsAlert = true
-            }
-        }
-        .alert(isPresented: $showsAlert, TextAlert(title: "Title", action: {
-            print("Callback \($0 ?? "<cancel>")")
-        }))
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-        ContentView(showsAlert: true)
-    }
-}
+//struct ContentView: View {
+//    @State var showsAlert = false
+//    var body: some View {
+//        VStack {
+//            Text("Hello, World!")
+//            Button("alert") {
+//                self.showsAlert = true
+//            }
+//        }
+//        .alert(isPresented: $showsAlert, TextAlert(title: "Title", action: {
+//            print("Callback \($0 ?? "<cancel>")")
+//        }))
+//    }
+//}
+//
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//        ContentView(showsAlert: true)
+//    }
+//}

@@ -37,6 +37,10 @@
 		C93F62442701A94300B2D993 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F62422701A94300B2D993 /* SearchBar.swift */; };
 		C93F62452701A94300B2D993 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F62422701A94300B2D993 /* SearchBar.swift */; };
 		C93F62462701A94300B2D993 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F62422701A94300B2D993 /* SearchBar.swift */; };
+		C93F62492701D04200B2D993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F62482701D04200B2D993 /* ContentView.swift */; };
+		C93F624A2701D04200B2D993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F62482701D04200B2D993 /* ContentView.swift */; };
+		C93F624B2701D04200B2D993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F62482701D04200B2D993 /* ContentView.swift */; };
+		C93F624C2701D04200B2D993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F62482701D04200B2D993 /* ContentView.swift */; };
 		C950752D26D2557C0042B175 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C950752C26D2557C0042B175 /* Tests_iOS.swift */; };
 		C950753826D2557C0042B175 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C950753726D2557C0042B175 /* Tests_macOS.swift */; };
 		C950753A26D2557C0042B175 /* Forking.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C950750E26D2557B0042B175 /* Forking.xcdatamodeld */; };
@@ -162,6 +166,7 @@
 		C9315B2826FCAECD00E79EAF /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		C93F623D2701A4BC00B2D993 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		C93F62422701A94300B2D993 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		C93F62482701D04200B2D993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C950750F26D2557B0042B175 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		C950751026D2557B0042B175 /* ForkingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForkingApp.swift; sourceTree = "<group>"; };
 		C950751226D2557B0042B175 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -234,6 +239,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C93F62472701D01900B2D993 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				C93F62482701D04200B2D993 /* ContentView.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		C950750826D2557B0042B175 = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +264,7 @@
 		C950750D26D2557B0042B175 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				C93F62472701D01900B2D993 /* Navigation */,
 				C98761B926F9EA5800D67766 /* Utilities */,
 				C9530BE226D42D5F00DA1660 /* Components */,
 				C950755226D255930042B175 /* Models */,
@@ -532,6 +546,7 @@
 			files = (
 				C99F599626D7717C00F0AA20 /* CompareBranchesView.swift in Sources */,
 				C9530BE426D42D7B00DA1660 /* IngredientListView.swift in Sources */,
+				C93F62492701D04200B2D993 /* ContentView.swift in Sources */,
 				C99F598726D6779500F0AA20 /* ListBranchesView.swift in Sources */,
 				C98761BB26F9EA7900D67766 /* String.swift in Sources */,
 				C950756426D2877D0042B175 /* EditRecipeView.swift in Sources */,
@@ -570,6 +585,7 @@
 			files = (
 				C99F599726D7717C00F0AA20 /* CompareBranchesView.swift in Sources */,
 				C9530BE526D42D7B00DA1660 /* IngredientListView.swift in Sources */,
+				C93F624A2701D04200B2D993 /* ContentView.swift in Sources */,
 				C99F598826D6779500F0AA20 /* ListBranchesView.swift in Sources */,
 				C98761BC26F9EA7900D67766 /* String.swift in Sources */,
 				C950756526D2877D0042B175 /* EditRecipeView.swift in Sources */,
@@ -608,6 +624,7 @@
 			files = (
 				C99F598926D6779500F0AA20 /* ListBranchesView.swift in Sources */,
 				C9530BBC26D2F95900DA1660 /* Recipe+CoreDataClass.swift in Sources */,
+				C93F624B2701D04200B2D993 /* ContentView.swift in Sources */,
 				C9DE377D26F884EB003064A9 /* Appearance.swift in Sources */,
 				C98761BD26F9EA7900D67766 /* String.swift in Sources */,
 				C9530BC426D2F95900DA1660 /* Branch+CoreDataClass.swift in Sources */,
@@ -646,6 +663,7 @@
 			files = (
 				C99F598A26D6779500F0AA20 /* ListBranchesView.swift in Sources */,
 				C9530BBD26D2F95900DA1660 /* Recipe+CoreDataClass.swift in Sources */,
+				C93F624C2701D04200B2D993 /* ContentView.swift in Sources */,
 				C9DE377E26F884EB003064A9 /* Appearance.swift in Sources */,
 				C98761BE26F9EA7900D67766 /* String.swift in Sources */,
 				C9530BC526D2F95900DA1660 /* Branch+CoreDataClass.swift in Sources */,
@@ -819,7 +837,7 @@
 				DEVELOPMENT_TEAM = 922DS6BX5S;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -827,8 +845,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattdeyoung.Forking;
 				PRODUCT_NAME = Forking;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -842,7 +862,7 @@
 				DEVELOPMENT_TEAM = 922DS6BX5S;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -850,8 +870,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattdeyoung.Forking;
 				PRODUCT_NAME = Forking;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
