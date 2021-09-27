@@ -11,6 +11,7 @@ struct FormField: View {
     
     @Binding var text: String
     var header: String? = nil
+    var placeholder: String = ""
     var isMultiLine = false
     
     var body: some View {
@@ -48,7 +49,7 @@ struct FormField: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 8)
                         .fill(Color.ui.fieldBackgroundColor)
-                    TextField("", text: $text)
+                    TextField(placeholder, text: $text)
                         .ignoresSafeArea(.keyboard, edges: .bottom)
                         .foregroundColor(Color.ui.foregroundColor)
                         .accentColor(Color.ui.accentColor)

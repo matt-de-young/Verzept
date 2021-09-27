@@ -11,6 +11,7 @@ struct ListRecipesView: View {
 
     @Environment(\.managedObjectContext) var viewContext
     @State private var newRecipeIsPresented = false
+    @State private var searchText: String = ""
     
     @FetchRequest(fetchRequest: Recipe.allRecipesFetchRequest)
     var recipes: FetchedResults<Recipe>
@@ -18,7 +19,9 @@ struct ListRecipesView: View {
     var body: some View {
         Container {
             ItemList {
-                ForEach(recipes) { recipe in
+                searchBar(text: $searchText)
+                    .padding(.bottom)
+                ForEach(recipes.filter({ searchText.isEmpty ? true : $0.title.contains(searchText) })) { recipe in
                     NavigationLink(destination: RecipeView(viewContext: viewContext, recipe: recipe)) {
                         HStack {
                             VStack {
@@ -43,6 +46,7 @@ struct ListRecipesView: View {
                         }
                     }
                     .modifier(ListItem())
+                    .animation(.default)
                 }
             }
         }
