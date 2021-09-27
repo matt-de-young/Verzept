@@ -17,36 +17,33 @@ struct ListRecipesView: View {
     
     var body: some View {
         Container {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 8) {
-                    ForEach(recipes) { recipe in
-                        NavigationLink(destination: RecipeView(viewContext: viewContext, recipe: recipe)) {
-                            HStack {
-                                VStack {
-                                    HStack {
-                                        Text(recipe.title)
-                                            .font(Font(UIFont(name: "Futura Bold", size: 22)!))
-                                            .foregroundColor(Color.ui.headerColor)
-                                            .multilineTextAlignment(.leading)
-                                        Spacer()
-                                    }
-                                    HStack {
-                                        Text("Branch:")
-                                        Text(recipe.currentBranch.name)
-                                            .fontWeight(.semibold)
-                                        Spacer()
-                                    }
+            ItemList {
+                ForEach(recipes) { recipe in
+                    NavigationLink(destination: RecipeView(viewContext: viewContext, recipe: recipe)) {
+                        HStack {
+                            VStack {
+                                HStack {
+                                    Text(recipe.title)
+                                        .font(Font(UIFont(name: "Futura Bold", size: 22)!))
+                                        .foregroundColor(Color.ui.headerColor)
+                                        .multilineTextAlignment(.leading)
+                                    Spacer()
                                 }
-                                Spacer()
-                                Image(systemName: "arrow.right")
-                                    .font(Font.body.weight(.semibold))
-                                    .foregroundColor(Color.ui.accentColor)
+                                HStack {
+                                    Text("Branch:")
+                                    Text(recipe.currentBranch.name)
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                }
                             }
+                            Spacer()
+                            Image(systemName: "arrow.right")
+                                .font(Font.body.weight(.semibold))
+                                .foregroundColor(Color.ui.accentColor)
                         }
-                        .modifier(ListItem())
                     }
+                    .modifier(ListItem())
                 }
-                .padding()
             }
         }
         .navigationTitle("All Recipes")

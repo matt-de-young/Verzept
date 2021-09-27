@@ -29,6 +29,9 @@ struct Form_Previews: PreviewProvider {
     static var previews: some View {
         Form {
             FormField(text: .constant("Some Note text"), header: "Note", isMultiLine: true)
-        }
+        }.preferredColorScheme(.light)
+        Form {
+            FormField(text: .constant("Some Note text"), header: "Note", isMultiLine: true)
+        }.preferredColorScheme(.dark)
     }
 }

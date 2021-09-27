@@ -17,32 +17,30 @@ struct BranchHistoryView: View {
     
     var body: some View {
         Container {
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 8) {
-                    ForEach(Array(branch.fullHistory())) { version in
-                        NavigationLink(destination: VersionView(viewContext: viewContext, version: version)) {
-                            HStack {
-                                VStack {
-                                    HStack {
-                                        Text(version.name)
-                                            .font(Font(UIFont(name: "Futura Bold", size: 22)!))
-                                            .foregroundColor(Color.ui.headerColor)
-                                            .multilineTextAlignment(.leading)
-                                        Spacer()
-                                    }
-                                    HStack {
-                                        Text(version.created, style: .date)
-                                        Spacer()
-                                    }
+            ItemList {
+                ForEach(Array(branch.fullHistory())) { version in
+                    NavigationLink(destination: VersionView(viewContext: viewContext, version: version)) {
+                        HStack {
+                            VStack {
+                                HStack {
+                                    Text(version.name)
+                                        .font(Font(UIFont(name: "Futura Bold", size: 22)!))
+                                        .foregroundColor(Color.ui.headerColor)
+                                        .multilineTextAlignment(.leading)
+                                    Spacer()
                                 }
-                                Spacer()
-                                Image(systemName: "arrow.right")
-                                    .font(Font.body.weight(.semibold))
-                                    .foregroundColor(Color.ui.accentColor)
+                                HStack {
+                                    Text(version.created, style: .date)
+                                    Spacer()
+                                }
                             }
-                        }.modifier(ListItem())
-                    }
-                }.padding()
+                            Spacer()
+                            Image(systemName: "arrow.right")
+                                .font(Font.body.weight(.semibold))
+                                .foregroundColor(Color.ui.accentColor)
+                        }
+                    }.modifier(ListItem())
+                }
             }
         }
         .navigationTitle("History")

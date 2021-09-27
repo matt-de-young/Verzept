@@ -54,15 +54,15 @@ struct SectionHeader: ViewModifier {
     }
 }
 
-struct ListItem: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .padding()
-            .background(Color.ui.fieldBackgroundColor)
-            .cornerRadius(8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.ui.foregroundColor, lineWidth: 2)
-            )
-    }
-}
+//struct ListItem: ViewModifier {
+//    func body(content: Content) -> some View {
+//        content
+//            .padding()
+//            .background(Color.ui.fieldBackgroundColor)
+//            .cornerRadius(8)
+//            .overlay(
+//                RoundedRectangle(cornerRadius: 8)
+//                    .stroke(Color.ui.foregroundColor, lineWidth: 2)
+//            )
+//    }
+//}

@@ -29,6 +29,10 @@
 		C9315B2A26FCAECD00E79EAF /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9315B2826FCAECD00E79EAF /* Container.swift */; };
 		C9315B2B26FCAECD00E79EAF /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9315B2826FCAECD00E79EAF /* Container.swift */; };
 		C9315B2C26FCAECD00E79EAF /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9315B2826FCAECD00E79EAF /* Container.swift */; };
+		C93F623E2701A4BC00B2D993 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F623D2701A4BC00B2D993 /* ItemList.swift */; };
+		C93F623F2701A4BC00B2D993 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F623D2701A4BC00B2D993 /* ItemList.swift */; };
+		C93F62402701A4BC00B2D993 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F623D2701A4BC00B2D993 /* ItemList.swift */; };
+		C93F62412701A4BC00B2D993 /* ItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93F623D2701A4BC00B2D993 /* ItemList.swift */; };
 		C950752D26D2557C0042B175 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C950752C26D2557C0042B175 /* Tests_iOS.swift */; };
 		C950753826D2557C0042B175 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C950753726D2557C0042B175 /* Tests_macOS.swift */; };
 		C950753A26D2557C0042B175 /* Forking.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C950750E26D2557B0042B175 /* Forking.xcdatamodeld */; };
@@ -152,6 +156,7 @@
 		C924ACCB26F9BC7400D3FEC7 /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 		C9315B2326FCA8EE00E79EAF /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		C9315B2826FCAECD00E79EAF /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		C93F623D2701A4BC00B2D993 /* ItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemList.swift; sourceTree = "<group>"; };
 		C950750F26D2557B0042B175 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		C950751026D2557B0042B175 /* ForkingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForkingApp.swift; sourceTree = "<group>"; };
 		C950751226D2557B0042B175 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -341,6 +346,7 @@
 				C98761B426F9E81D00D67766 /* DirectionsListView.swift */,
 				C9315B2326FCA8EE00E79EAF /* Form.swift */,
 				C9315B2826FCAECD00E79EAF /* Container.swift */,
+				C93F623D2701A4BC00B2D993 /* ItemList.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -534,6 +540,7 @@
 				C9530BDA26D2F95900DA1660 /* Version+CoreDataClass.swift in Sources */,
 				C950753C26D2557C0042B175 /* ForkingApp.swift in Sources */,
 				C924ACCC26F9BC7400D3FEC7 /* FormField.swift in Sources */,
+				C93F623E2701A4BC00B2D993 /* ItemList.swift in Sources */,
 				C98761B526F9E81D00D67766 /* DirectionsListView.swift in Sources */,
 				C9530BDE26D2F95900DA1660 /* Version+CoreDataProperties.swift in Sources */,
 				C9315B2926FCAECD00E79EAF /* Container.swift in Sources */,
@@ -570,6 +577,7 @@
 				C9530BDB26D2F95900DA1660 /* Version+CoreDataClass.swift in Sources */,
 				C950753D26D2557C0042B175 /* ForkingApp.swift in Sources */,
 				C924ACCD26F9BC7400D3FEC7 /* FormField.swift in Sources */,
+				C93F623F2701A4BC00B2D993 /* ItemList.swift in Sources */,
 				C98761B626F9E81D00D67766 /* DirectionsListView.swift in Sources */,
 				C9530BDF26D2F95900DA1660 /* Version+CoreDataProperties.swift in Sources */,
 				C9315B2A26FCAECD00E79EAF /* Container.swift in Sources */,
@@ -606,6 +614,7 @@
 				C918645426DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C950756626D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C98761A926F9BE6700D67766 /* FormField.swift in Sources */,
+				C93F62402701A4BC00B2D993 /* ItemList.swift in Sources */,
 				C98761B726F9E81D00D67766 /* DirectionsListView.swift in Sources */,
 				C99F598426D6541000F0AA20 /* NewNoteView.swift in Sources */,
 				C9315B2B26FCAECD00E79EAF /* Container.swift in Sources */,
@@ -642,6 +651,7 @@
 				C918645526DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C950756726D2877D0042B175 /* EditRecipeView.swift in Sources */,
 				C98761AA26F9BE6800D67766 /* FormField.swift in Sources */,
+				C93F62412701A4BC00B2D993 /* ItemList.swift in Sources */,
 				C98761B826F9E81D00D67766 /* DirectionsListView.swift in Sources */,
 				C99F598526D6541000F0AA20 /* NewNoteView.swift in Sources */,
 				C9315B2C26FCAECD00E79EAF /* Container.swift in Sources */,
