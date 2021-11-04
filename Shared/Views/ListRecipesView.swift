@@ -10,19 +10,21 @@ import SwiftUI
 struct ListRecipesView: View {
 
     @Environment(\.managedObjectContext) var viewContext
+    @EnvironmentObject private var model: Model
     @State private var newRecipeIsPresented = false
     @State private var searchText: String = ""
+    @State private var selection: Recipe.ID?
     
     @FetchRequest(fetchRequest: Recipe.allRecipesFetchRequest)
     var recipes: FetchedResults<Recipe>
     
     var body: some View {
         Container {
-            ItemList {
-                searchBar(text: $searchText)
-                    .padding(.bottom)
-                ForEach(recipes.filter({ searchText.isEmpty ? true : $0.title.contains(searchText) })) { recipe in
-                    NavigationLink(destination: RecipeView(viewContext: viewContext, recipe: recipe)) {
+            List {
+                ForEach(recipes) { recipe in
+                    NavigationLink(tag: recipe.id, selection: $selection) {
+                        RecipeView(recipe: recipe)
+                    } label: {
                         HStack {
                             VStack {
                                 HStack {
@@ -44,9 +46,9 @@ struct ListRecipesView: View {
                                 .font(Font.body.weight(.semibold))
                                 .foregroundColor(Color.ui.accentColor)
                         }
+                        .padding(.top)
+                        .padding(.bottom)
                     }
-                    .modifier(ListItem())
-                    .animation(.default)
                 }
             }
         }
@@ -57,7 +59,7 @@ struct ListRecipesView: View {
             Image(systemName: "plus").font(Font.body.weight(.semibold))
         })
         .sheet(isPresented: $newRecipeIsPresented){
-            CreateRecipeView(viewContext: viewContext) { title, ingredients, directions in
+            CreateRecipeView() { title, ingredients, directions in
                 withAnimation {
                     _ = Recipe(
                         context: viewContext,
@@ -78,11 +80,13 @@ struct ListRecipesView_Previews: PreviewProvider {
             ListRecipesView()
         }
             .preferredColorScheme(.light)
+            .environmentObject(Model())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         NavigationView {
             ListRecipesView()
         }
             .preferredColorScheme(.dark)
+            .environmentObject(Model())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

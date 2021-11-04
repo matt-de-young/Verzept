@@ -138,6 +138,10 @@
 		C9DE377C26F884EB003064A9 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DE377A26F884EB003064A9 /* Appearance.swift */; };
 		C9DE377D26F884EB003064A9 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DE377A26F884EB003064A9 /* Appearance.swift */; };
 		C9DE377E26F884EB003064A9 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9DE377A26F884EB003064A9 /* Appearance.swift */; };
+		C9E5F5562733E18100AD2B2F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E5F5552733E18100AD2B2F /* Model.swift */; };
+		C9E5F5572733E18100AD2B2F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E5F5552733E18100AD2B2F /* Model.swift */; };
+		C9E5F5582733E18100AD2B2F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E5F5552733E18100AD2B2F /* Model.swift */; };
+		C9E5F5592733E18100AD2B2F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E5F5552733E18100AD2B2F /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +208,7 @@
 		C99F599026D6D8CD00F0AA20 /* NewBranchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBranchView.swift; sourceTree = "<group>"; };
 		C99F599526D7717C00F0AA20 /* CompareBranchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareBranchesView.swift; sourceTree = "<group>"; };
 		C9DE377A26F884EB003064A9 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		C9E5F5552733E18100AD2B2F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +278,7 @@
 				C950751226D2557B0042B175 /* Persistence.swift */,
 				C950751326D2557C0042B175 /* Assets.xcassets */,
 				C950750E26D2557B0042B175 /* Forking.xcdatamodeld */,
+				C9E5F5552733E18100AD2B2F /* Model.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -558,6 +564,7 @@
 				C93F62432701A94300B2D993 /* SearchBar.swift in Sources */,
 				C9530BBE26D2F95900DA1660 /* Recipe+CoreDataProperties.swift in Sources */,
 				C99F598226D6541000F0AA20 /* NewNoteView.swift in Sources */,
+				C9E5F5562733E18100AD2B2F /* Model.swift in Sources */,
 				C9530BC626D2F95900DA1660 /* Branch+CoreDataProperties.swift in Sources */,
 				C9530BDA26D2F95900DA1660 /* Version+CoreDataClass.swift in Sources */,
 				C950753C26D2557C0042B175 /* ForkingApp.swift in Sources */,
@@ -597,6 +604,7 @@
 				C93F62442701A94300B2D993 /* SearchBar.swift in Sources */,
 				C9530BBF26D2F95900DA1660 /* Recipe+CoreDataProperties.swift in Sources */,
 				C99F598326D6541000F0AA20 /* NewNoteView.swift in Sources */,
+				C9E5F5572733E18100AD2B2F /* Model.swift in Sources */,
 				C9530BC726D2F95900DA1660 /* Branch+CoreDataProperties.swift in Sources */,
 				C9530BDB26D2F95900DA1660 /* Version+CoreDataClass.swift in Sources */,
 				C950753D26D2557C0042B175 /* ForkingApp.swift in Sources */,
@@ -636,6 +644,7 @@
 				C93F62452701A94300B2D993 /* SearchBar.swift in Sources */,
 				C9530BB826D2F95900DA1660 /* Note+CoreDataProperties.swift in Sources */,
 				C9530BC026D2F95900DA1660 /* Recipe+CoreDataProperties.swift in Sources */,
+				C9E5F5582733E18100AD2B2F /* Model.swift in Sources */,
 				C950756126D285A70042B175 /* ListRecipesView.swift in Sources */,
 				C918645426DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C950756626D2877D0042B175 /* EditRecipeView.swift in Sources */,
@@ -675,6 +684,7 @@
 				C93F62462701A94300B2D993 /* SearchBar.swift in Sources */,
 				C9530BB926D2F95900DA1660 /* Note+CoreDataProperties.swift in Sources */,
 				C9530BC126D2F95900DA1660 /* Recipe+CoreDataProperties.swift in Sources */,
+				C9E5F5592733E18100AD2B2F /* Model.swift in Sources */,
 				C950756226D285A70042B175 /* ListRecipesView.swift in Sources */,
 				C918645526DCE0F3000450F8 /* BranchHistoryView.swift in Sources */,
 				C950756726D2877D0042B175 /* EditRecipeView.swift in Sources */,

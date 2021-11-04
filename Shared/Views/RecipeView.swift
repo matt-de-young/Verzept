@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct RecipeView: View {
-    @State var viewContext: NSManagedObjectContext
+    @Environment(\.managedObjectContext) var viewContext
     @ObservedObject var recipe: Recipe
     @State private var editRecipeisPresented = false
     @State private var branchesViewisPresented = false
@@ -85,7 +85,6 @@ struct RecipeView: View {
         }
         .sheet(isPresented: $editRecipeisPresented) {
             EditRecipeView(
-                viewContext: viewContext,
                 title: recipe.title,
                 ingredients: recipe.ingredients,
                 directions: recipe.directions
@@ -112,7 +111,7 @@ struct RecipeView: View {
         }
         .background(
             NavigationLink(
-                destination: ListBranchesView(viewContext: viewContext, recipe: recipe.self),
+                destination: ListBranchesView(recipe: recipe.self),
                 isActive: $branchesViewisPresented
             ) {
                 EmptyView()
@@ -125,7 +124,6 @@ struct RecipeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             RecipeView(
-                viewContext: PersistenceController.preview.container.viewContext,
                 recipe: Recipe(
                     context: PersistenceController.preview.container.viewContext,
                     title: "Super Recipe",

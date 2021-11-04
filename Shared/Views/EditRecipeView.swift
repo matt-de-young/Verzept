@@ -9,8 +9,6 @@ import SwiftUI
 import CoreData
 
 struct RecipeFormView: View {
-    
-    @State var viewContext: NSManagedObjectContext
 
     @State private var newIngredientIsPresented: Bool = false
     
@@ -29,9 +27,8 @@ struct RecipeFormView: View {
 
 struct EditRecipeView: View {
 
+    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @State var viewContext: NSManagedObjectContext
     
     @State var title: String
     @State var ingredients: String
@@ -45,7 +42,6 @@ struct EditRecipeView: View {
         NavigationView {
             Container {
                 RecipeFormView(
-                    viewContext: viewContext,
                     title: $title,
                     ingredients: $ingredients,
                     directions: $directions
@@ -71,9 +67,8 @@ struct EditRecipeView: View {
 
 struct CreateRecipeView: View {
     
+    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
-    @State var viewContext: NSManagedObjectContext
     
     @State var title: String = ""
     @State var ingredients: String = ""
@@ -84,7 +79,6 @@ struct CreateRecipeView: View {
         NavigationView {
             Container {
                 RecipeFormView(
-                    viewContext: viewContext,
                     title: $title,
                     ingredients: $ingredients,
                     directions: $directions
@@ -105,13 +99,10 @@ struct CreateRecipeView: View {
 
 struct EditRecipeView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateRecipeView(
-            viewContext: PersistenceController.preview.container.viewContext
-        ) { title, ingredients, directions in
+        CreateRecipeView() { title, ingredients, directions in
             
         }
         EditRecipeView(
-            viewContext: PersistenceController.preview.container.viewContext,
             title: "Black Bean Burgers",
             ingredients: "",
             directions: ""

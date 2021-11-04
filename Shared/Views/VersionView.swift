@@ -10,9 +10,9 @@ import CoreData
 
 struct VersionView: View {
     
+    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var viewContext: NSManagedObjectContext
     @ObservedObject var version: Version
     @State private var newBranchIsPresented = false
     @State var newBranchName: String = ""
@@ -96,7 +96,7 @@ struct VersionView_Previews: PreviewProvider {
     )
     static var previews: some View {
         NavigationView {
-            VersionView(viewContext: viewContext, version: initVersion)
+            VersionView(version: initVersion)
         }
     }
 }

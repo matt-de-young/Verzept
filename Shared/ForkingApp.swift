@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct ForkingApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject private var model = Model()
 
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [
@@ -27,7 +28,9 @@ struct ForkingApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(viewContext: persistenceController.container.viewContext)
+            ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(model)
         }
     }
 }

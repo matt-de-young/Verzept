@@ -12,14 +12,13 @@ struct BranchHistoryView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @State var viewContext: NSManagedObjectContext
     var branch: Branch
     
     var body: some View {
         Container {
             ItemList {
                 ForEach(Array(branch.fullHistory())) { version in
-                    NavigationLink(destination: VersionView(viewContext: viewContext, version: version)) {
+                    NavigationLink(destination: VersionView(version: version)) {
                         HStack {
                             VStack {
                                 HStack {
@@ -76,10 +75,7 @@ struct BranchHistoryView_Previews: PreviewProvider {
     )
     static var previews: some View {
         NavigationView {
-            BranchHistoryView(
-                viewContext: viewContext,
-                branch: branch
-            )
+            BranchHistoryView(branch: branch)
         }
     }
 }

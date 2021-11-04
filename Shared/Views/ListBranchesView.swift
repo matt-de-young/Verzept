@@ -40,9 +40,9 @@ struct BranchListItem: View {
 
 struct ListBranchesView: View {
     
+    @Environment(\.managedObjectContext) var viewContext
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    @State var viewContext: NSManagedObjectContext
     @State var recipe: Recipe
     
     @State private var newBranchIsPresented: Bool = false
@@ -151,7 +151,6 @@ struct ListBranchesView: View {
         .background(
             NavigationLink(
                 destination: BranchHistoryView(
-                    viewContext: viewContext,
                     branch: historyBranch ?? recipe.currentBranch
                 ),
                 isActive: $historyBranchIsPresented
@@ -166,7 +165,6 @@ struct ListBranchesView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ListBranchesView(
-                viewContext: PersistenceController.preview.container.viewContext,
                 recipe: Recipe(
                     context: PersistenceController.preview.container.viewContext,
                     title: "Super Recipe",
@@ -180,7 +178,6 @@ struct ListBranchesView_Previews: PreviewProvider {
         .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         NavigationView {
             ListBranchesView(
-                viewContext: PersistenceController.preview.container.viewContext,
                 recipe: Recipe(
                     context: PersistenceController.preview.container.viewContext,
                     title: "Super Recipe",
