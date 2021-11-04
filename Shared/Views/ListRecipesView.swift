@@ -18,46 +18,65 @@ struct ListRecipesView: View {
     @FetchRequest(fetchRequest: Recipe.allRecipesFetchRequest)
     var recipes: FetchedResults<Recipe>
     
+    var searchSuggestions: [Recipe] {
+        recipes.filter {
+            $0.title.localizedCaseInsensitiveContains(searchText) &&
+            $0.title.localizedCaseInsensitiveCompare(searchText) != .orderedSame
+        }
+    }
+    
+    var filteredRecipes: [Recipe] {
+        recipes
+            .filter { searchText.isEmpty ? true : $0.title.contains(searchText) }
+            .sorted(by: { $0.title.localizedCompare($1.title) == .orderedAscending })
+    }
+    
     var body: some View {
         Container {
             List {
-                ForEach(recipes) { recipe in
+                ForEach(filteredRecipes) { recipe in
                     NavigationLink(tag: recipe.id, selection: $selection) {
                         RecipeView(recipe: recipe)
                     } label: {
-                        HStack {
-                            VStack {
-                                HStack {
-                                    Text(recipe.title)
-                                        .font(Font(UIFont(name: "Futura Bold", size: 22)!))
-                                        .foregroundColor(Color.ui.headerColor)
-                                        .multilineTextAlignment(.leading)
-                                    Spacer()
-                                }
-                                HStack {
-                                    Text("Branch:")
-                                    Text(recipe.currentBranch.name)
-                                        .fontWeight(.semibold)
-                                    Spacer()
-                                }
+                        VStack {
+                            HStack {
+                                Text(recipe.title)
+                                    .font(Font(UIFont(name: "Futura Bold", size: 22)!))
+                                    .foregroundColor(Color.ui.headerColor)
+                                    .multilineTextAlignment(.leading)
+                                Spacer()
                             }
-                            Spacer()
-                            Image(systemName: "arrow.right")
-                                .font(Font.body.weight(.semibold))
-                                .foregroundColor(Color.ui.accentColor)
+                            HStack {
+                                Text("Branch:")
+                                Text(recipe.currentBranch.name)
+                                    .fontWeight(.semibold)
+                                Spacer()
+                            }
                         }
-                        .padding(.top)
-                        .padding(.bottom)
+                    }
+                }
+                    .listRowBackground(Color.ui.backgroundColor)
+                    .listRowSeparator(.hidden)
+                    .padding(.bottom)
+            }
+            .searchable(text: $searchText) {
+//                ForEach(searchSuggestions) { suggestion in
+//                    Text(suggestion.title).searchCompletion(suggestion.title)
+//                        .listRowBackground(Color.ui.backgroundColor)
+//                        .background(Color.ui.backgroundColor)
+//                }
+            }
+            .listStyle(.plain)
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {newRecipeIsPresented = true}) {
+                        Image(systemName: "plus")
+                            .font(Font.body.weight(.semibold))
+                            .foregroundColor(Color.ui.accentColor)
                     }
                 }
             }
         }
-        .navigationTitle("All Recipes")
-        .navigationBarItems(trailing: Button(action: {
-            newRecipeIsPresented = true
-        }) {
-            Image(systemName: "plus").font(Font.body.weight(.semibold))
-        })
         .sheet(isPresented: $newRecipeIsPresented){
             CreateRecipeView() { title, ingredients, directions in
                 withAnimation {
@@ -78,12 +97,14 @@ struct ListRecipesView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ListRecipesView()
+                .navigationTitle("All Recipes")
         }
             .preferredColorScheme(.light)
             .environmentObject(Model())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         NavigationView {
             ListRecipesView()
+                .navigationTitle("All Recipes")
         }
             .preferredColorScheme(.dark)
             .environmentObject(Model())

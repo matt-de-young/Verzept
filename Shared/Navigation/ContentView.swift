@@ -19,15 +19,18 @@ struct ContentView: View {
             if horizontalSizeClass == .compact {
                 NavigationView {
                     ListRecipesView()
+                        .navigationTitle("All Recipes")
                 }
             } else {
                 NavigationView {
                     ListRecipesView()
+                        .navigationTitle("All Recipes")
                 }
             }
         #else
             NavigationView {
                 ListRecipesView()
+                    .navigationTitle("All Recipes")
             }
         #endif
     }
