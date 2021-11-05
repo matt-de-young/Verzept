@@ -8,10 +8,11 @@
 import Foundation
 import AuthenticationServices
 import StoreKit
+import OSLog
 
 class Model: ObservableObject {
     
-//    @Published var viewContext = PersistenceController.shared.container.viewContext
+    @Published var container = PersistenceController.shared.container
     @Published var selectedRecipeID: Recipe.ID?
     
     @Published var searchString = ""

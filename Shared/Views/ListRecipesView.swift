@@ -18,12 +18,12 @@ struct ListRecipesView: View {
     @FetchRequest(fetchRequest: Recipe.allRecipesFetchRequest)
     var recipes: FetchedResults<Recipe>
     
-    var searchSuggestions: [Recipe] {
-        recipes.filter {
-            $0.title.localizedCaseInsensitiveContains(searchText) &&
-            $0.title.localizedCaseInsensitiveCompare(searchText) != .orderedSame
-        }
-    }
+//    var searchSuggestions: [Recipe] {
+//        recipes.filter {
+//            $0.title.localizedCaseInsensitiveContains(searchText) &&
+//            $0.title.localizedCaseInsensitiveCompare(searchText) != .orderedSame
+//        }
+//    }
     
     var filteredRecipes: [Recipe] {
         recipes
@@ -33,32 +33,40 @@ struct ListRecipesView: View {
     
     var body: some View {
         Container {
-            List {
-                ForEach(filteredRecipes) { recipe in
-                    NavigationLink(tag: recipe.id, selection: $selection) {
-                        RecipeView(recipe: recipe)
-                    } label: {
-                        VStack {
-                            HStack {
-                                Text(recipe.title)
-                                    .font(Font(UIFont(name: "Futura Bold", size: 22)!))
-                                    .foregroundColor(Color.ui.headerColor)
-                                    .multilineTextAlignment(.leading)
-                                Spacer()
-                            }
-                            HStack {
-                                Text("Branch:")
-                                Text(recipe.currentBranch.name)
-                                    .fontWeight(.semibold)
-                                Spacer()
-                            }
+            List(filteredRecipes){ recipe in
+                HStack {
+                    VStack {
+                        HStack {
+                            Text(recipe.title)
+                                .font(Font(UIFont(name: "Futura Bold", size: 22)!))
+                                .foregroundColor(Color.ui.headerColor)
+                                .multilineTextAlignment(.leading)
+                            Spacer()
+                        }
+                        HStack {
+                            Text("Branch:")
+                            Text(recipe.currentBranch.name)
+                                .fontWeight(.semibold)
+                            Spacer()
                         }
                     }
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 7)
+                        .foregroundColor(Color.ui.accentColor)
                 }
-                    .listRowBackground(Color.ui.backgroundColor)
-                    .listRowSeparator(.hidden)
-                    .padding(.bottom)
+                .padding(.bottom)
+                .background(
+                    NavigationLink(destination:RecipeView(recipe: recipe)) {}
+                        .opacity(0)
+                )
+                .listRowBackground(Color.ui.backgroundColor)
+                .listRowSeparator(.hidden)
+                .listStyle(.plain)
             }
+            .animation(.default, value: filteredRecipes)
             .searchable(text: $searchText) {
 //                ForEach(searchSuggestions) { suggestion in
 //                    Text(suggestion.title).searchCompletion(suggestion.title)
@@ -66,7 +74,6 @@ struct ListRecipesView: View {
 //                        .background(Color.ui.backgroundColor)
 //                }
             }
-            .listStyle(.plain)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: {newRecipeIsPresented = true}) {
