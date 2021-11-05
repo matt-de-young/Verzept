@@ -51,10 +51,8 @@ struct ListRecipesView: View {
                         }
                     }
                     Spacer()
-                    Image(systemName: "chevron.right")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 7)
+                    Image(systemName: "arrow.right")
+                        .font(Font.body.weight(.semibold))
                         .foregroundColor(Color.ui.accentColor)
                 }
                 .padding(.bottom)
@@ -63,8 +61,7 @@ struct ListRecipesView: View {
                         .opacity(0)
                 )
                 .listRowBackground(Color.ui.backgroundColor)
-                .listRowSeparator(.hidden)
-                .listStyle(.plain)
+                .listRowSeparatorTint(Color.ui.foregroundColor)
             }
             .animation(.default, value: filteredRecipes)
             .searchable(text: $searchText) {
